@@ -1,0 +1,295 @@
+<?php
+include('header.php');
+include('sidebar.php');
+?>
+
+<!-- START @PAGE CONTENT -->
+            <section id="page-content">
+
+                <!-- Start page header -->
+                <div class="header-content">
+                    <h2><i class="fa fa-home"></i>Dashboard <span>dashboard & statistics</span></h2>
+                    <div class="breadcrumb-wrapper hidden-xs">
+                        <span class="label">You are here:</span>
+                        <ol class="breadcrumb">
+                            <li class="active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div><!-- /.header-content -->
+                <!--/ End page header -->
+
+                <!-- Start body content -->
+               <div class="body-content animated fadeIn">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="mini-stat-type-3 shadow border-danger">
+                                <div class="ribbon-wrapper">
+                                    <a href="#" class="ribbon ribbon-success ribbon-shadow">View</a>
+                                </div>
+                                <span class="text-uppercase text-block text-center">Computted VAT AMOUNT</span>
+                                <h3 class="text-strong text-center">₦<span class="counter">24.5</span></h3>
+   
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="mini-stat-type-3 shadow border-danger">
+                                <div class="ribbon-wrapper">
+                                    <a href="#" class="ribbon ribbon-danger ribbon-shadow">View</a>
+                                </div>
+                                <span class="text-uppercase text-block text-center">Deducted VAT AMOUNT</span>
+                                <h3 class="text-strong text-center">₦<span class="counter">3,540</span></h3>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="mini-stat-type-3 shadow border-danger">
+                                <div class="ribbon-wrapper">
+                                    <a href="#" class="ribbon ribbon-primary ribbon-shadow">View</a>
+                                </div>
+                                <span class="text-uppercase text-block text-center">REMITTED VAT AMOUNT</span>
+                                <h3 class="text-strong text-center">₦<span class="counter">1.8</span></h3>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="mini-stat-type-3 shadow border-danger">
+                                <div class="ribbon-wrapper">
+                                    <a href="#" class="ribbon ribbon-warning ribbon-shadow">View</a>
+                                </div>
+                                <span class="text-uppercase text-block text-center">VAT REMITTANCE ERROR</span>
+                                <h3 class="text-strong text-center">₦<span class="counter">2,480</span></h3>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                            <!-- Start total investments -->
+                            <div class="panel rounded shadow panel-default">
+                                <div class="panel-heading">
+                                    <div class="pull-left">
+                                        <h3 class="panel-title">Total investments</h3>
+                                    </div>
+                                    <div class="pull-right">
+                                        <button class="btn btn-sm" data-action="expand" data-toggle="tooltip" data-placement="top" data-title="Expand"><i class="fa fa-expand"></i></button>
+                                        <button class="btn btn-sm" data-action="refresh" data-toggle="tooltip" data-placement="top" data-title="Refresh"><i class="fa fa-refresh"></i></button>
+                                        <button class="btn btn-sm" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse"><i class="fa fa-angle-up"></i></button>
+                                        <button class="btn btn-sm" data-action="remove" data-toggle="tooltip" data-placement="top" data-title="Remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div><!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <div id="total-investments" class="chart"></div>
+                                </div><!-- /.panel-body -->
+                            </div><!-- /.panel -->
+                            <!--/ End total investments -->
+
+                        </div>
+                        <div class="col-md-3">
+
+                            <!-- Start list investment -->
+                            <<div class="panel">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title text-center">List - <b>Generated VAT</b></h3>
+                                </div><!-- /.panel-heading -->
+                                <div class="panel-body no-padding">
+                                    <div class="sidebar-circle sidebar-light">
+                                        <!--<table class="table">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span class="pull-left text-capitalize">eCcommerce</span>
+                                                    <span class="pull-right text-strong">$<span class="counter">233.34</span>K</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="pull-left text-capitalize">Financial </span>
+                                                    <span class="pull-right text-strong">$<span class="counter">237.14</span>K</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="pull-left text-capitalize">Yudala</span>
+                                                    <span class="pull-right text-strong">$<span class="counter">542.9</span>K</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="pull-left text-capitalize">Jiji</span>
+                                                    <span class="pull-right text-strong">$<span class="counter">231.9</span>K</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="pull-left text-capitalize">Shopify</span>
+                                                    <span class="pull-right text-strong">$<span class="counter">784.39</span>K</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>-->
+							<ul class="sidebar-menu">
+										<li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-group"></i></span>
+                            <span class="text">eCcommerce</span>
+							<span class="text-strong"> ₦<span class="counter">233.34</span>K</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="<?php echo site_url('dashboard');?>">Jumia -<span class="pull-right text-strong"> ₦<span class="counter">233.34</span>K</span></a></li>
+                            <li><a href="<?php echo site_url('dashboard');?>">Konga - <span class="pull-right text-strong">₦<span class="counter">237.14</span>K</span></a></li>
+                            <li><a href="<?php echo site_url('dashboard');?>">Yudala-  <span class="pull-right text-strong">₦<span class="counter">542.9</span>K</span></a></li>
+                            <li><a href="<?php echo site_url('dashboard');?>">Jiji- <span class="pull-right text-strong">₦<span class="counter">231.9</span>K</span></a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - client management -->
+                        <li class="submenu">
+                            <a href="javascript:void(0);">
+                                <span class="icon"><i class="fa fa-money"></i></span>
+                                <span class="text">Financial Inst..</span>
+								<span class="text-strong"> ₦<span class="counter">10253.34</span>B</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul>
+                            <li><a href="#">Zenith Bank -<span class="pull-right text-strong"> ₦<span class="counter">42.34</span>K</span></a></li>
+                            <li><a href="#">Fidelity Bank- <span class="pull-right text-strong">₦<span class="counter">2537.14</span>K</span></a></li>
+                            <li><a href="#">GTB-  <span class="pull-right text-strong">₦<span class="counter">6542.9</span>K</span></a></li>
+                            <li><a href="#">Eco Bank- <span class="pull-right text-strong">₦<span class="counter">9231.9</span>K</span></a></li>
+                            <li><a href="#">Zenith Bank -<span class="pull-right text-strong"> ₦<span class="counter">42.34</span>K</span></a></li>
+                            <li><a href="#">First Bank- <span class="pull-right text-strong">₦<span class="counter">2537.14</span>K</span></a></li>
+                            <li><a href="#">Heritage Bank-  <span class="pull-right text-strong">₦<span class="counter">6542.9</span>K</span></a></li>
+                            <li><a href="#">Skye Bank- <span class="pull-right text-strong">₦<span class="counter">9231.9</span>K</span></a></li>                             <li><a href="#">Keystone Bank -<span class="pull-right text-strong"> ₦<span class="counter">42.34</span>K</span></a></li>
+                            <li><a href="#">Diamond Bank- <span class="pull-right text-strong">₦<span class="counter">2537.14</span>K</span></a></li>
+                            <li><a href="#">Wema Bank-  <span class="pull-right text-strong">₦<span class="counter">6542.9</span>K</span></a></li>
+                            <li><a href="#">Stanbic Bank- <span class="pull-right text-strong">₦<span class="counter">9231.9</span>K</span></a></li>
+                            </ul>
+                            
+                        </li>
+
+                    <!-- Start navigation - funds sweep -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-money"></i></span>
+                            <span class="text">Telecom</span>
+							<span class="text-strong"> ₦<span class="counter">233.34</span>K</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="#">MTN -<span class="pull-right text-strong"> ₦<span class="counter">2133.34</span>K</span></a></li>
+                            <li><a href="#">Global Comm- <span class="pull-right text-strong">₦<span class="counter">2037.14</span>K</span></a></li>
+                            <li><a href="#">Etisalat-  <span class="pull-right text-strong">₦<span class="counter">1542.9</span>K</span></a></li>
+                            <li><a href="#">Airtel- <span class="pull-right text-strong">₦<span class="counter">2231.9</span>K</span></a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - funds sweep -->
+					<li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-group"></i></span>
+                            <span class="text">Power</span>
+							<span class="text-strong"> ₦<span class="counter">61233.34</span>K</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="#">AEDC -<span class="pull-right text-strong"> ₦<span class="counter">2133.34</span>K</span></a></li>
+                            <li><a href="#">IKDEC - <span class="pull-right text-strong">₦<span class="counter">8237.14</span>K</span></a></li>
+                            <li><a href="#">KEDCO-  <span class="pull-right text-strong">₦<span class="counter">5142.9</span>K</span></a></li>
+                            <li><a href="#">BEDISCO- <span class="pull-right text-strong">₦<span class="counter">2431.9</span>K</span></a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - client management -->
+
+                    <!-- Start navigation - reporting -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+                            <span class="text">Informal Sectors</span>
+							<span class="text-strong"> ₦<span class="counter">233.34</span>K</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="#">Toll Gate -<span class="pull-right text-strong"> ₦<span class="counter">233.34</span>K</span></a></li>
+                            <li><a href="#">Craftmen- <span class="pull-right text-strong">₦<span class="counter">237.14</span>K</span></a></li>
+                            <li><a href="#">Transportation-  <span class="pull-right text-strong">₦<span class="counter">542.9</span>K</span></a></li>
+                            <li><a href="#">ETC.- <span class="pull-right text-strong">₦<span class="counter">231.9</span>K</span></a></li>
+                        </ul>
+                    </li>
+							</ul>			
+                                    </div>
+                                </div><!-- /.panel-body -->
+                            </div>
+                            <!--/ End list investment -->
+
+                        </div>
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel rounded shadow panel-default">
+                                <div class="panel-heading">
+                                    <div class="pull-left">
+                                        <h3 class="panel-title">Median Raised</h3>
+                                    </div>
+                                    <div class="pull-right">
+                                        <button class="btn btn-sm" data-action="refresh" data-container="body" data-toggle="tooltip" data-placement="top" data-title="Refresh"><i class="fa fa-refresh"></i></button>
+                                        <button class="btn btn-sm" data-action="collapse" data-container="body" data-toggle="tooltip" data-placement="top" data-title="Collapse"><i class="fa fa-angle-up"></i></button>
+                                        <button class="btn btn-sm" data-action="remove" data-container="body" data-toggle="tooltip" data-placement="top" data-title="Remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div><!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <!-- Start datatable -->
+                                    <table id="datatable-median-raised" class="table table-bordered table-condensed table-striped table-default">
+                                        <thead>
+                                        <tr>
+                                            <th data-class="expand">Series</th>
+                                            <th data-hide="phone"><span class="fa fa-globe"></span> Computed VAT</th>
+                                            <th data-hide="phone"><span class="fa fa-globe"></span> Remittance Error</th>
+                                            <th data-hide="phone"><span class="fa fa-globe"></span>Deducted VAT </th>
+                                            <th data-hide="phone,tablet"><span class="fa fa-globe"></span>Remitted VAT</th>
+                                            <th data-hide="phone,tablet"><i class="fa fa-globe"></i>Total</th>
+                                        </tr>
+                                        </thead>
+                                        <!--tbody section is required-->
+                                        <tbody></tbody>
+                                        <!--tfoot section is optional-->
+                                        <tfoot>
+                                        <tr>
+                                            <th>Series</th>
+                                            <th>Computed VAT</th>
+                                            <th> Remittance Error</th>
+                                            <th>Deducted VAT </th>
+                                            <th>Remitted VAT</th>
+                                            <th>Total</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                    <!--/ End datatable -->
+                                </div><!-- /.panel-body -->
+                            </div><!-- /.panel -->
+                        </div>
+                    </div>
+
+                </div><!-- /.body-content -->
+                <!--/ End body content -->
+
+<?php include('footer.php');?>		 
+<!-- START @PAGE LEVEL PLUGINS -->
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/jquery.gritter/js/jquery.gritter.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/d3/d3.min.js'); ?>" charset="utf-8"></script>
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/c3js-chart/c3.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/datatables/js/jquery.dataTables.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/datatables/js/dataTables.bootstrap.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/datatables/js/datatables.responsive.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/waypoints/lib/jquery.waypoints.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/main/assets/global/plugins/bower_components/counter-up/jquery.counterup.min.js'); ?>"></script>
+        <!--/ END PAGE LEVEL PLUGINS -->
+
+        <!-- START @PAGE LEVEL SCRIPTS -->
+        <script src="<?php echo base_url('assets/main/assets/admin/js/apps.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/main/assets/admin/js/pages/blankon.dashboard.investor.js'); ?>"></script>
+        <!----><script src="<?php echo base_url('assets/main/assets/admin/js/demo.js'); ?>"></script>
+        <!--/ END PAGE LEVEL SCRIPTS -->
+        <!--/ END JAVASCRIPT SECTION -->
