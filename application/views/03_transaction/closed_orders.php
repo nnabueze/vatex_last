@@ -17,27 +17,59 @@
                                                 <div class="panel-body no-padding">
                                                     <table id="datatable-dom" class="table table-default table-middle table-striped table-bordered table-condensed">
                                                         <thead>
-                                                        <tr>
-                                                            <th>Column1 Label</th>
-                                                            <th>Column2 Label</th>
-                                                            <th>Column3 Label</th>
-                                                            <th>Column4 Label</th>
-                                                            <th>Column5 Label</th>
-                                                            <th>Column6 Label</th>
-                                                            <th>Column7 Label</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th data-class="expand">Order_Id</th>
+                                                                <th data-hide="phone">sales_date</th>
+                                                                <th data-hide="phone">Transaction_Id</th>
+                                                                <th data-hide="phone">Order_Amount</th>
+                                                                <th data-hide="phone,tablet">Net_VAT</th>
+                                                                <th data-hide="phone,tablet">Order_Status</th>
+                                                            </tr>
                                                         </thead>
 
+                                                    </thead>
+                                                    <!--tbody section is required-->
+                                                    <tbody>
+                                                        <?php foreach($initiated_orders as $initiatedOrders){ ?>
+                                                        <tr class="border-warning">
+                                                            <td>
+                                                                <b><?php echo $initiatedOrders->Order_Id; ?></b>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $initiatedOrders->sales_date; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $initiatedOrders->Transaction_Id; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $initiatedOrders->Order_Amount; ?>
+                                                            </td>
+
+                                                            <td>
+                                                                <?php echo $initiatedOrders->Net_VAT; ?>
+                                                            </td>
+                                                            <td class="text-center">
+
+                                                            <?php if($initiatedOrders->Order_Status=="closed" || $initiatedOrders->Order_Status=="Closed"){ ?>
+                                                                <span class="label label-success"><?php echo $initiatedOrders->Order_Status; ?></span>
+                                                                <?php } else { ?>
+                                                                <span class="label label-warning"><?php echo $initiatedOrders->Order_Status; ?></span>
+                                                                <?php } ?>
+                                                            </td>
+
+                                                            <?php } ?>
+
+                                                        </tbody>
+
                                                         <tfoot>
-                                                        <tr>
-                                                            <th>Column1 Label</th>
-                                                            <th>Column2 Label</th>
-                                                            <th>Column3 Label</th>
-                                                            <th>Column4 Label</th>
-                                                            <th>Column5 Label</th>
-                                                            <th>Column6 Label</th>
-                                                            <th>Column7 Label</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th data-class="expand">Order_Id</th>
+                                                                <th data-hide="phone">sales_date</th>
+                                                                <th data-hide="phone">Transaction_Id</th>
+                                                                <th data-hide="phone">Order_Amount</th>
+                                                                <th data-hide="phone,tablet">Net_VAT</th>
+                                                                <th data-hide="phone,tablet">Order_Status</th>
+                                                            </tr>
                                                         </tfoot>
                                                     </table>
                                                 </div>

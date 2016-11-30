@@ -94,15 +94,16 @@ class Transaction_model extends CI_Model {
 	{
 		if($criteria)
 		{
-			$result = $this->db->where($criteria)->get('transactions')->result();
+			$result = $this->db->where($criteria)->get('payment_sweep_queue')->result();
 		}
 		else
 		{
-			$result = $this->db->get('transactions')->result();
+			$result = $this->db->get('payment_sweep_queue')->result();
 		}
 		
 		return $result;
 	}
+
 	
 	function get_all_orders($id){
 		return $result = $this->db->where(array('nibsid'=>$id))->get('payment_vat_details')->result();
