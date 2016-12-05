@@ -14,7 +14,8 @@ class Reports extends CI_Controller {
 	} 
 
 	public function index()
-	{		
+	{	
+
 		if(!isAdminLoggedIn())
 		{
 			redirect(getUrl('login'));
@@ -26,7 +27,54 @@ class Reports extends CI_Controller {
 		$data['uri_segment_2'] = 'reports';
 		if($this->input->post('search_report')!='')
 		{
+
+			switch ($this->input->post('item')) {
+			    case "computed_report":
+			        $data['report'] = $this->reports_model->computed_report();
+			        $data['type'] = "computed_report";
+			        break;
+			    case "deducted_report":
+			        $data['report'] = $this->reports_model->deducted_report();
+			        $data['type'] = "deducted_report";
+			        break;
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->remittance_report();
+			        $data['type'] = "remittance_report";
+			        break;
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->computed_report();
+			        $data['type'] = "computed_report";
+			        break;
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->computed_report();
+			        $data['type'] = "computed_report";
+			        break;
+
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->computed_report();
+			        $data['type'] = "computed_report";
+			        break;
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->computed_report();
+			        $data['type'] = "computed_report";
+			        break;
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->computed_report();
+			        $data['type'] = "computed_report";
+			        break;
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->computed_report();
+			        $data['type'] = "computed_report";
+			        break;
+			     case "remittance_report":
+			         $data['report'] = $this->reports_model->computed_report();
+			         $data['type'] = "computed_report";
+			         break;
 			
+			    default:
+			        $data['report'] = $this->reports_model->computed_report();
+			        $data['type'] = "computed_report";
+			}
 		}
 		$data['page_content'] = '04_reporting/reports';
 		$this->load->view('includes/main_content', $data);

@@ -48,11 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '69.64.69.79';
+$db['default']['hostname'] = 'localhost';//69.64.69.79
 
-$db['default']['username'] = 'admin_connect';
-$db['default']['password'] = 'd8^mKu89';
-$db['default']['database'] = 'ercas_vatex_v1';
+$db['default']['username'] = 'root';//admin_connect
+$db['default']['password'] = '';//d8^mKu89
+$db['default']['database'] = 'vatex';//ercas_vatex_v1
 /*
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';

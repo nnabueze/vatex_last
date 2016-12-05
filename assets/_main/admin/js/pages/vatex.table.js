@@ -59,7 +59,7 @@ var BlankonTable = function () {
             } );
             tableDom.dataTable({
                 autoWidth        : true,
-				"aoColumnDefs": [ { "bSortable": false, "aTargets": [ 6 ] } ],
+				"aoColumnDefs": [ { "bSortable": false, "aTargets": [ 10 ] } ],
 				'dom': 'Blfrtip',
                 buttons: [
                     {

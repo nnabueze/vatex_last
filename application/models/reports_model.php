@@ -276,6 +276,33 @@ class Reports_model extends CI_Model {
 		$fields = $this->db->list_fields($tbl);
 		return $fields;		
 	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//getting computed report
+	public function computed_report($date=null)
+	{
+		$result = $this->db->get('computed_vat')->result();
+
+		return $result;
+	}
+
+	//getting deducted VAT
+	public function deducted_report($date=null)
+	{
+		$result = $this->db->get('deducted_vat')->result();
+
+		return $result;
+	}
+
+	//getting remitance report
+	public function remittance_report()
+	{
+		$result = $this->db->get('remittance_report')->result();
+
+		return $result;
+	}
+
+
 	
 	
 }
