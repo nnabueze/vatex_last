@@ -45,10 +45,10 @@
                                                 </td>
                                                 <td class="text-center">
 
-                                                <?php if($initiatedOrders->Order_Status=="closed" || $initiatedOrders->Order_Status=="Closed"){ ?>
-                                                    <span class="label label-success"><?php echo $initiatedOrders->Order_Status; ?></span>
+                                                <?php if($initiatedOrders->Order_Status== 1 ){ ?>
+                                                    <span class="label label-success"><?php echo 'Closed'; ?></span>
                                                     <?php } else { ?>
-                                                    <span class="label label-warning"><?php echo $initiatedOrders->Order_Status; ?></span>
+                                                    <span class="label label-warning"><?php echo 'Open'; ?></span>
                                                     <?php } ?>
                                                 </td>
 

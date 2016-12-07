@@ -94,11 +94,11 @@ class Transaction_model extends CI_Model {
 	{
 		if($criteria)
 		{
-			$result = $this->db->where($criteria)->get('payment_sweep_queue')->result();
+			$result = $this->db->where($criteria)->get('vat_on_hold_sweep_queue')->result();
 		}
 		else
 		{
-			$result = $this->db->get('payment_sweep_queue')->result();
+			$result = $this->db->get('vat_on_hold_sweep_queue')->result();
 		}
 		
 		return $result;

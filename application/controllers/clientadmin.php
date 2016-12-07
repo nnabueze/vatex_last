@@ -143,7 +143,7 @@ class Clientadmin extends CI_Controller {
 				$data['token_id'] = $tokenid;
 				$clientid = $this->client_model->add_client_settings($data);
 
-				$this->session->set_flashdata('success',"client registered successfully.");
+				$this->session->set_flashdata('success',"client registered successfully. API_KEY: ".$api_key);
 				redirect(getUrl('clientadmin'));
 			}			
 		}

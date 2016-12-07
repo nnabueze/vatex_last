@@ -10,33 +10,52 @@ class Secured extends REST_Controller
     {
         // Construct our parent class
         parent::__construct();
-/*		$this->load->model('bill_model');
-		$this->load->model('payment_model');
-		$this->load->model('client_model');*/
-        
-        
+		$this->load->model('secured_model');
     }
     
-    function bill_get()
-    {	
-       	$this->response(array('error' => 'No bill found!'), 404);
-        if(!$this->get('id'))
-        {
-        	$this->response(NULL, 400);
+
+    //Api for posting open order
+    public function open_order_post()
+    {
+        $data['Transaction_Id']   = $this->post('Transaction_Id');
+        $data['Vendor_Id']   = $this->post('Vendor_Id');
+        $data['Order_Id']   = $this->post('Order_Id');
+        $data['Order_Amount']   = $this->post('Order_Amount');
+        $data['Quantity']   = $this->post('Quantity');
+        $data['Order_date']   = $this->post('Order_date');
+        $data['Order_Status']   = $this->post('Order_Status');
+        $data['Purchase_Price']   = $this->post('Purchase_Price');
+        $data['Product_Description']   = $this->post('Product_Description');
+        $data['Product_Category']   = $this->post('Product_Category');
+        $data['Payment_Date']   = $this->post('Payment_Date');
+        $data['Payment_Type']   = $this->post('Payment_Type');
+        $data['Delivery_Date']   = $this->post('Delivery_Date');
+        $data['Net_VAT']   = $this->post('Net_VAT');
+        $data['Vendor_TIN']   = $this->post('Vendor_TIN');
+
+        //check if any of the parameters are empty
+        if (empty($this->post('Transaction_Id')) || empty($this->post('Vendor_Id'))|| empty($this->post('Order_Id'))|| empty($this->post('Order_Amount'))|| empty($this->post('Quantity')) || empty($this->post('Order_date')) || empty($this->post('Purchase_Price')) || empty($this->post('Product_Description')) || empty($this->post('Product_Category')) || empty($this->post('Payment_Date')) ||empty($this->post('Payment_Type'))|| empty($this->post('Delivery_Date')) || empty($this->post('Vendor_TIN'))) {
+
+            $this->response(array('error' => 'parameter missing'), 404);
         }
 
-        $bill = $this->bill_model->getData( $this->get('id') );
-		//$bill = null;
-    	
-        if($bill)
-        {
-            $this->response($bill, 200); // 200 being the HTTP response code
+        //varify token
+        if (!$token = $this->secured_model->token_verify( $this->post('token') )) {
+            //return $token;
+            $this->response(array('error' => 'Token Mismatch'), 404);
         }
 
-        else
-        {
-            $this->response(array('error' => 'No bill found!'), 404);
+        $data['ec_id'] = $token['client_id'];
+
+        //insert paraters into database
+        if ($data = $this->secured_model->open_order( $data )) {
+            
+            //return successful message
+            $this->response(array('message' => 'Succefully completed'), 200);
         }
+
+        //return error unable to insert record
+        $this->response(array('error' => 'Unable to insert record'), 404);
     }
 	
 }

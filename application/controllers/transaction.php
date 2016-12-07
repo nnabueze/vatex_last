@@ -34,7 +34,6 @@ class Transaction extends CI_Controller {
 		$data['page_title'] = 'Unremitted Transaction Orders';
 		$data['uri_segment_2'] = 'transaction';
 		$data['uri_segment_3'] = 'initiated_orders';
-		$criteria = array('order_status'=>0);
 		$data['initiated_orders'] = $this->transaction_model->get_all_transaction();
 		//$data['initiated_orders'] = $this->transaction_model->get_all_transaction1();
 		$data['page_content'] = '03_transaction/initiated_orders';
@@ -52,7 +51,7 @@ class Transaction extends CI_Controller {
 		$data['page_title'] = 'Successful/Closed Transaction Orders';
 		$data['uri_segment_2'] = 'transaction';
 		$data['uri_segment_3'] = 'closed_orders';
-		$criteria = array('order_status'=>"Closed");
+		$criteria = array('order_status'=> '1');
 		$data['initiated_orders'] = $this->transaction_model->get_all_transaction($criteria);
 
 		$data['page_content'] = '03_transaction/closed_orders';

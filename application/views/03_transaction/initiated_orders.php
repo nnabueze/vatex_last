@@ -45,10 +45,10 @@
                                                     <?php echo $initiated_orders->sales_date; ?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?php if($initiated_orders->Order_Status =="close" || $initiated_orders->Order_Status=="Close"){ ?>
-                                                    <span class="label label-success"><?php echo $initiated_orders->Order_Status; ?></span>
+                                                    <?php if($initiated_orders->Order_Status == 1 ){ ?>
+                                                    <span class="label label-success"><?php echo "Closed"; ?></span>
                                                     <?php } else { ?>
-                                                    <span class="label label-warning"><?php echo $initiated_orders->Order_Status; ?></span>
+                                                    <span class="label label-warning"><?php echo "Open"; ?></span>
                                                     <?php } ?>
                                                 </td>
                                              
