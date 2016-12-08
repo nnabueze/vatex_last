@@ -61,6 +61,47 @@ class Secured extends REST_Controller
         $this->response(array('error' => 'Unable to insert record'), 404);
     }
 
+    //Api for closing order
+    public function close_order_post()
+    {
+        //accept parameters
+        $data['Ecommerce_Id']   = $this->post('Ecommerce_Id');
+        $data['Transaction_Id']   = $this->post('Transaction_Id');
+        $data['Payment_Date']   = $this->post('Payment_Date');
+        $data['Payment_Type']   = $this->post('Payment_Type');
+        $data['Delivery_Date']   = $this->post('Delivery_Date');
+        $data['Order_Status']   = "1";
+
+        //validated parameters
+        if (empty($this->post('Ecommerce_Id')) || empty($this->post('Transaction_Id'))|| empty($this->post('Payment_Date'))|| empty($this->post('Payment_Type'))|| empty($this->post('Delivery_Date'))  ) {
+
+            $this->response(array('error' => 'parameter missing'), 404);
+        }
+
+        //check if token exist
+        //varify token
+        if (!$token = $this->token_verify($this->post('token'))) {
+            //return $token;
+            $this->response(array('error' => 'Token Mismatch'), 404);
+        }
+
+        //check if transaction id exist
+        if (!$transaction = $this->secured_model->transaction_check( $data )) {
+
+            $this->response(array('error' => 'Transaction ID does not exist'), 404);
+        }
+
+        //update transaction
+        if ($data = $this->secured_model->close_order( $data )) {
+            
+            //return successful message
+            $this->response(array('message' => 'Succefully Updated Transaction'), 200);
+        }
+
+        //return error unable to insert record
+        $this->response(array('error' => 'Unable to update transaction'), 404);
+    }
+
     //token verification
     private function token_verify($request)
     {
