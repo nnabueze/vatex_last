@@ -20,7 +20,7 @@
                                                 <th data-hide="phone">VENDOR ID</th>
                                                 <th data-hide="phone">ORDER AMOUNT</th>
                                                 <th data-hide="phone">TRANSACTION ID</th>
-                                                <th data-hide="phone,tablet">SALES DATE</th>
+                                                <th data-hide="phone,tablet">ORDER DATE</th>
                                                 <th data-hide="phone,tablet" class="text-center">STATUS</th>
                                             </tr>
                                         </thead>
@@ -42,7 +42,7 @@
                                                 </td>
                                                 
                                                 <td>
-                                                    <?php echo $initiated_orders->sales_date; ?>
+                                                    <?php echo $initiated_orders->Order_date; ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <?php if($initiated_orders->Order_Status == 1 ){ ?>
@@ -63,7 +63,7 @@
                                                 <th>VENDOR ID</th>
                                                 <th>ORDER AMOUNT</th>
                                                 <th>TRANSACTION ID</th>
-                                                <th>SALES DATE</th>
+                                                <th>ORDER DATE</th>
                                                 <th>STATUS</th>
                                             </tr>
                                         </tfoot>
