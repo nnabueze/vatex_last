@@ -24,4 +24,12 @@ class Secured_model extends CI_Model {
 		return $token;
 	}
 
+	//checking if order ID
+	public function order_check($order)
+	{
+		$token = $this->db->where(array('Order_Id'=>$order))->get('vat_on_hold_sweep_queue')->row_array();
+
+		return $token;
+	}
+
 }
