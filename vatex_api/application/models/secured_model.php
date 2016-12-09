@@ -68,4 +68,26 @@ class Secured_model extends CI_Model {
 		return $token;
 	}
 
+	//getting all users on the platform
+	public function users()
+	{
+		$results = $this->db->select('contact_email, api_key')->get('client_settings')->result_array();
+
+		//$users = array();
+		$item = array();
+		if (count($results) > 0) {
+			
+			foreach ($results as $value) {
+				$item[$value['contact_email']] = $value['api_key'];
+
+				//array_push($users, $value['contact_email'] = $value['api_key']);
+			}
+		}
+
+		return $item;
+
+
+		
+	}
+
 }

@@ -138,6 +138,7 @@ class Clientadmin extends CI_Controller {
 				$api_key = md5(uniqid(rand(), true));
 				$tokenid = sha1(md5(uniqid(rand(), true)));
 				$data = array();
+				$data['contact_email'] = $this->input->post('contact_email');
 				$data['client_id'] = $clientid;
 				$data['api_key'] = $api_key;
 				$data['token_id'] = $tokenid;

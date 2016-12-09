@@ -157,7 +157,12 @@ $config['auth_library_function'] = '';
 |
 */
 //$config['rest_valid_logins'] = array('username' => 'accessbank','password'=>'access@bank!@#');
-$config['rest_valid_logins'] = array('test' => 'test');
+//$config['rest_valid_logins'] = array('v@yahoo.com' => '5ee3d7c6e61f2537f3769bac692aae07');
+
+$CI =& get_instance();
+$CI->load->model('secured_model');
+$users = $CI->secured_model->users();
+$config['rest_valid_logins'] = $users;
 
 /*
 |--------------------------------------------------------------------------
@@ -352,7 +357,7 @@ $config['rest_enable_logging'] = FALSE;
 |	'access'
 |
 */
-$config['rest_access_table'] = 'access';
+$config['rest_access_table'] = 'client_settings';
 
 /*
 |--------------------------------------------------------------------------
