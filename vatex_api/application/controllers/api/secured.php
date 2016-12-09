@@ -108,5 +108,40 @@ class Secured extends REST_Controller
         $token = $this->secured_model->token_verify( $request);
         return $token;
     }
+
+    //Api to onboard a vendor
+    public function vendor_post()
+    {
+        $data['Ecommerce_Id']   = $this->post('Ecommerce_Id');
+        $data['Vendor_Id']   = $this->post('Vendor_Id');
+        $data['date']   = date('Y-m-d h:i:s');
+
+        //validated parameters
+        if (empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_Id'))) {
+
+            $this->response(array('error' => 'parameter missing'), 404);
+        }
+
+        //varify token
+        if (!$token = $this->token_verify($this->post('token'))) {
+            //return $token;
+            $this->response(array('error' => 'Token Mismatch'), 404);
+        }
+
+        //check if vendor exist
+        if ($vendor = $this->secured_model->vendor_check($this->post('Vendor_Id'))) {
+            $this->response(array('error' => 'Vendor already exist'), 404);
+        }
+
+        //generate vendor key
+        $data['key_id']  = md5(uniqid(rand(), true));
+
+        //insert vendor
+        if ($result = $this->secured_model->insert_vendor($data)) {
+            $this->response(array('message' => 'Vendor registeration successful'), 404);
+        }
+
+        $this->response(array('error' => 'Unable to register vendor'), 404);
+    }
 	
 }

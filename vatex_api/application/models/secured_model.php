@@ -90,4 +90,22 @@ class Secured_model extends CI_Model {
 		
 	}
 
+	//checking if vendor exist
+	public function vendor_check($data)
+	{
+		$vendor = $this->db->where(array('Vendor_Id'=>$data))->get('vendor')->row_array();
+
+		return $vendor;
+	}
+
+	//inserting vendor 
+	public function insert_vendor($data)
+	{
+		if ($insert = $this->db->insert("vendor", $data)) {
+			return true;
+		}
+
+		return false;
+	}
+
 }
