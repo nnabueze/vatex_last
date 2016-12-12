@@ -123,6 +123,7 @@
                                         <th>transaction_amount</th>
                                         <th>input_vat</th>
                                         <th>output_vat</th>
+                                        <th>NET VAT</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -148,6 +149,10 @@
                                             <?php echo $report->output_vat; ?></span>
 
                                         </td>
+                                        <td class="text-center">
+                                            <?php echo $report->net_vat; ?></span>
+
+                                        </td>
 
                                         <?php } ?>
 
@@ -160,6 +165,7 @@
                                             <th>transaction_amount</th>
                                             <th>input_vat</th>
                                             <th>output_vat</th>
+                                            <th>Net Vat</th>
                                         </tr>
                                     </tfoot>
                                 </table>

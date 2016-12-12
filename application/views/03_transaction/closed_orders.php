@@ -21,7 +21,7 @@
                                                 <th data-hide="phone">ORDER ID</th>
                                                 <th data-hide="phone,tablet">ORDER AMOUNT</th>
                                                 <th data-hide="phone,tablet">QUANTITY</th>
-                                                <th data-hide="phone,tablet">ORDER DATE</th>
+                                                <th data-hide="phone,tablet">PAYMENT DATE</th>
                                                 <th data-hide="phone,tablet" class="text-center">STATUS</th>
                                                 <th data-hide="phone,tablet" class="text-center">ACTION</th>
                                             </tr>
@@ -50,7 +50,7 @@
                                                     <?php echo $initiatedOrders->Quantity; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $initiatedOrders->Order_date; ?>
+                                                    <?php echo $initiatedOrders->Payment_Date; ?>
                                                 </td>
                                                 <td class="text-center">
 
@@ -76,7 +76,7 @@
                                                     <th>ORDER ID</th>
                                                     <th>ORDER AMOUNT</th>
                                                     <th>QUANTITY</th>
-                                                    <th>ORDER DATE</th>
+                                                    <th>PAYMENT DATE</th>
                                                     <th>STATUS</th>
                                                     <th>ACTION</th>
                                                 </tr>

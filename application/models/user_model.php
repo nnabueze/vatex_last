@@ -104,6 +104,14 @@ class User_model extends CI_Model {
 		return $query;	
 	}
 	/*** EOF ***/
+
+
+	//getting list of vendors on the platform
+	public function vendor()
+	{
+		$query = $this->db->get('vendor')->result_array();
+		return $query;
+	}
 }
 
 

@@ -29,6 +29,7 @@ class Secured extends REST_Controller
         $data['Product_Category']   = $this->post('Product_Category');
         $data['Net_VAT']   = $this->post('Net_VAT');
         $data['Vendor_TIN']   = $this->post('Vendor_TIN');
+        $data['token']   = $this->post('token');
 
         //check if any of the parameters are empty
         if (empty($this->post('Transaction_Id')) || empty($this->post('Vendor_Id'))|| empty($this->post('Order_Id'))|| empty($this->post('Order_Amount'))|| empty($this->post('Quantity')) || empty($this->post('Order_date')) || empty($this->post('Purchase_Price')) || empty($this->post('Product_Description')) || empty($this->post('Product_Category')) || empty($this->post('Order_date')) || empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_TIN'))) {
@@ -37,7 +38,7 @@ class Secured extends REST_Controller
         }
 
         //varify token
-        if (!$token = $this->token_verify($this->post('token'))) {
+        if (!$token = $this->token_verify($data)) {
             //return $token;
             $this->response(array('error' => 'Token Mismatch'), 404);
         }
@@ -71,6 +72,7 @@ class Secured extends REST_Controller
         $data['Payment_Type']   = $this->post('Payment_Type');
         $data['Delivery_Date']   = $this->post('Delivery_Date');
         $data['Order_Status']   = "1";
+        $data['token']   = $this->post('token');
 
         //validated parameters
         if (empty($this->post('Ecommerce_Id')) || empty($this->post('Transaction_Id'))|| empty($this->post('Payment_Date'))|| empty($this->post('Payment_Type'))|| empty($this->post('Delivery_Date'))  ) {
@@ -80,7 +82,7 @@ class Secured extends REST_Controller
 
         //check if token exist
         //varify token
-        if (!$token = $this->token_verify($this->post('token'))) {
+        if (!$token = $this->token_verify($data)) {
             //return $token;
             $this->response(array('error' => 'Token Mismatch'), 404);
         }
@@ -115,6 +117,7 @@ class Secured extends REST_Controller
         $data['Ecommerce_Id']   = $this->post('Ecommerce_Id');
         $data['Vendor_Id']   = $this->post('Vendor_Id');
         $data['date']   = date('Y-m-d h:i:s');
+        $data['token']   = $this->post('token');
 
         //validated parameters
         if (empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_Id'))) {
@@ -123,7 +126,7 @@ class Secured extends REST_Controller
         }
 
         //varify token
-        if (!$token = $this->token_verify($this->post('token'))) {
+        if (!$token = $this->token_verify($data)) {
             //return $token;
             $this->response(array('error' => 'Token Mismatch'), 404);
         }

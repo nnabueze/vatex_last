@@ -127,6 +127,7 @@ class Clientadmin extends CI_Controller {
 			$data['business_type'] = $this->input->post('business_type');
 			$data['client_name'] = $this->input->post('client_name');
 			$data['date_created']   = date('Y-m-d H:i:s');
+			$data['key_id']   = 'VA'.md5(uniqid(rand(), true));
 			$data['status'] = 1;
 			
 			$client_exists = $this->client_model->client_exists($data['contact_email'],$data['client_name']);
@@ -135,7 +136,7 @@ class Clientadmin extends CI_Controller {
 				redirect(getUrl('clientadmin/create_new'));
 			}else{
 				$clientid = $this->client_model->client_registration($data);
-				$api_key = md5(uniqid(rand(), true));
+				$api_key = $data['key_id'];
 				$tokenid = sha1(md5(uniqid(rand(), true)));
 				$data = array();
 				$data['contact_email'] = $this->input->post('contact_email');
