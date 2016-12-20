@@ -53,6 +53,13 @@ class User_model extends CI_Model {
 		$query = $this->db->where(array('id'=>$id))->get('user')->result();
 		return $query;
 	}
+
+	//login for vendors
+	public function vendor_login($data)
+	{
+		$query = $this->db->where(array('Ecommerce_Id'=>$data['email']))->where(array('Vendor_Id'=>$data['password']))->get('vendor')->row_array();
+		return $query;
+	}
 	
 	/****** EOF *****/
 

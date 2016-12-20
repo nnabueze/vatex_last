@@ -7,41 +7,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
 
-			<aside id="sidebar-left" class="sidebar-circle sidebar-primary">
-            		<?php 
-						$userid = $this->session->userdata('user_id');
-						$userdt = $this->user_model->user_detail($userid);
-						
-						$usergroupid = $userdt[0]->user_group_id;
-						CI()->load->model('user_group_model');
-						$permissiondata = CI()->user_group_model->user_group_permissions_detail($usergroupid);
-						$perm= array();
-						foreach($permissiondata as $usp){
-							$perm[] = $usp->user_permissions;
-						}
-					?>
+            <aside id="sidebar-left" class="sidebar-circle sidebar-primary">
+                    <?php 
+                        $userid = $this->session->userdata('user_id');
+                        $userdt = $this->user_model->user_detail($userid);
+                        
+                        $usergroupid = $userdt[0]->user_group_id;
+                        CI()->load->model('user_group_model');
+                        $permissiondata = CI()->user_group_model->user_group_permissions_detail($usergroupid);
+                        $perm= array();
+                        foreach($permissiondata as $usp){
+                            $perm[] = $usp->user_permissions;
+                        }
+                    ?>
                 
                 <div class="sidebar-content">
                     <div class="media">
-                    	<a class="pull-left has-notif avatar" href="<?php echo site_url('profile');?>">
-						
+                        <a class="pull-left has-notif avatar" href="<?php echo site_url('profile');?>">
+                        
                             <img src="<?php echo base_url('uploads/user_img/'.$userdt[0]->profile_img);?>?create=50x50,4888E1?f=ffffff" alt="admin">
                             <i class="online"></i>
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading"><span><strong><?php echo $userdt[0]->username; ?></strong></span></h4>
                             <small>
-							<?php if($userdt[0]->user_group_id==1){ ?>
-							<strong>Super Administrator</strong>
-							<?php } elseif($userdt[0]->user_group_id==2){ ?>
-							<strong>Administrator</strong>
-							<?php } elseif($userdt[0]->user_group_id==3){ ?>
-							<strong>Ecommerce</strong>	
-							<?php } else {
-							echo "<strong>Vendor</strong>";
-							}?>
-							
-							</small>
+                            <?php if($userdt[0]->user_group_id==1){ ?>
+                            <strong>Super Administrator</strong>
+                            <?php } elseif($userdt[0]->user_group_id==2){ ?>
+                            <strong>Administrator</strong>
+                            <?php } elseif($userdt[0]->user_group_id==3){ ?>
+                            <strong>Ecommerce</strong>  
+                            <?php } else {
+                            echo "<strong>Vendor</strong>";
+                            }?>
+                            
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -64,19 +64,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </a>
                         <ul>
                             <li class="<?php if(strtolower($uri_segment_3)=='clientlisting') { echo 'active'; }  ?>">
-                            	<a href="<?php echo site_url('clientadmin/listing');?>" title="Client Listing">Client Listing</a>
+                                <a href="<?php echo site_url('clientadmin/listing');?>" title="Client Listing">Client Listing</a>
                             </li>
                             
                             <li class="<?php if(strtolower($uri_segment_3)=='clientadd') { echo 'active'; }  ?>">
-                            	<a href="<?php echo site_url('clientadmin/create_new');?>" title="Create New Client">Create New Client</a>
+                                <a href="<?php echo site_url('clientadmin/create_new');?>" title="Create New Client">Create New Client</a>
                             </li>
                             
                             <!--<li class="<?php if(strtolower($uri_segment_3)=='clientactivation') { echo 'active'; }  ?>">
-                            	<a href="<?php echo site_url('clientadmin/activation_deactivation');?>" title="Activate/Deactivate">Activate/Deactivate</a>
+                                <a href="<?php echo site_url('clientadmin/activation_deactivation');?>" title="Activate/Deactivate">Activate/Deactivate</a>
                             </li>-->
                             
                             <li class="<?php if(strtolower($uri_segment_3)=='client_fundssweep_settings') { echo 'active'; }  ?>">
-                            	<a href="<?php echo site_url('clientadmin/fundsweep_config');?>" title="Funds Sweep Settings">Funds Sweeping Config</a>
+                                <a href="<?php echo site_url('clientadmin/fundsweep_config');?>" title="Funds Sweep Settings">Funds Sweeping Config</a>
                             </li>
                         </ul>
                     </li>

@@ -22,21 +22,21 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
 				<div class="well no-padding">
-					<form action="<?php echo site_url('login');?>" id="login-form" class="smart-form client-form" method="post">
+					<form action="<?php echo site_url('login/vendor');?>" id="login" class="smart-form client-form" method="post">
 						<header>
-							Sign In
+							VENDOR LOGIN PAGE
 						</header>
 						<fieldset>
 							
 							<section>
-								<label class="label">E-mail</label>
+								<label class="label">E-commerce</label>
 								<label class="input"> <i class="icon-append fa fa-user"></i>
-									<input type="email" name="username">
+									<input type="text" name="username">
 									<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address</b></label>
 							</section>
 
 							<section>
-								<label class="label">Password</label>
+								<label class="label">Vendor ID</label>
 								<label class="input"> <i class="icon-append fa fa-lock"></i>
 									<input type="password" name="password">
 									<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> 
@@ -44,17 +44,15 @@
 							</section>
 
 							<section>
-                            	<div class="note">
-                                    <p>If you are a vendor, please access <a href="<?php echo site_url('login/vendor');?>" title="Are you Vendor?" ><strong>vendor portal here...</strong></a></p>
-								</div>
+
 								<!--<label class="checkbox">
 									<input type="checkbox" name="remember" checked="">
 									<i></i>Stay signed in</label>-->
 							</section>
 						</fieldset>
 						<footer>
-							<button type="submit" class="btn btn-primary">
-								Sign in
+							<button type="submit" class="btn btn-success">
+								Login
 							</button>
 						</footer>
 					</form>
@@ -110,13 +108,13 @@
 					// Rules for form validation
 					rules : {
 						email : {
-							required : true,
-							email : true
+							required : true
+							/*email : true*/
 						},
 						password : {
-							required : true,
-							minlength : 3,
-							maxlength : 20
+							required : true
+							/*minlength : 3,
+							maxlength : 20*/
 						}
 					},
 

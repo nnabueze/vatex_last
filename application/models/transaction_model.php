@@ -94,11 +94,17 @@ class Transaction_model extends CI_Model {
 	{
 		if($criteria)
 		{
-			$result = $this->db->where($criteria)->get('vat_on_hold_sweep_queue')->result();
+			$result = $this->db->where($criteria)
+					->order_by('id',"desc")
+					->get('vat_on_hold_sweep_queue')
+					->result();
 		}
 		else
 		{
-			$result = $this->db->get('vat_on_hold_sweep_queue')->result();
+			$result = $this->db->select('*')
+					->order_by('id',"desc")
+					->get('vat_on_hold_sweep_queue')
+					->result();
 		}
 		
 		return $result;
@@ -167,5 +173,30 @@ class Transaction_model extends CI_Model {
 		}
 
 		$this->db->delete('payment_sweep_queue',array('ec_id'=>$userid,'sales_date'=>$sdate));
+	}
+
+	////////////////////////////VENDOR////////////////////////////////////////
+
+	//getting vendor order closed order
+	public function vendor_order($data)
+	{
+		return $result = $this->db->where(array('Ecommerce_Id'=>$data['ecommerce_id']))
+						->where(array('Vendor_Id'=>$data['vandor_id']))
+						->where(array('Order_Status'=>'1'))
+						->order_by('id',"desc")
+						->get('vat_on_hold_sweep_queue')
+						->result_array();
+	}
+
+	//getting vendor the last 5 closed order
+	public function vendor_last_order($data)
+	{
+		return $result = $this->db->where(array('Ecommerce_Id'=>$data['ecommerce_id']))
+						->where(array('Vendor_Id'=>$data['vandor_id']))
+						->where(array('Order_Status'=>'1'))
+						->limit(5)
+						->order_by('id',"desc")
+						->get('vat_on_hold_sweep_queue')
+						->result_array();
 	}
 }

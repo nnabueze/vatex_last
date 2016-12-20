@@ -113,7 +113,11 @@ class Secured_model extends CI_Model {
 	//checking if vendor exist
 	public function vendor_check($data)
 	{
-		$vendor = $this->db->where(array('Vendor_Id'=>$data))->get('vendor')->row_array();
+
+		$vendor = $this->db->where(array('Vendor_Id'=>$data['Vendor_Id']))
+					->where(array('Ecommerce_Id'=>$data['Ecommerce_Id']))
+					->get('vendor')
+					->row_array();
 
 		return $vendor;
 	}
@@ -121,13 +125,25 @@ class Secured_model extends CI_Model {
 	//inserting vendor 
 	public function insert_vendor($data)
 	{
-		$item['Ecommerce_Id']   = $data['Ecommerce_Id'];
-		$item['Vendor_Id']   = $data['Vendor_Id'];
-		$item['date']   = $data['date'];
-		$item['key_id']   = $data['key_id'];
+		$item['first_name']   = $data['first_name'];
+		$item['last_name']   = $data['last_name'];
+		$item['added_date']   = $data['date'];
+		$item['email']   = $data['email'];
+		$item['mobile']   = $data['mobile'];
 
-		if ($insert = $this->db->insert("vendor", $item)) {
-			return true;
+		//insert into user table for easy login system
+		if (! empty($item['mobile'])) {
+			$this->db->insert("user", $item);
+			if ($insert = $this->db->insert_id()) {
+
+				$vendor['Ecommerce_Id']   = $data['Ecommerce_Id'];
+				$vendor['Vendor_Id']   = $data['Vendor_Id'];
+				$vendor['date']   = $data['date'];
+				$vendor['user_id']   = $insert;
+
+				$this->db->insert("vendor", $vendor);
+				return true;
+			}
 		}
 
 		return false;

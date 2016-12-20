@@ -40,6 +40,28 @@ class Transaction extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//getting vendor closed order
+	public function vendor_orders()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$item['vandor_id']= $this->session->userdata('vendor_id');
+		$item['ecommerce_id'] = $this->session->userdata('ecommerce_Id');
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Unremitted Transaction Orders';
+		$data['uri_segment_2'] = 'vendor_orders';
+		$data['uri_segment_3'] = 'vendor_orders';
+		$data['user'] = 'vendor';
+		$data['vendor_orders'] = $this->transaction_model->vendor_order($item);
+
+		$data['page_content'] = '03_transaction/vendor_orders';
+		$this->load->view('includes/main_content', $data);
+	}
+
 	public function closed_orders()
 	{
 		if(!isAdminLoggedIn())

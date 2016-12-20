@@ -117,45 +117,7 @@ var BlankonTable = function () {
             tableDomClientListing.dataTable({
                 autoWidth        : true,
 				"aoColumnDefs": [ { "bSortable": false, "aTargets": [ 4 ] } ],
-                                'dom': 'Blfrtip',
-                                buttons: [
-                                    {
-                                        extend: 'collection',
-                                        text: 'Export',
-                                        buttons: [
-                                            {
-                                                extend: 'copy',
-                                                /*exportOptions: {
-                                                    columns: [0,1,2,3,4,5,6]
-                                                }*/
-                                            },
-                                            {
-                                                extend: 'excel',
-                                                /*exportOptions: {
-                                                    columns: [0,1,2,3,4,5,6]
-                                                }*/
-                                            },
-                                            {
-                                                extend: 'csv',
-                                                /*exportOptions: {
-                                                    columns: [0,1,2,3,4,5,6]
-                                                }*/
-                                            },
-                                            {
-                                                extend: 'pdf',
-                                                /*exportOptions: {
-                                                    columns: [0,1,2,3,4,5,6]
-                                                }*/
-                                            },
-                                            {
-                                                extend: 'print',
-                                                /*exportOptions: {
-                                                    columns: [0,1,2,3,4,5,6]
-                                                }*/
-                                            }
-                                        ]
-                                    }
-                                ],
+
                 preDrawCallback: function () {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelperDom) {

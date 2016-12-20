@@ -49,6 +49,11 @@ class Secured extends REST_Controller
             $this->response(array('error' => 'Order ID already exist'), 404);
         }
 
+        //check if vendor exist under ecommerce
+        if (! $vendor = $this->secured_model->vendor_check($data)) {
+            $this->response(array('error' => 'Vendor does not exist'), 404);
+        }
+
         $data['ec_id'] = $token['client_id'];
 
         //insert paraters into database
@@ -118,9 +123,13 @@ class Secured extends REST_Controller
         $data['Vendor_Id']   = $this->post('Vendor_Id');
         $data['date']   = date('Y-m-d h:i:s');
         $data['token']   = $this->post('token');
+        $data['first_name']   = $this->post('first_name');
+        $data['last_name']   = $this->post('last_name');
+        $data['email']   = $this->post('email');
+        $data['mobile']   = $this->post('phone');
 
         //validated parameters
-        if (empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_Id'))) {
+        if (empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_Id')) || empty($this->post('phone'))) {
 
             $this->response(array('error' => 'parameter missing'), 404);
         }
@@ -132,12 +141,12 @@ class Secured extends REST_Controller
         }
 
         //check if vendor exist
-        if ($vendor = $this->secured_model->vendor_check($this->post('Vendor_Id'))) {
+        if ($vendor = $this->secured_model->vendor_check($data)) {
             $this->response(array('error' => 'Vendor already exist'), 404);
         }
 
         //generate vendor key
-        $data['key_id']  = md5(uniqid(rand(), true));
+       // $data['key_id']  = md5(uniqid(rand(), true));
 
         //insert vendor
         if ($result = $this->secured_model->insert_vendor($data)) {

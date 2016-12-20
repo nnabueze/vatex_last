@@ -38,6 +38,31 @@ class Login extends CI_Controller
 		$this->load->view('login',$data);
 	}
 
+	//vendor login
+	public function vendor()
+	{
+		if ($this->input->post('username')!='') {
+			$data['email']      = $this->input->post('username');
+			$data['password']   = $this->input->post('password');
+
+			$result             = $this->user_model->vendor_login($data);
+
+			if ($result) {
+				$this->session->sess_expiration = '10'; //30 Minutes
+				$this->session->sess_expire_on_close = 'true';
+				$this->session->set_userdata('user_id', $result['user_id']);
+				$this->session->set_userdata('vendor_id', $result['Vendor_Id']);
+				$this->session->set_userdata('ecommerce_Id', $result['Ecommerce_Id']);
+				$this->session->set_flashdata('success',"Login successful");
+				redirect('dashboard/vendor');
+			}else{
+				redirect('login/vendor');
+			}
+		}
+
+		$this->load->view('login_vendor');
+	}
+
 	/**** Start  of function For logout of client ****/
 	public function logout()
 	{
