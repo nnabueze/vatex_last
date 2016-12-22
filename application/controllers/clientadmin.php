@@ -111,7 +111,7 @@ class Clientadmin extends CI_Controller {
 		{
 			if($_FILES["pimg"]["name"] != '')
 			{
-				$uploads_dir = 'uploads';
+				$uploads_dir = 'uploads/client_img';
 				$tmp_name = $_FILES["pimg"]["tmp_name"];
 				$name = uniqid().$_FILES["pimg"]["name"];
 				move_uploaded_file($tmp_name, "$uploads_dir/$name");
@@ -143,10 +143,11 @@ class Clientadmin extends CI_Controller {
 				$data['client_id'] = $clientid;
 				$data['api_key'] = $api_key;
 				$data['token_id'] = $tokenid;
-				$clientid = $this->client_model->add_client_settings($data);
-
-				$this->session->set_flashdata('success',"client registered successfully. API_KEY: ".$api_key);
-				redirect(getUrl('clientadmin'));
+				
+				if ($clientid = $this->client_model->add_client_settings($data)) {
+					$this->session->set_flashdata('success',"Ecommerce ID:".$api_key." Token:".$tokenid);
+					redirect(getUrl('clientadmin/listing'));
+				}
 			}			
 		}
 		

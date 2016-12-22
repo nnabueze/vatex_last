@@ -14,25 +14,24 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->
-                                 	<?php 
-									if($this->session->flashdata('error')!=''){
-										echo 
-										'<div class="alert alert-danger alert-dismissable">
-											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-											<strong>Failure!</strong> '.$this->session->flashdata('error').'
-										</div>';
-								
-									}
-									if($this->session->flashdata('success')!=''){
-										echo 
-										'<div class="alert alert-success alert-dismissable">
-											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-											<strong>Failure!</strong> '.$this->session->flashdata('success').'
-										</div>';
-									}
-									?>
-                                    
                                 <div class="panel-body">
+                                            <?php 
+                                            if($this->session->flashdata('error')!=''){
+                                                echo 
+                                                '<div class="alert alert-danger alert-dismissable">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Failure!</strong> '.$this->session->flashdata('error').'
+                                                </div>';
+                                        
+                                            }
+                                            if($this->session->flashdata('success')!=''){
+                                                echo 
+                                                '<div class="alert alert-success alert-dismissable">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Success!</strong> '.$this->session->flashdata('success').'
+                                                </div>';
+                                            }
+                                            ?>
                                     <!-- Start datatable -->
                                     <table id="datatable-client-listing" class="table table-striped table-primary table-middle table-project-clients">
                                         <thead>
