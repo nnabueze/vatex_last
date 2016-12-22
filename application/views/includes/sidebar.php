@@ -117,6 +117,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </ul>
                     </li>
 
+                    <li class="<?php if(strtolower($uri_segment_2)=='efiling') { echo 'active'; }  ?>">
+                        <a href="<?php echo site_url('transaction/efiling');?>" title="efiling">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">Efiling</span>
+                            <?php if(strtolower($uri_segment_2)=='efiling') { echo '<span class="selected"></span>'; }  ?>
+                        </a>
+                    </li>
+
                     <li class="submenu <?php if(strtolower($uri_segment_2)=='profile') { echo 'active'; }  ?>">
                         <a href="javascript:void(0);">
                             <span class="icon"><i class="fa fa-user"></i></span>
@@ -145,7 +153,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
 
                     <li class="active">
-                        <a href="<?php echo site_url('dashboard/logout');?>" title="">
+                        <a href="<?php echo site_url('login/logout');?>" title="">
                             <span class="icon"><i class="fa fa-sign-out"></i></span>
                             <span class="text">Logout</span>
                         </a>

@@ -5,9 +5,9 @@ class Transaction extends CI_Controller {
 	public function  __construct()
 	{
 		parent::__construct();
-        $this->load->model(array('user_model','client_model','vat_model','basic_model','transaction_model'));
-		$this->load->library('upload');
-		$this->load->helper(array('url'));
+		$this->load->model(array('user_model','client_model','vat_model','basic_model','transaction_model'));
+		$this->load->library('upload','form_validation');
+		$this->load->helper(array('url','form','download'));
 		if(!isAdminLoggedIn())
 		{
 			redirect(getUrl('login'));
@@ -23,6 +23,9 @@ class Transaction extends CI_Controller {
 		$this->vat_model->gettransactionhold();
 	}
 
+
+//////////////////////////////////////////////////////////////////TRANSACTION
+	//getting initiated order
 	public function initiated_orders()
 	{
 		if(!isAdminLoggedIn())
@@ -52,7 +55,7 @@ class Transaction extends CI_Controller {
 
 		$data = array();
 		$data['datatable'] = TRUE;
-		$data['page_title'] = 'Unremitted Transaction Orders';
+		$data['page_title'] = 'List of Vendor Orders';
 		$data['uri_segment_2'] = 'vendor_orders';
 		$data['uri_segment_3'] = 'vendor_orders';
 		$data['user'] = 'vendor';
@@ -62,6 +65,7 @@ class Transaction extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//getting closed orders
 	public function closed_orders()
 	{
 		if(!isAdminLoggedIn())
@@ -80,12 +84,153 @@ class Transaction extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//getting specific oreder details
+	public function order_details($id)
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Efiling of Input VAT';
+		$data['uri_segment_2'] = 'vendor_orders';
+		$data['uri_segment_3'] = 'vendor_orders';
+		$data['user'] = 'vendor';
+		$data['order_details'] = $this->transaction_model->order_details($id);
+
+		$data['page_content'] = '03_transaction/input_vat';
+		$this->load->view('includes/main_content', $data);
+
+	}
+
+	//storing input VAT
+	public function input_vat()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+
+		if ($this->input->post('input_vat')!='') {
+
+			if($_FILES["pimg"]["name"] != ''){
+				$uploads_dir = 'uploads/vat';
+				$tmp_name = $_FILES["pimg"]["tmp_name"];
+				$array = explode('.', $_FILES["pimg"]["name"]);
+				$extension = end($array);
+				$name = uniqid().".".$extension;
+				move_uploaded_file($tmp_name, "$uploads_dir/$name");
+				$data['vat_image'] = $name;
+			}
+		}
+
+		$data['input_vat']   = $this->input->post('input_vat');
+		$data['id']      = $this->input->post('Id');
+
+		if ($vat = $this->transaction_model->input_vat($data)) {
+			$this->session->set_flashdata('success',"VAT entered susccessfully.");
+			redirect(getUrl('transaction/vendor_orders'));
+		}
+
+		$this->session->set_flashdata('error',"unable to insert Vat.");
+		redirect(getUrl('transaction/vendor_orders'));
+	}
+
+	//retrieving listof input vat for FIRS
+	public function efiling()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Efiling of Input VAT';
+		$data['uri_segment_2'] = 'efiling';
+		$data['uri_segment_3'] = 'efiling';
+		$data['user'] = 'firs';
+		$data['efilings'] = $this->transaction_model->efiling();
+
+		$data['page_content'] = '03_transaction/efiling';
+		$this->load->view('includes/main_content', $data);
+	}
+
+	//getting a specific input vat details for firs
+	public function efiling_details($id)
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Efiling of Input VAT';
+		$data['uri_segment_2'] = 'efiling';
+		$data['uri_segment_3'] = 'efiling';
+		$data['user'] = 'firs';
+		$data['order_details'] = $this->transaction_model->order_details($id);
+
+		$data['page_content'] = '03_transaction/efiling_details';
+		$this->load->view('includes/main_content', $data);
+	}
+
+	//downloading transaction image
+	public function download($id){
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+		$data = file_get_contents(site_url().'uploads/vat/'.$id);
+		$name = $id;
+		force_download($name, $data);
+	}
+
+	//approving input vat by firs
+	public function approve($id, $data)
+	{
+		
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+		$status = $this->transaction_model->approve($id,$data);
+
+		switch ($status) {
+		    case 1:
+		        $this->session->set_flashdata('success',"VAT Approved Sucessful.");
+		        redirect(getUrl('transaction/efiling'));
+		        break;
+		    case 2:
+		        $this->session->set_flashdata('success',"VAT hav been sucessfully declined.");
+		        redirect(getUrl('transaction/efiling'));
+		        break;
+		    default:
+		    	$this->session->set_flashdata('error',"unable to approve VAT.");
+		    	redirect(getUrl('transaction/efiling'));
+		       
+		}
+
+	}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 	public function viewdetails($id,$date){
 		$data = array();
 		$data['vatdetails'] = $this->vat_model->get_all_hold_orders($id,$date);
 		$this->load->view('holdvatdetails',$data);
 	}
-	
+
+
 	//Joseph
 	public function orderdetail($orderid){
 		$data = array();

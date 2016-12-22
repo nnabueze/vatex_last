@@ -7,7 +7,7 @@
                             <div class="panel panel-default shadow no-overflow">
                                 <div class="panel-heading">
                                     <div class="pull-left">
-                                        <h3 class="panel-title">Vendor Closed Orders</h3>
+                                        <h3 class="panel-title">Efiling Page</h3>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->
@@ -38,46 +38,50 @@
                                                 <th data-hide="phone">TRANSACTION ID</th>
                                                 <th data-hide="phone">VENDOR ID</th>
                                                 <th data-hide="phone">ORDER ID</th>
-                                                <th data-hide="phone,tablet">ORDER AMOUNT</th>
                                                 <th data-hide="phone,tablet">QUANTITY</th>
                                                 <th data-hide="phone,tablet">PAYMENT DATE</th>
+                                                <th data-hide="phone,tablet">ORDER AMOUNT</th>
+                                                <th data-hide="phone,tablet">INPUT VAT</th>
                                                 <th data-hide="phone,tablet" class="text-center">STATUS</th>
-                                                <th data-hide="phone,tablet">FILE VAT</th>
+                                                <th data-hide="phone,tablet">ACTION</th>
                                             </tr>
                                         </thead>
                                         <!--tbody section is required-->
                                         <tbody>
-                                            <?php foreach($vendor_orders as $vendor_orders){ ?>
+                                            <?php foreach($efilings as $efiling){ ?>
                                             <tr class="border-warning">
                                                 <td>
-                                                    <b><?php echo $vendor_orders['Ecommerce_Id']; ?></b>
+                                                    <b><?php echo $efiling['Ecommerce_Id']; ?></b>
                                                 </td>
                                                 <td>
-                                                    <?php echo $vendor_orders['Transaction_Id']; ?>
+                                                    <?php echo $efiling['Transaction_Id']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $vendor_orders['Vendor_Id']; ?>
+                                                    <?php echo $efiling['Vendor_Id']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $vendor_orders['Order_Id']; ?>
+                                                    <?php echo $efiling['Order_Id']; ?>
                                                 </td>
-                                                
+
                                                 <td>
-                                                    <?php echo $vendor_orders['Order_Amount']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $vendor_orders['Quantity']; ?>
+                                                    <?php echo $efiling['Quantity']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $vendor_orders['Payment_Date']; ?>
+                                                    <?php echo $efiling['Payment_Date']; ?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?php if($vendor_orders['Order_Status'] == 1 ){ ?>
-                                                    <span class="label label-success"><?php echo "Closed"; ?></span>
+                                                    <?php echo $efiling['Order_Amount']; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $efiling['input_vat']; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php if($efiling['approve'] == 1 ){ ?>
+                                                    <span class="label label-success"><?php echo "Not Approved"; ?></span>
                                                     <?php } ?>
                                                 </td>
                                                 <td class="text-center">
-                                                <a href="<?php echo site_url('transaction/order_details/'.$vendor_orders['id']);?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="View detail"><i class="fa fa-eye"></i></a>
+                                                <a href="<?php echo site_url('transaction/efiling_details/'.$efiling['id']);?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="View detail"><i class="fa fa-eye"></i></a>
                                            
                                                 </td>
                                              
@@ -92,11 +96,12 @@
                                                 <th>TRANSACTION ID</th>
                                                 <th>VENDOR ID</th>
                                                 <th>ORDER ID</th>
-                                                <th>ORDER AMOUNT</th>
                                                 <th>QUANTITY</th>
                                                 <th>PAYMENT DATE</th>
+                                                <th>ORDER AMOUNT</th>
+                                                <th>INPUT VAT</th>
                                                 <th data-hide="phone,tablet" class="text-center">STATUS</th>
-                                                <th>FILE VAT</th>
+                                                <th>ACTION</th>
                                             </tr>
                                         </tfoot>
                                     </table>

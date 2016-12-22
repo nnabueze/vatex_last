@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
 
                     <li>
-                        <a href="<?php echo site_url('dashboard/logout');?>" title="">
+                        <a href="<?php echo site_url('login/logout');?>" title="">
                             <span class="icon"><i class="fa fa-sign-out"></i></span>
                             <span class="text">Logout</span>
                         </a>

@@ -70,7 +70,7 @@ class Vat1_model extends CI_Model {
 
 				if (count($vendors) > 0) {
 					foreach ($vendors as $vendor) {
-						$orders = $this->db->where(array('Ecommerce_Id'=>$vendor['Ecommerce_Id']))->where('Vendor_Id',$vendor['Vendor_Id'])->where('Order_Status','1')->where('Payment_Date >=',$start_of_last_month)->where('Payment_Date <',$end_of_last_month)->get('vat_on_hold_sweep_queue')->result_array();
+						$orders = $this->db->where(array('Ecommerce_Id'=>$vendor['Ecommerce_Id']))->where('Vendor_Id',$vendor['Vendor_Id'])->where('Order_Status','1')->where('Payment_Date >=',$start_of_last_month)->where('Payment_Date <=',$end_of_last_month)->get('vat_on_hold_sweep_queue')->result_array();
 
 						if (count($orders) > 0) {
 							foreach($orders as $order){

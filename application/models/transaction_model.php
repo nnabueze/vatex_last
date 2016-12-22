@@ -177,12 +177,25 @@ class Transaction_model extends CI_Model {
 
 	////////////////////////////VENDOR////////////////////////////////////////
 
-	//getting vendor order closed order
+	//aprrove in vat_on_hold_sweep_queue table is to specify when INPUT VAT have been entered
+	//and approved.
+	//0 means vat have not been entered
+	//1 means it have been entered
+	//2 means FIRS have approved.
+
+	//getting vendor order closed order of last month
 	public function vendor_order($data)
 	{
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$end_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m"), 0));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
 		return $result = $this->db->where(array('Ecommerce_Id'=>$data['ecommerce_id']))
 						->where(array('Vendor_Id'=>$data['vandor_id']))
 						->where(array('Order_Status'=>'1'))
+						->where(array('approve'=>'0'))
+						->where('Payment_Date >=',$start_of_last_month)
+						->where('Payment_Date <=',$start_of_current_month)
 						->order_by('id',"desc")
 						->get('vat_on_hold_sweep_queue')
 						->result_array();
@@ -198,5 +211,80 @@ class Transaction_model extends CI_Model {
 						->order_by('id',"desc")
 						->get('vat_on_hold_sweep_queue')
 						->result_array();
+	}
+
+	//getting a specific order
+	public function order_details($id)
+	{
+		return $result = $this->db->where(array('id'=>$id))
+						->get('vat_on_hold_sweep_queue')
+						->row_array();
+	}
+
+	//storing vandor input vat
+	public function input_vat($data)
+	{
+		$item['input_vat'] = $data['input_vat'];
+		$item['vat_image'] = $data['vat_image'];
+		$item['approve'] = "1";
+
+		//check if the date is greater than 21st.
+		$day_of_current_month = date('d', strtotime(date('Y-m-1')));
+		if ($day_of_current_month < 21) {
+			$this->db->where('id', $data['id']);
+			$this->db->update('vat_on_hold_sweep_queue', $item);
+
+			return True;
+		}
+		return FALSE;
+	}
+
+	//getting list of inputed vat
+	public function efiling()
+	{
+		return $result = $this->db->where(array('approve'=>'1'))
+						->where(array('status'=>'0'))
+						->order_by('id',"desc")
+						->get('vat_on_hold_sweep_queue')
+						->result_array();
+	}
+
+	//approving efiling(input vat) by firs
+	public function approve($id, $data)
+	{
+		switch ($id) {
+		    case "confirm":
+		        $result = $this->db->where(array('id'=>$data))
+		        						->get('vat_on_hold_sweep_queue')
+		        						->row_array();
+		      	if ($result) {
+		      		$item['Net_VAT'] = $result['Output_VAT'] - $result['input_vat'];
+		      		$item['approve'] = "2";
+
+		      		$this->db->where('id', $data);
+		      		$this->db->update('vat_on_hold_sweep_queue', $item);
+
+		      		return 1;
+		      	}
+		      	return 3;
+		        break;
+		    case "decline":
+				$result = $this->db->where(array('id'=>$data))
+										->get('vat_on_hold_sweep_queue')
+										->row_array();
+				if ($result) {
+					$item['Net_VAT'] = $result['Output_VAT'];
+					$item['approve'] = "3";
+
+					$this->db->where('id', $data);
+					$this->db->update('vat_on_hold_sweep_queue', $item);
+
+					return 2;
+				}
+				return 3;
+		        break;
+		    default:
+		        return 3;
+		}
 	}
 }
