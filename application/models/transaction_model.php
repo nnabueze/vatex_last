@@ -201,6 +201,28 @@ class Transaction_model extends CI_Model {
 						->result_array();
 	}
 
+
+	//getting all the list of vendor initiated order
+	public function vendor_initiated_orders($data)
+	{
+		return $result = $this->db->where(array('Ecommerce_Id'=>$data['ecommerce_id']))
+						->where(array('Vendor_Id'=>$data['vandor_id']))
+						->order_by('id',"desc")
+						->get('vat_on_hold_sweep_queue')
+						->result_array();
+	}
+
+	//getting list of vendor closded order
+	public function vendor_closed_orders($data)
+	{
+		return $result = $this->db->where(array('Ecommerce_Id'=>$data['ecommerce_id']))
+						->where(array('Vendor_Id'=>$data['vandor_id']))
+						->where(array('Order_Status'=>'1'))
+						->order_by('id',"desc")
+						->get('vat_on_hold_sweep_queue')
+						->result_array();
+	}
+
 	//getting vendor the last 5 closed order
 	public function vendor_last_order($data)
 	{

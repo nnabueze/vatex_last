@@ -65,6 +65,50 @@ class Transaction extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//getting list of vendor order
+	public function vendor_initiated_orders()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$item['vandor_id']= $this->session->userdata('vendor_id');
+		$item['ecommerce_id'] = $this->session->userdata('ecommerce_Id');
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'List of Vendor Orders';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'initiated_orders';
+		$data['user'] = 'vendor';
+		$data['vendor_orders'] = $this->transaction_model->vendor_initiated_orders($item);
+
+		$data['page_content'] = '03_transaction/vendor_list_orders';
+		$this->load->view('includes/main_content', $data);
+	}
+
+	//getting vendor closed order
+	public function vendor_closed_orders()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$item['vandor_id']= $this->session->userdata('vendor_id');
+		$item['ecommerce_id'] = $this->session->userdata('ecommerce_Id');
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'List of Vendor Orders';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'closed_orders';
+		$data['user'] = 'vendor';
+		$data['vendor_orders'] = $this->transaction_model->vendor_closed_orders($item);
+	
+		$data['page_content'] = '03_transaction/vendor_closed_orders';
+		$this->load->view('includes/main_content', $data);
+	}
+
 	//getting closed orders
 	public function closed_orders()
 	{

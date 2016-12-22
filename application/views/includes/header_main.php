@@ -109,7 +109,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li class="dropdown navbar-profile">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="meta">
-                                        <span class="avatar"><img src="http://img.djavaui.com/?create=35x35,4888E1?f=ffffff" class="img-circle" alt="admin"></span>
+                                        <span class="avatar">
+                                            <?php
+                                            if (empty($userdt[0]->profile_img)) {
+                                            ?>
+                                                <img src="<?php echo base_url('uploads/user_img/images.jpg');?>?create=50x50,4888E1?f=ffffff" alt="admin">
+                                            <?php
+                                            }else{
+                                            ?>
+                                            <img src="<?php echo base_url('uploads/user_img/'.$userdt[0]->profile_img);?>?create=50x50,4888E1?f=ffffff" alt="admin">
+                                            <?php } ?>
+                                        </span>
                                         <span class="text hidden-xs hidden-sm text-muted"><?php echo $userdt[0]->username; ?></span>
                                         <span class="caret"></span>
                                     </span>

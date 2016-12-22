@@ -77,7 +77,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <?php if($efiling['approve'] == 1 ){ ?>
-                                                    <span class="label label-success"><?php echo "Not Approved"; ?></span>
+                                                    <span class="label label-warning"><?php echo "Not Approved"; ?></span>
                                                     <?php } ?>
                                                 </td>
                                                 <td class="text-center">
