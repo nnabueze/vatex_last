@@ -45,13 +45,16 @@ class Secured_model extends CI_Model {
 		if (count($orders) > 0) {
 		 	foreach ($orders as $order) {
 		 		//check if the product category is Vatable
+		 		$result = $this->db->where(array('product_category_name'=>$order['Product_Category']))->get('vatibles')->row_array();
 
-		 		//computing Output Vat for specific order
-		 		$data1['Output_VAT'] = 0.05 * $order['Order_Amount'];
+		 		if (!$result) {
+		 			//computing Output Vat for specific order
+		 			$data1['Output_VAT'] = 0.05 * $order['Order_Amount'];
 
-		 		//insert the output vat
-		 		$this->db->where('Order_Id', $order['Order_Id']);
-		 		$this->db->update('vat_on_hold_sweep_queue', $data1);
+		 			//insert the output vat
+		 			$this->db->where('Order_Id', $order['Order_Id']);
+		 			$this->db->update('vat_on_hold_sweep_queue', $data1);
+		 		}
 		 	}
 
 		 	//close all the order within the specified transaction.
