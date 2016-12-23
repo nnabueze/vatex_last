@@ -138,17 +138,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </ul>
                     </li>
 
-                    <li class="submenu <?php if(strtolower($uri_segment_2)=='settings') { echo 'active'; }  ?>">
+                    <li class="submenu <?php if(strtolower($uri_segment_2)=='vatible') { echo 'active'; }  ?>">
                         <a href="javascript:void(0);">
                             <span class="icon"><i class="fa fa-cogs"></i></span>
                             <span class="text">Rules & Procedures </span>
                             <span class="arrow"></span>
-                            <?php if(strtolower($uri_segment_2)=='settings') { echo '<span class="selected"></span>'; }  ?>
+                            <?php if(strtolower($uri_segment_2)=='vatible') { echo '<span class="selected"></span>'; }  ?>
                         </a>
                         <ul>
-                            <li><a href="<?php echo site_url('settings/vatibles');?>" title="">VATible and non-VATible</a></li>
-                            <li class="<?php if(strtolower($uri_segment_3)=='vendor_listing') { echo 'active'; }  ?>"><a href="<?php echo site_url('settings/vendors');?>" title="">Vendor Listing & Mapping</a></li>
-                            <li class="<?php if(strtolower($uri_segment_3)=='inputvat_tracker') { echo 'active'; }  ?>"><a href="<?php echo site_url('settings/inputvat_tracker');?>" title="">Vendor Input VAT Tracking</a></li>
+                            <li class="<?php if(strtolower($uri_segment_3)=='vatible') { echo 'active'; }  ?>"><a href="<?php echo site_url('vat/vatibles');?>" title="">Non-Vatibles</a></li>
                         </ul>
                     </li>
 
