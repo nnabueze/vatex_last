@@ -20,8 +20,36 @@ class Vat extends CI_Controller {
 		{
 			redirect(getUrl('login'));
 		}
+		//getting the current day of the month
+		$day = date("d", strtotime(date('Y-m-d')));
 
-		$vador = $this->vat1_model->vat();
+		//getting the configuration date for computation, deduction, email and fund sweep
+		$result = $this->vat1_model->config_date();
+
+		$fund_sweep_date = $result['sweep_execution_day'];
+		$deduction_date = $result['sweep_execution_day'] - 4;
+		$email_date = $result['sweep_execution_day'] - 3;
+		$computation_date = $result['vat_computation_hold'];
+
+		//if current day equal to fund sweep date run!
+		if ($day == $fund_sweep_date) {
+
+		}
+		
+		//if current day equal to deduction date run
+		if ($day == $deduction_date) {
+
+		}
+
+		//if current day equal to email date sent out email
+		if ($day == $email_date) {
+			
+		}
+
+		//if current day equal to computation date run
+		if ($day == $computation_date) {
+			$this->vat1_model->computation_date();
+		}
 	}
 
 	//showing list of vatible products

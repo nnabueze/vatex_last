@@ -38,45 +38,64 @@ class Vat1_model extends CI_Model {
 		return false;
 	}
 
-	//function that handles the computation, deduction, email and fund sweep
-	public function vat()
+	//getting the configuration date
+	public function config_date()
 	{
-		//get the day of current month
-		$day = date("d", strtotime(date('Y-m-d')));
-
-		//getting the configuration date for computation, deduction, email and fund sweep
 		$result = $this->db->get('sweep_settings')->row_array();
-
-		$fund_sweep_date = $result['sweep_execution_day'];
-		$deduction_date = $result['sweep_execution_day'] - 4;
-		$email_date = $result['sweep_execution_day'] - 3;
-		$computation_date = $result['vat_computation_hold'];
-		//echo "<pre>"; print_r($computation_date); die;
-
-		switch ('th') {
-			case $fund_sweep_date:
-				//fund sweep
-				break;
-			case $deduction_date:
-				//deduct VAT
-				break;
-			case $email_date:
-				//send email
-				break;
-			case 'th':
-				echo "string";
-				break;
-			default:
-				# code...
-				break;
-		}
+		return $result;
 	}
 
 	//computing previous month VAT
-	private function comput_vat()
+	public function computation_date()
 	{
-		echo "yes computation working";
-		die;
+		//getting list of registered client
+		$clients = $this->db->get('client_settings')->result_array();
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$end_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m"), 0));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+			//comput net vat for each client
+		foreach ($clients as $client) {
+			
+				//get all vendors under a specific ecommers
+				$vendors = $this->db->where('Ecommerce_Id',$client['api_key'])->get('vendor')->result_array();
+
+				if (count($vendors) > 0) {
+					foreach ($vendors as $vendor) {
+						$orders = $this->db->where(array('Ecommerce_Id'=>$vendor['Ecommerce_Id']))
+								->where('Vendor_Id',$vendor['Vendor_Id'])
+								->where('Order_Status','1')
+								->where('Payment_Date >=',$start_of_last_month)
+								->where('Payment_Date <=',$start_of_current_month)
+								->get('vat_on_hold_sweep_queue')
+								->result_array();
+
+						if (count($orders) > 0) {
+							foreach($orders as $order){
+								$result['transaction_amount'] += $order['Order_Amount'];
+								$result['output_vat'] += $order['Output_VAT'];
+							}
+
+							$result['ecommerce_id'] = $vendor['Ecommerce_Id'];
+							$result['vendor_id'] = $vendor['Vendor_Id'];
+							$result['net_vat'] = $result['output_vat'];
+							$result['input_vat'] = "0";
+							$result['period'] = date("F,Y",strtotime("-1 month"));
+							$result['date'] = date('Y-m-d H:i:s');
+
+							//check if computed vendor computed vat for the month exist
+							if (! $net_vat = $this->db->where(array('period'=>$result['period']))->where(array('vendor_id'=>$result['vendor_id']))->get('computed_vat')->row_array()) {
+
+								$insert = $this->db->insert("computed_vat", $result);
+
+							}
+						}
+
+					}
+				}
+
+			
+		}
 	}
 
 
