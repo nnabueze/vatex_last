@@ -35,7 +35,7 @@
                                             <th data-hide="phone">ClientID</th>
                                             <th data-class="expand">Client Name</th>
                                             <th data-hide="phone">Funds Sweep Date</th>
-                                            <th data-hide="phone">VAT Input Window</th>
+                                            <th data-hide="phone">VAT computation Date</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                         </thead>
@@ -69,7 +69,7 @@
                                             <th>ClientID</th>
                                             <th>Client Name</th>
                                             <th>Funds Sweep Date</th>
-                                            <th>VAT Input Window</th>
+                                            <th>VAT computation Date</th>
                                             <th>Action</th>
                                         </tr>
                                         </tfoot>
@@ -102,7 +102,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Vendor VAT Input Window</label>
+                                                <label class="col-sm-6 control-label">Monthly VAT computation Day</label>
                                                 <div class="col-sm-5">
                                                     <input type="text" class="form-control" name="vat_computation_hold" value="<?php echo $client_detail[0]->vat_computation_hold;?>">
                                                 </div>
@@ -138,7 +138,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Vendor VAT Input Window</label>
+                                                <label class="col-sm-6 control-label">Monthly VAT computation Day</label>
                                                 <div class="col-sm-5">
                                                     <input type="text" class="form-control" disabled="disabled" value="">
                                                 </div>

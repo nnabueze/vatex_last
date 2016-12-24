@@ -216,12 +216,12 @@ class Clientadmin extends CI_Controller {
 				$this->session->set_flashdata('error',"Client computation date should not be greater than sweep date.");			# code...
 				redirect(getUrl('clientadmin/fundsweep_config'));
 			}
-			if ($save['vat_computation_hold'] <= 20 || $save['sweep_execution_day'] <= 28 ) {
+			if ($save['vat_computation_hold'] <= 20 && $save['sweep_execution_day'] <= 28 && $save['sweep_execution_day'] >= 24) {
 				$this->basic_model->customupd('client_settings',$save,$upd);			
 				$this->session->set_flashdata('success',"Client funds sweeping settings updated successfully.");			# code...
 				redirect(getUrl('clientadmin/fundsweep_config'));
 			}
-			$this->session->set_flashdata('error',"Client computation date should not be greater than 20th and sweep date should not be greater than 28th.");			# code...
+			$this->session->set_flashdata('error',"Client computation date should not be greater than 20th and sweep date should not be greater than 27th or less than 24th.");			# code...
 			redirect(getUrl('clientadmin/fundsweep_config'));
 		}
 		$data['page_title'] = 'Funds Sweep Settings';		

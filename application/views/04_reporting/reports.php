@@ -18,7 +18,7 @@
                                <div class="col-sm-4">
                                 <select class="chosen-select" name="item" tabindex="2">
                                     <option value=""></option>
-                                    <option value="computed_report">Computed Report</option>
+                                    <option value="">Computed Report</option>
                                     <option value="deducted_report">Deducted Report</option>
                                     <option value="remittance_report">Remittance Report</option>
                                     <option value="deduction_error_report">Deduction Error Report</option>
@@ -61,39 +61,14 @@
                     <h3 class="panel-title">Report Table - 
                     <?php
                     switch ($type) {
-                        case "computed_report":
-                            echo "COMPUTED REPORT";
-                            break;
                         case "deducted_report":
                              echo "DEDUCTED REPORT";
                             break;
                         case "remittance_report":
                             echo "REMITTANCE REPORT";
                             break;
-                        case "deduction_error_report":
-                            echo "DEDUCTION ERROR REPORT";
-                            break;
-                        case "remittance_error_report":
-                            echo "REMITTANCE ERROR REPORT";
-                            break;
-                        case "order_transaction_volume":
-                            echo "ORDER TRANSACTION VOLUME";
-                            break;
-                        case "remittance_report":
-                            echo "REMITTANCE REPORT";
-                            break;
-                        case "remittance_report":
-                            echo "REMITTANCE REPORT";
-                            break;
-                        case "remittance_report":
-                            echo "REMITTANCE REPORT";
-                            break;
-                        case "remittance_report":
-                            echo "REMITTANCE REPORT";
-                            break;
-                   
                         default:
-                            //code to be executed if n is different from all labels;
+                            echo "COMPUTED REPORT";
                     }
                      ?>
                     </h3>
@@ -111,7 +86,7 @@
 
 
                             <!--   Table for computted VAT -->                            
-                            <?php if($type == "computed_report"){?>
+                            <?php if($type == ""){?>
 
 
                             <table id="datatable-dom" class="table table-default table-middle table-striped table-bordered table-condensed">
