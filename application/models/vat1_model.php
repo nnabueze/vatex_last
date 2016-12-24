@@ -45,6 +45,38 @@ class Vat1_model extends CI_Model {
 		$day = date("d", strtotime(date('Y-m-d')));
 
 		//getting the configuration date for computation, deduction, email and fund sweep
+		$result = $this->db->get('sweep_settings')->row_array();
+
+		$fund_sweep_date = $result['sweep_execution_day'];
+		$deduction_date = $result['sweep_execution_day'] - 4;
+		$email_date = $result['sweep_execution_day'] - 3;
+		$computation_date = $result['vat_computation_hold'];
+		//echo "<pre>"; print_r($computation_date); die;
+
+		switch ('th') {
+			case $fund_sweep_date:
+				//fund sweep
+				break;
+			case $deduction_date:
+				//deduct VAT
+				break;
+			case $email_date:
+				//send email
+				break;
+			case 'th':
+				echo "string";
+				break;
+			default:
+				# code...
+				break;
+		}
+	}
+
+	//computing previous month VAT
+	private function comput_vat()
+	{
+		echo "yes computation working";
+		die;
 	}
 
 
