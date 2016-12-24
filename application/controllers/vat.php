@@ -54,7 +54,7 @@ class Vat extends CI_Controller {
 
 	    $data['error'] = '';    //initialize image upload error array to empty
 	
-	    $config['upload_path'] = 'application/uploads/vat/';
+	    $config['upload_path'] = './uploads/vat/';
 	    $config['allowed_types'] = 'xlsx';
 	    $config['max_size'] = '1000';
 
