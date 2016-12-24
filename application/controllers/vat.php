@@ -15,11 +15,6 @@ class Vat extends CI_Controller {
 	//test url for computing computed vat
 	public function computed_vat()
 	{
-
-		if(!isAdminLoggedIn())
-		{
-			redirect(getUrl('login'));
-		}
 		//getting the current day of the month
 		$day = date("d", strtotime(date('Y-m-d')));
 
@@ -43,7 +38,7 @@ class Vat extends CI_Controller {
 
 		//if current day equal to email date sent out email
 		if ($day == $email_date) {
-			
+
 		}
 
 		//if current day equal to computation date run
