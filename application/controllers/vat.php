@@ -43,7 +43,7 @@ class Vat extends CI_Controller {
 		}
 
 		//if current day equal to computation date run
-		if ($day == 25) {
+		if ($day == $computation_date) {
 			$this->vat1_model->computation_date();
 		}
 	}
