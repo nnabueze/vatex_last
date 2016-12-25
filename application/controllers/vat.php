@@ -34,7 +34,7 @@ class Vat extends CI_Controller {
 		
 		//if current day equal to deduction date run
 		if ($day == $deduction_date) {
-			//$this->vat1_model->deduction_date();
+			$this->vat1_model->deduction_date();
 		}
 
 		//if current day equal to email date sent out email

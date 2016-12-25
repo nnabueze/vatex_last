@@ -58,10 +58,10 @@ class Vat1_model extends CI_Model {
 			
 			//get all each ecommerce net vat to calculate total vat
 			$vat = $this->db->where(array('period'=>$period))
-						->where(array('ecommerce_id'=>$client['api_key']))
-						->where(array('status'=>'1'))
-						->get('computed_vat')
-						->result_array();
+			->where(array('ecommerce_id'=>$client['api_key']))
+			->where(array('status'=>'1'))
+			->get('computed_vat')
+			->result_array();
 
 			if ($vat) {
 				if (count($vat) > 0) {
@@ -76,8 +76,8 @@ class Vat1_model extends CI_Model {
 				}
 
 				$item = $this->db->where(array('id'=>$client['client_id']))
-							->get('client')
-							->row_array();
+				->get('client')
+				->row_array();
 				$result['ecommerce_name'] = $item['client_name'];
 				$result['ecommerce_id'] = $client['api_key'];
 
@@ -88,32 +88,32 @@ class Vat1_model extends CI_Model {
 		//genarate an XML file to be sent to NIBBS
 		if (count($list_ercommerce) > 0) {
 			$this->load->helper('xml');
-			 
+
 			$dom = xml_dom();
 			$NibbsPaymentCollection = xml_add_child($dom, 'NibbsPaymentCollection');
-			 
-			 foreach ($list_ercommerce as $list_ercommerce) {
-			 	$NibssPayment = xml_add_child($NibbsPaymentCollection, 'ns1:NibssPayment');
-			 					xml_add_child($NibssPayment, 'ns1:TaxType','VAT');
-			 					xml_add_child($NibssPayment, 'ns1:amount',$list_ercommerce['total_net_vat']);
-			 					xml_add_child($NibssPayment, 'ns1:transactionDescription',$period.' VAT from '.$list_ercommerce['ecommerce_name']);
-			 }
-			 
+
+			foreach ($list_ercommerce as $list_ercommerce) {
+				$NibssPayment = xml_add_child($NibbsPaymentCollection, 'ns1:NibssPayment');
+				xml_add_child($NibssPayment, 'ns1:TaxType','VAT');
+				xml_add_child($NibssPayment, 'ns1:amount',$list_ercommerce['total_net_vat']);
+				xml_add_child($NibssPayment, 'ns1:transactionDescription',$period.' VAT from '.$list_ercommerce['ecommerce_name']);
+			}
+
 			//xml_print($dom);
 			 //Post XML file to NIBBS
 			$URL = "ftp://ravi:Cjm26o3^@dev.ercasteam.com/";
-			  
- 			$ch = curl_init($URL);
+
+			$ch = curl_init($URL);
  			//curl_setopt($ch, CURLOPT_MUTE, 1);
- 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
- 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
- 			curl_setopt($ch, CURLOPT_POST, 1);
- 			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
- 			curl_setopt($ch, CURLOPT_POSTFIELDS, $dom);
- 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
- 			$output = curl_exec($ch);
- 			$info = curl_getinfo($ch); 
- 			curl_close($ch);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $dom);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			$output = curl_exec($ch);
+			$info = curl_getinfo($ch); 
+			curl_close($ch);
 		}
 	}
 
@@ -170,6 +170,74 @@ class Vat1_model extends CI_Model {
 				}
 			}
 
+			
+		}
+	}
+
+	//deducting previous month vat
+	public function deduction_date()
+	{
+		//getting list of registered client
+		$clients = $this->db->get('client_settings')->result_array();
+		$period = date("F,Y",strtotime("-1 month"));
+$i=1;
+			//deducting vat for each client
+		foreach ($clients as $client) {
+			
+				//get all vendors under a specific ecommers
+			$vendors = $this->db->where('Ecommerce_Id',$client['api_key'])->get('vendor')->result_array();
+
+			if (count($vendors) > 0) {
+				foreach ($vendors as $vendor) {
+					$orders = $this->db->where(array('Ecommerce_Id'=>$vendor['Ecommerce_Id']))
+					->where('Vendor_Id',$vendor['Vendor_Id'])
+					->where('Order_Status','1')
+					->where('approve','2')
+					->where('status','0')
+					->get('vat_on_hold_sweep_queue')
+					->result_array();
+
+
+
+						//select vendor previous month computation vat
+					if ($net_vat = $this->db->where(array('period'=>$period))->where(array('vendor_id'=>$vendor['Vendor_Id']))->get('computed_vat')->row_array()) {
+
+
+						if (count($orders) > 0) {
+							foreach($orders as $order){
+								$result['input_vat'] += $order['input_vat'];
+
+								$status['status'] = '1';
+
+								//updating the status showing that input vat have been calculated
+								$this->db->where('id', $order['id']);
+								$this->db->update('vat_on_hold_sweep_queue', $status);
+							}
+
+							
+							//get the actual net vat
+							$result['net_vat'] = $net_vat['output_vat'] - $result['input_vat'];
+							$result['status'] = '1';
+
+
+
+							//update the input and net vat in the computation table.
+							$this->db->where('vendor_id', $vendor['Vendor_Id']);
+							$this->db->where('period', $period);
+							$this->db->update('computed_vat', $result);
+
+							//emptying variables for next vendor deduction computation
+							$result['net_vat'] = "";
+							$result['input_vat'] = "";
+
+						}
+
+
+					}
+
+				}
+			}
+			$i++;
 			
 		}
 	}

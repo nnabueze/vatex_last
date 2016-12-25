@@ -289,7 +289,7 @@ class Reports_model extends CI_Model {
 	//getting deducted VAT
 	public function deducted_report($date=null)
 	{
-		$result = $this->db->get('deducted_vat')->result();
+		$result = $this->db->where('status','1')->get('computed_vat')->result();
 
 		return $result;
 	}
