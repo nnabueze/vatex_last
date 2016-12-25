@@ -99,13 +99,13 @@ class Vat1_model extends CI_Model {
 				xml_add_child($NibssPayment, 'ns1:transactionDescription',$period.' VAT from '.$list_ercommerce['ecommerce_name']);
 			}
 
-			//xml_print($dom);
+			xml_print($dom);
 			 //Post XML file to NIBBS
-			$URL = "ftp://ravi:Cjm26o3^@dev.ercasteam.com/";
+			//$URL = "ftp://ravi:Cjm26o3^@dev.ercasteam.com/";
 
-			$ch = curl_init($URL);
+			//$ch = curl_init($URL);
  			//curl_setopt($ch, CURLOPT_MUTE, 1);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+/*			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 			curl_setopt($ch, CURLOPT_POST, 1);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
@@ -113,7 +113,7 @@ class Vat1_model extends CI_Model {
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			$output = curl_exec($ch);
 			$info = curl_getinfo($ch); 
-			curl_close($ch);
+			curl_close($ch);*/
 		}
 	}
 
