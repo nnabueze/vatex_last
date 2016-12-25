@@ -180,7 +180,7 @@ class Vat1_model extends CI_Model {
 		//getting list of registered client
 		$clients = $this->db->get('client_settings')->result_array();
 		$period = date("F,Y",strtotime("-1 month"));
-$i=1;
+
 			//deducting vat for each client
 		foreach ($clients as $client) {
 			
@@ -237,8 +237,80 @@ $i=1;
 
 				}
 			}
-			$i++;
 			
+			
+		}
+	}
+
+
+	//sending email notification of vat deduction before fund sweep
+	public function email_date()
+	{
+		//getting list of registered client
+		$clients = $this->db->get('client_settings')->result_array();
+		$period = date("F,Y",strtotime("-1 month"));
+
+
+
+			//comput net vat for each client
+		foreach ($clients as $client) {
+			
+			$total_result = array();
+			$total_net_vat ="";
+				//get all vendors under a specific ecommers
+			$vendors = $this->db->where('Ecommerce_Id',$client['api_key'])->get('vendor')->result_array();
+
+			if (count($vendors) > 0) {
+				foreach ($vendors as $vendor) {
+					$orders = $this->db->where(array('Ecommerce_Id'=>$vendor['Ecommerce_Id']))
+					->where('Vendor_Id',$vendor['Vendor_Id'])
+					->where('Status','1')
+					->where('period',$period)
+					->get('computed_vat')
+					->row_array();
+
+					if ($orders) {
+						
+						$result['Ecommerce_Id'] = $vendor['Ecommerce_Id'];
+						$result['vendor_id'] = $vendor['Vendor_Id'];
+						$result['period'] = $period;
+						$result['transaction_amount'] = $orders['transaction_amount'];
+						$result['output_vat'] = $orders['output_vat'];
+						$result['input_vat'] = $orders['input_vat'];
+						$result['net_vat'] = $orders['net_vat'];
+						$total_net_vat  += $result['net_vat'] ;
+						array_push($total_result, $result);
+						
+					}
+
+				}
+
+			}
+			//send email to a specific client
+			$config = Array(        
+			'protocol' => 'smtp',//sendmail
+			'smtp_host' => 'ssl://smtp.googlemail.com',//your domain SMTP host
+			'smtp_port' => 465,//25
+			'smtp_user' => 'oparannabueze@gmail.com',//SMTP Username
+			'smtp_pass' => 'tomorro2',//SMTP Password
+			'smtp_timeout' => '4',
+			'mailtype'  => 'html', 
+			'charset'   => 'iso-8859-1'
+			);
+			$data = array(
+				'info'=> $total_result,
+				'total'=> $total_net_vat
+				);
+			$this->load->library('email', $config);
+			$this->email->set_newline("\r\n");
+
+			$this->email->from('oparannabueze@gmail.com', 'Firs Admin');
+			$this->email->to($client['contact_email']);  
+			$this->email->subject("Firs Remittance Report"); 
+			
+			$body = $this->load->view('email/notification.php',$data,TRUE);
+			$this->email->message($body);
+			$this->email->send(); 
 		}
 	}
 
