@@ -309,4 +309,23 @@ class Transaction_model extends CI_Model {
 		        return 3;
 		}
 	}
+
+	//getting the list of all ecommerce initiated transaction
+	public function ecommerce_initiated_orders($data)
+	{
+		$result = $this->db->where(array('Ecommerce_Id'=>$data))
+								->get('vat_on_hold_sweep_queue')
+								->result_array();
+		return $result;
+	}
+
+	//getting list of all ecommerces closed order
+	public function ecommerce_closed_orders($data)
+	{
+		$result = $this->db->where(array('Ecommerce_Id'=>$data))
+								->where("Order_Status","1")
+								->get('vat_on_hold_sweep_queue')
+								->result_array();
+		return $result;
+	}
 }

@@ -21,9 +21,10 @@ class Dashboard extends CI_Controller {
 		$data['uri_segment_2'] = 'dashboard';
 		$data['dashboard'] = TRUE;
 		$data['datatable'] = FALSE;
-		$data['user'] = 'ecommerce';
+		
 		if ($this->session->userdata('user') == "ecommerce") {
 			$data['page_content'] = '01_dashboard/ecommerce_dashboard';
+			$data['user'] = 'ecommerce';
 		}else{
 
 			$data['page_content'] = '01_dashboard/dashboard';

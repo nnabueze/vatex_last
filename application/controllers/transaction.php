@@ -109,6 +109,42 @@ class Transaction extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//ecommerce orders
+	public function ecommerce_initiated_order()
+	{
+		$item = $this->session->userdata('ecommerce_id');
+	
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'List of Ecommerce Orders';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'ecommerce_initiated_order';
+		$data['user'] = 'ecommerce';
+		$data['vendor_orders'] = $this->transaction_model->ecommerce_initiated_orders($item);
+
+		
+		$data['page_content'] = '03_transaction/ecommerce_initiated_orders';
+		$this->load->view('includes/main_content', $data);
+	}
+
+	//getting all list of ecommerce closed order
+	public function ecommerce_closed_order()
+	{
+		$item = $this->session->userdata('ecommerce_id');
+		
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'List of Ecommerce Orders';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'ecommerce_closed_order';
+		$data['user'] = 'ecommerce';
+		$data['vendor_orders'] = $this->transaction_model->ecommerce_closed_orders($item);
+	
+		
+		$data['page_content'] = '03_transaction/ecommerce_closed_orders';
+		$this->load->view('includes/main_content', $data);
+	}
+
 	//getting closed orders
 	public function closed_orders()
 	{

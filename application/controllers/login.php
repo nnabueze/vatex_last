@@ -26,7 +26,12 @@ class Login extends CI_Controller
 				$this->session->sess_expiration = '10'; //30 Minutes
 				$this->session->sess_expire_on_close = 'true';
 				$this->session->set_userdata('user_id', $result[0]['id']);
-				$this->session->set_userdata('user', "ecommerce");
+				if ($result[0]['user_status'] == 1) {
+					$this->session->set_userdata('user', "ecommerce");
+					$ecommerce_id = $this->user_model->ecommerce($result[0]['email']);
+					
+					$this->session->set_userdata('ecommerce_id', $ecommerce_id['api_key']);
+				}
 				$this->session->set_flashdata('success',"Login successful"); 
 				redirect('dashboard');
 			}
@@ -72,6 +77,8 @@ class Login extends CI_Controller
 		$this->session->unset_userdata('vendor_username');
 		$this->session->unset_userdata('vendor_orgid');
 		$this->session->unset_userdata('vendor_ecid');
+		$this->session->unset_userdata('user');
+		$this->session->unset_userdata('ecommerce_id');
 		redirect(getUrl('login'));
 	}
 

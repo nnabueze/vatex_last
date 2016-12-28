@@ -120,6 +120,13 @@ class User_model extends CI_Model {
 		return $query;
 	}
 
+	//getting ecommerce id
+	public function ecommerce($data)
+	{
+		$query = $this->db->where("contact_email",$data)->get('client_settings')->row_array();
+		return $query;
+	}
+
 
 }
 
