@@ -118,6 +118,7 @@ class Clientadmin extends CI_Controller {
 				$data['company_logo'] = $name;
 			}
 			
+			
 			//$data['creatorId'] = $this->session->userdata('user_id');
 			$data['client_name'] = $this->input->post('client_name');
 			$data['unique_identifier'] = $this->input->post('unique_identifier');
@@ -145,7 +146,20 @@ class Clientadmin extends CI_Controller {
 				$data['token_id'] = $tokenid;
 				
 				if ($clientid = $this->client_model->add_client_settings($data)) {
-					$this->session->set_flashdata('success',"Ecommerce ID:".$api_key." Token:".$tokenid);
+					$item['first_name'] = $this->input->post('client_name');
+					$item['username'] = $this->input->post('client_name');
+					$item['email'] = $this->input->post('contact_email');
+					$item['mobile'] = $this->input->post('contact_phone');
+					$item['user_status'] = $this->input->post('user');
+					$item['status'] = 1;
+					$pass['password'] = rand();
+					$item['password'] = sha1(md5($pass['password']));
+
+					//inserting inot users table
+					if ($this->input->post('user') == 1) {
+						$this->client_model->user($item);
+					}
+					$this->session->set_flashdata('success',"Ecommerce ID:".$api_key." Token:".$tokenid." Password ".$pass['password']);
 					redirect(getUrl('clientadmin/listing'));
 				}
 			}			

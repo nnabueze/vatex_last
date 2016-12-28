@@ -25,7 +25,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="media">
                         <a class="pull-left has-notif avatar" href="<?php echo site_url('profile');?>">
                         
-                            <img src="<?php echo base_url('uploads/user_img/'.$userdt[0]->profile_img);?>?create=50x50,4888E1?f=ffffff" alt="admin">
+                                                    <?php
+                                                    if (empty($userdt[0]->profile_img)) {
+                                                    ?>
+                                                        <img src="<?php echo base_url('uploads/user_img/images.jpg');?>?create=50x50,4888E1?f=ffffff" alt="admin">
+                                                    <?php
+                                                    }else{
+                                                    ?>
+                                                    <img src="<?php echo base_url('uploads/user_img/'.$userdt[0]->profile_img);?>?create=50x50,4888E1?f=ffffff" alt="admin">
+                                                    <?php } ?>
                             <i class="online"></i>
                         </a>
                         <div class="media-body">

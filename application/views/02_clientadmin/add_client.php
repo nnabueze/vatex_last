@@ -14,6 +14,7 @@
                                 	
                                     <!--<form id="smart-form-register"  class="form-horizontal form-bordered" role="form">-->
                                     <form id="client-create-validation" name="smart-form-register" class="form-horizontal form-bordered"  method="post" action ="<?php echo site_url('clientadmin/create_new');?>" enctype="multipart/form-data" role="form">
+                                    <input type="hidden" name="user" value="1">
                                     <?php 
 									if($this->session->flashdata('error')!=''){
 										echo 

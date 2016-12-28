@@ -40,6 +40,12 @@ class Client_model extends CI_Model {
     }	
 	/****** EOF *****/
 
+    //inserting ercommerce inot user table
+    public function user($item)
+    {
+        $this->db->insert("user", $item);
+    }
+
 	/***  Function for Client Detail ***/
 	public function client_detail($id){
 		$query = $this->db->where(array('id'=>$id))->get('client')->result();

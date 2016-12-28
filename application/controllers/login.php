@@ -26,6 +26,7 @@ class Login extends CI_Controller
 				$this->session->sess_expiration = '10'; //30 Minutes
 				$this->session->sess_expire_on_close = 'true';
 				$this->session->set_userdata('user_id', $result[0]['id']);
+				$this->session->set_userdata('user', "ecommerce");
 				$this->session->set_flashdata('success',"Login successful"); 
 				redirect('dashboard');
 			}

@@ -119,6 +119,8 @@ class User_model extends CI_Model {
 		$query = $this->db->get('vendor')->result_array();
 		return $query;
 	}
+
+
 }
 
 
