@@ -45,6 +45,64 @@ class Reports extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//ecommerce reports
+	public function ecommerce_report()
+	{
+
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$data= array();
+
+		$item = $this->session->userdata('ecommerce_id');
+		
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Reports';
+		$data['uri_segment_2'] = 'reports';
+		$data['user'] = 'ecommerce';
+
+
+			switch ($this->input->post('item')) {
+			    case "deducted_report":
+			        $data['report'] = $this->reports_model->ecommerce_deducted_report($item);
+			        $data['type'] = "deducted_report";
+			        break;
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->remittance_report($item);
+			        $data['type'] = "remittance_report";
+			        break;
+			    default:
+			        $data['report'] = $this->reports_model->ecommerce_computed_report($item);
+			        $data['type'] = "";
+			}
+
+		$data['page_content'] = '04_reporting/ecommerce_reports';
+		$this->load->view('includes/main_content', $data);
+	}
+
+	//getting the list of client attached to a specific ecommerce
+	public function client_listing()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+		$item = $this->session->userdata('ecommerce_id');
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Client Listing';
+		$data['uri_segment_2'] = 'client_listing';
+		$data['uri_segment_3'] = 'client_listing';
+		$data['user'] = 'ecommerce';
+		$data['client_listing'] = $this->reports_model->client_listing($item);
+
+		$data['page_content'] = '04_reporting/client_listing';
+		$this->load->view('includes/main_content', $data);
+	}
+
 	public function graphicreport()
 	{		
 		if($this->input->post('biller_srch')!=''){

@@ -302,6 +302,34 @@ class Reports_model extends CI_Model {
 		return $result;
 	}
 
+	//getting computed report for a specific ecommerce
+	public function ecommerce_computed_report($data)
+	{
+		$result = $this->db->where('ecommerce_id',$data)
+				->get('computed_vat')->result();
+
+		return $result;
+	}
+
+	//getting deducted report for a specific ecommerce
+	public function ecommerce_deducted_report($data)
+	{
+		$result = $this->db->where('status','1')
+				->where('ecommerce_id',$data)
+				->get('computed_vat')->result();
+
+		return $result;
+	}
+
+	//getting list of vendors within ecommerce 
+	public function client_listing($item)
+	{
+		$result = $this->db->where('Ecommerce_Id',$item)
+				->get('vendor')->result_array();
+
+		return $result;
+	}
+
 
 	
 	

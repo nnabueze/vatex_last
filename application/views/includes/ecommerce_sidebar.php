@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
 
                     <li class="<?php if(strtolower($uri_segment_2)=='reports') { echo 'active'; }  ?>">
-                        <a href="#" title="">
+                        <a href="<?php echo site_url('reports/ecommerce_report');?>" title="">
                             <span class="icon"><i class="fa fa-signal"></i></span>
                             <span class="text">Reports & Analytics </span>
                             <?php if(strtolower($uri_segment_2)=='reports') { echo '<span class="selected"></span>'; }  ?>
@@ -85,25 +85,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
 
 
-                    <li class="submenu <?php if(strtolower($uri_segment_2)=='profile') { echo 'active'; }  ?>">
-                        <a href="javascript:void(0);">
-                            <span class="icon"><i class="fa fa-user"></i></span>
-                            <span class="text">Profile Management</span>
-                            <span class="arrow"></span>
-                            <?php if(strtolower($uri_segment_2)=='profile') { echo '<span class="selected"></span>'; }  ?>
-                        </a>
-                        <ul>
-                            <li class="<?php if(strtolower($uri_segment_3)=='userprofile') { echo 'active'; }  ?>"><a href="#" title="">My Profile</a></li>
-                            <li class="<?php if(strtolower($uri_segment_3)=='editprofile') { echo 'active'; }  ?>"><a href="#" title="">Edit Profile</a></li>
-                        </ul>
-                    </li>
-
-
-                    <li class="<?php if(strtolower($uri_segment_2)=='vendor_orders') { echo 'active'; }  ?>">
-                        <a href="<?php echo site_url('#');?>" title="Efiling">
+                    <li class="<?php if(strtolower($uri_segment_2)=='client_listing') { echo 'active'; }  ?>">
+                        <a href="<?php echo site_url('reports/client_listing');?>" title="Efiling">
                             <span class="icon"><i class="fa fa-cogs"></i></span>
-                            <span class="text">Efiling</span>
-                            <?php if(strtolower($uri_segment_3)=='vendor_orders') { echo '<span class="selected"></span>'; }  ?>
+                            <span class="text">Client Listing</span>
+                            <?php if(strtolower($uri_segment_3)=='client_listing') { echo '<span class="selected"></span>'; }  ?>
                         </a>
                     </li>
 

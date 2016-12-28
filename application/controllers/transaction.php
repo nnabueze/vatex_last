@@ -112,6 +112,10 @@ class Transaction extends CI_Controller {
 	//ecommerce orders
 	public function ecommerce_initiated_order()
 	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
 		$item = $this->session->userdata('ecommerce_id');
 	
 		$data = array();
@@ -130,6 +134,10 @@ class Transaction extends CI_Controller {
 	//getting all list of ecommerce closed order
 	public function ecommerce_closed_order()
 	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
 		$item = $this->session->userdata('ecommerce_id');
 		
 		$data = array();
