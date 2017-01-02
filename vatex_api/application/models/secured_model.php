@@ -85,6 +85,16 @@ class Secured_model extends CI_Model {
 		 	$this->db->where('Transaction_Id', $data['Transaction_Id']);
 		 	$this->db->update('vat_on_hold_sweep_queue', $item);
 
+		 	//updating transaction table for closed transaction
+		 	$transaction['payment_date']   = $data['Payment_Date'];
+		 	$transaction['status']   = "1";
+		 	$trans = $this->transaction($data['Transaction_Id']);
+		 	if ($trans) {
+		 		$transaction['vat_deducted']   = 0.05 * $trans['transaction_amount'];
+		 		$this->db->where('transaction_id',$data['Transaction_Id']);
+		 		$this->db->update('transactions', $transaction);
+		 	}
+
 		 	return true;
 		 } 
 
