@@ -25,6 +25,45 @@ class Transaction extends CI_Controller {
 
 
 //////////////////////////////////////////////////////////////////TRANSACTION
+	//getting previous month transactions
+	public function current_transaction()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Current Transaction';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'current_transaction';
+		$data['period'] = date("F,Y",strtotime("-1 month"));
+		$data['current_date'] = date('d F, Y');
+		$data['sweep_date'] = date($this->sweep_date().' F, Y');
+		$data['initiated_orders'] = $this->transaction_model->current_transaction();
+		//echo "<pre>"; print_r($data['initiated_orders']); die;
+		$data['page_content'] = '03_transaction/current_transaction';
+		$this->load->view('includes/main_content', $data);
+	}
+
+	//viewing list of order under a specifictransaction
+	public function current_order($id)
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Current Transaction';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'current_transaction';
+		$data['initiated_orders'] = $this->transaction_model->current_order($id);
+		//echo "<pre>"; print_r($data['initiated_orders']); die;
+		$data['page_content'] = '03_transaction/current_order';
+		$this->load->view('includes/main_content', $data);
+	}
+
 	//getting initiated order
 	public function initiated_orders()
 	{
@@ -305,6 +344,13 @@ class Transaction extends CI_Controller {
 		       
 		}
 
+	}
+
+	//getting the fundsweep date
+	private function sweep_date()
+	{
+		$sweep_date = $this->transaction_model->sweep_date();
+		return $sweep_date;
 	}
 
 

@@ -89,6 +89,33 @@ class Transaction_model extends CI_Model {
 
 	}
 
+	//get current month transactions
+	public function current_transaction()
+	{
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$end_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m"), 0));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+		$orders = $this->db->where('status','1')
+		->where('payment_date >=',$start_of_last_month)
+		->where('payment_date <=',$start_of_current_month)
+		->get('transactions')
+		->result_array();
+
+		return $orders;
+
+	}
+
+	//getting list of last month order
+	public function current_order($id)
+	{
+		$orders = $this->db->where('Transaction_Id',$id)
+		->get('vat_on_hold_sweep_queue')
+		->result_array();
+
+		return $orders;
+	}
+
 
 	function get_all_transaction($criteria=NULL)
 	{
@@ -108,6 +135,14 @@ class Transaction_model extends CI_Model {
 		}
 		
 		return $result;
+	}
+
+	//getting the sweep date
+	public function sweep_date()
+	{
+		$result = $this->db->get('sweep_settings')
+				->row_array();
+		return $result['sweep_execution_day'];
 	}
 
 	
