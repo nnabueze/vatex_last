@@ -23,6 +23,7 @@ class Secured_model extends CI_Model {
 		$item['Vendor_TIN']   = $data['Vendor_TIN'];
 		$item['ecommerce_name']   = $data['ecommerce_name'];
 		$item['vendor_name']   = $data['vendor_name'];
+		$item['sell_price']   = $data['Order_Amount'] / $data['Quantity'];
 
 		if ($insert = $this->db->insert("vat_on_hold_sweep_queue", $item)) {
 
@@ -88,9 +89,12 @@ class Secured_model extends CI_Model {
 		 	//updating transaction table for closed transaction
 		 	$transaction['payment_date']   = $data['Payment_Date'];
 		 	$transaction['status']   = "1";
-		 	$trans = $this->transaction($data['Transaction_Id']);
-		 	if ($trans) {
-		 		$transaction['vat_deducted']   = 0.05 * $trans['transaction_amount'];
+		 	$transaction['vat_deducted'] = "";
+		 	$trans = $this->transaction_order($data['Transaction_Id']);
+		 	if (count($trans) > 0) {
+		 		foreach ($trans as $tran) {
+		 			$transaction['vat_deducted']   += $tran['Output_VAT'];
+		 		}
 		 		$this->db->where('transaction_id',$data['Transaction_Id']);
 		 		$this->db->update('transactions', $transaction);
 		 	}
@@ -213,6 +217,16 @@ class Secured_model extends CI_Model {
 		$name = $this->db->where(array('transaction_id'=>$data))
 					->get('transactions')
 					->row_array();
+
+		return $name;
+	}
+
+	//getting list of order transaction
+	public function transaction_order($data)
+	{
+		$name = $this->db->where(array('Transaction_Id'=>$data))
+					->get('vat_on_hold_sweep_queue')
+					->result_array();
 
 		return $name;
 	}
