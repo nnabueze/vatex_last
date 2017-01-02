@@ -15,9 +15,9 @@
                                     <table id="datatable-dom" class="table table-default table-middle table-striped table-bordered table-condensed">
                                         <thead>
                                             <tr>
-                                                <th data-class="expand">ECOMMERCE ID</th>
+                                                <th data-class="expand">ECOMMERCE NAME</th>
                                                 <th data-hide="phone">TRANSACTION ID</th>
-                                                <th data-hide="phone">VENDOR ID</th>
+                                                <th data-hide="phone">VENDOR NAME</th>
                                                 <th data-hide="phone">ORDER ID</th>
                                                 <th data-hide="phone,tablet">ORDER AMOUNT</th>
                                                 <th data-hide="phone,tablet">QUANTITY</th>
@@ -31,13 +31,13 @@
                                             <?php foreach($initiated_orders as $initiatedOrders){ ?>
                                             <tr class="border-warning">
                                                 <td>
-                                                    <b><?php echo $initiatedOrders->Ecommerce_Id; ?></b>
+                                                    <b><?php echo ucwords($initiatedOrders->ecommerce_name); ?></b>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiatedOrders->Transaction_Id; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $initiatedOrders->Vendor_Id; ?>
+                                                    <?php echo ucwords($initiatedOrders->vendor_name); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiatedOrders->Order_Id; ?>

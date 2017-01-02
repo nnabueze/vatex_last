@@ -17,7 +17,7 @@
                                         <thead>
                                             <tr>
                                                 <th data-class="expand">ORDER ID</th>
-                                                <th data-hide="phone">VENDOR ID</th>
+                                                <th data-hide="phone">VENDOR NAME</th>
                                                 <th data-hide="phone">ORDER AMOUNT</th>
                                                 <th data-hide="phone">TRANSACTION ID</th>
                                                 <th data-hide="phone,tablet">ORDER DATE</th>
@@ -32,7 +32,7 @@
                                                     <b><?php echo $initiated_orders->Order_Id; ?></b>
                                                 </td>
                                                 <td>
-                                                    <?php echo $initiated_orders->Vendor_Id; ?>
+                                                    <?php echo ucwords($initiated_orders->vendor_name); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiated_orders->Order_Amount; ?>

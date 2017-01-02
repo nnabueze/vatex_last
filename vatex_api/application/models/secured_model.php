@@ -21,6 +21,8 @@ class Secured_model extends CI_Model {
 		$item['Product_Category']   = $data['Product_Category'];
 		$item['Net_VAT']   = $data['Net_VAT'];
 		$item['Vendor_TIN']   = $data['Vendor_TIN'];
+		$item['ecommerce_name']   = $data['ecommerce_name'];
+		$item['vendor_name']   = $data['vendor_name'];
 
 		if ($insert = $this->db->insert("vat_on_hold_sweep_queue", $item)) {
 			return true;
@@ -143,6 +145,7 @@ class Secured_model extends CI_Model {
 				$vendor['Vendor_Id']   = $data['Vendor_Id'];
 				$vendor['date']   = $data['date'];
 				$vendor['user_id']   = $insert;
+				$vendor['name']   = $data['first_name']." ".$data['last_name'];
 
 				$this->db->insert("vendor", $vendor);
 				return true;
@@ -150,6 +153,26 @@ class Secured_model extends CI_Model {
 		}
 
 		return false;
+	}
+
+	//get ecommerce name
+	public function ecommerce($data)
+	{
+		$name = $this->db->where(array('key_id'=>$data))
+					->get('client')
+					->row_array();
+
+		return $name['client_name'];
+	}
+
+	//getting vendor name
+	public function vendor($data)
+	{
+		$name = $this->db->where(array('Vendor_Id'=>$data))
+					->get('vendor')
+					->row_array();
+
+		return $name['name'];
 	}
 
 }

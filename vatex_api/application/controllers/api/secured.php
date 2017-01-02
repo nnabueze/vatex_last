@@ -30,6 +30,8 @@ class Secured extends REST_Controller
         $data['Net_VAT']   = $this->post('Net_VAT');
         $data['Vendor_TIN']   = $this->post('Vendor_TIN');
         $data['token']   = $this->post('token');
+        $data['ecommerce_name']   = $this->ecommerce($this->post('Ecommerce_Id'));
+        $data['vendor_name']   = $this->vendor($this->post('Vendor_Id'));
 
         //check if any of the parameters are empty
         if (empty($this->post('Transaction_Id')) || empty($this->post('Vendor_Id'))|| empty($this->post('Order_Id'))|| empty($this->post('Order_Amount'))|| empty($this->post('Quantity')) || empty($this->post('Order_date')) || empty($this->post('Purchase_Price')) || empty($this->post('Product_Description')) || empty($this->post('Product_Category')) || empty($this->post('Order_date')) || empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_TIN'))) {
@@ -154,6 +156,23 @@ class Secured extends REST_Controller
         }
 
         $this->response(array('error' => 'Unable to register vendor'), 404);
+    }
+
+
+    //getting ecommerce name
+    private function ecommerce($data)
+    {
+        $name = $this->secured_model->ecommerce($data);
+
+        return $name;
+    }
+
+    //getting vendor name
+    private function vendor($data)
+    {
+        $name = $this->secured_model->vendor($data);
+
+        return $name;
     }
 	
 }
