@@ -9,11 +9,11 @@
                                     <div class="col-md-3">
                                         <h3 class="panel-title">Last Month Transactions</h3>
                                     </div>
-                                    
+                                    <?php if(count($initiated_orders) > 0){?>
                                         <div class="col-md-3"><h3 class="panel-title">Period: <?php echo $period; ?></h3></div>
                                         <div class="col-md-3"><h3 class="panel-title">Current Date: <?php echo $current_date; ?></h3></div>
                                         <div class="col-md-3"><h3 class="panel-title">Sweeping Date: <?php echo $sweep_date; ?></div>
-                                    
+                                    <?php } ?>
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->
                                 <div class="panel-body">
@@ -84,11 +84,23 @@
                                         <!--tfoot section is optional-->
                                         <tfoot>
                                             <tr>
+                                            <?php if(count($initiated_orders) > 0){?>
                                             <th colspan="2">Total TransactionAmount:</th>
                                             <th colspan="2"><?php echo $total_amount; ?></th>
                                             <th></th>
                                             <th colspan="2">Total VAT Amount</th>
                                             <th colspan="2"><?php echo $total_vat; ?></th>
+                                            <?php }else{ ?>
+                                            <th data-class="expand">ECOMMERCE</th>
+                                            <th data-hide="phone">TRANSACTION ID</th>
+                                            <th data-hide="phone">TRANSACTION AMOUNT</th>
+                                            <th data-hide="phone">TRANSACTION DATE</th>
+                                            <th data-hide="phone,tablet">PAYMENT DATE</th>
+                                            <th data-hide="phone,tablet">NO OF ORDERS</th>
+                                            <th data-hide="phone,tablet">VAT DEDUCTED</th>
+                                            <th data-hide="phone,tablet" class="text-center">STATUS</th>
+                                            <th data-hide="phone,tablet" class="text-center">ACTION</th>
+                                            <?php } ?>
                                             </tr>
                                         </tfoot>
                                     </table>
