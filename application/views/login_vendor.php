@@ -32,7 +32,7 @@
 								<label class="label">E-commerce</label>
 								<label class="input"> <i class="icon-append fa fa-user"></i>
 									<!-- <input type="text" name="username"> -->
-									<select name="username">
+									<select name="username" class="form-control input-sm mb-15">
 										<?php 
 										if (count($ecommerce) > 0) {
 											?>
