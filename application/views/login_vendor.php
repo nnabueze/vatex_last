@@ -31,52 +31,68 @@
 							<section>
 								<label class="label">E-commerce</label>
 								<label class="input"> <i class="icon-append fa fa-user"></i>
-									<input type="text" name="username">
-									<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address</b></label>
-							</section>
+									<!-- <input type="text" name="username"> -->
+									<select name="username">
+										<?php 
+										if (count($ecommerce) > 0) {
+											?>
+											<option value="">----SELECT CLIENT----</option>
+											<?php
+											foreach($ecommerce as $ecommerce){
+												?> 
+												<option value="<?php echo $ecommerce['key_id'];?>"><?php echo ucwords($ecommerce['client_name']);?></option>
+												<?php
+											} 
+										}else{
+											?>
+											<option value="">----NO CLIENT----</option>
+											<?php } ?>
+										</select>
+										<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address</b></label>
+									</section>
 
-							<section>
-								<label class="label">Vendor ID</label>
-								<label class="input"> <i class="icon-append fa fa-lock"></i>
-									<input type="password" name="password">
-									<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> 
-                                </label>
-							</section>
+									<section>
+										<label class="label">Vendor ID</label>
+										<label class="input"> <i class="icon-append fa fa-lock"></i>
+											<input type="password" name="password">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> 
+										</label>
+									</section>
 
-							<section>
+									<section>
 
 								<!--<label class="checkbox">
 									<input type="checkbox" name="remember" checked="">
 									<i></i>Stay signed in</label>-->
-							</section>
-						</fieldset>
-						<footer>
-							<button type="submit" class="btn btn-success">
-								Login
-							</button>
-						</footer>
-					</form>
+								</section>
+							</fieldset>
+							<footer>
+								<button type="submit" class="btn btn-success">
+									Login
+								</button>
+							</footer>
+						</form>
 
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 	</div>
 	<!--================================================== -->	
 
-		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-		<script src="<?php echo base_url('assets/js/plugin/pace/pace.min.js');?>"></script>
+	<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+	<script src="<?php echo base_url('assets/js/plugin/pace/pace.min.js');?>"></script>
 
-	    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-	    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script> if (!window.jQuery) { document.write('<script src="<?php echo base_url('assets/js/libs/jquery-2.1.1.min.js');?>"><\/script>');} </script>
+	<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script> if (!window.jQuery) { document.write('<script src="<?php echo base_url('assets/js/libs/jquery-2.1.1.min.js');?>"><\/script>');} </script>
 
-	    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-		<script> if (!window.jQuery.ui) { document.write('<script src="<?php echo base_url('assets/js/libs/jquery-ui-1.10.3.min.js');?>"><\/script>');} </script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script> if (!window.jQuery.ui) { document.write('<script src="<?php echo base_url('assets/js/libs/jquery-ui-1.10.3.min.js');?>"><\/script>');} </script>
 
-		<!-- IMPORTANT: APP CONFIG -->
-		<script src="<?php echo base_url('assets/js/app.config.js');?>"></script>
+	<!-- IMPORTANT: APP CONFIG -->
+	<script src="<?php echo base_url('assets/js/app.config.js');?>"></script>
 
 		<!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
 		<script src="<?php echo base_url('assets/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js');?>"></script> -->
@@ -94,15 +110,15 @@
 			
 			<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 			
-		<![endif]-->
+			<![endif]-->
 
-		<!-- MAIN APP JS FILE -->
-		<script src="<?php echo base_url('assets/js/app.min.js');?>"></script>
+			<!-- MAIN APP JS FILE -->
+			<script src="<?php echo base_url('assets/js/app.min.js');?>"></script>
 
-		<script type="text/javascript">
-			runAllForms();
+			<script type="text/javascript">
+				runAllForms();
 
-			$(function() {
+				$(function() {
 				// Validation
 				$("#login-form").validate({
 					// Rules for form validation
@@ -136,4 +152,4 @@
 				});
 			});
 		</script>
-<?php	include 'includes/footer.php'; ?>
+		<?php	include 'includes/footer.php'; ?>

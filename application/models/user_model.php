@@ -127,6 +127,13 @@ class User_model extends CI_Model {
 		return $query;
 	}
 
+	//getting ecomerce details
+	public function ecommerce_details()
+	{
+		$query = $this->db->get('client')->result_array();
+		return $query;
+	}
+
 
 }
 

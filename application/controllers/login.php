@@ -47,6 +47,8 @@ class Login extends CI_Controller
 	//vendor login
 	public function vendor()
 	{
+		$data['ecommerce'] = $this->ecomerce_details();
+		//echo "<pre>";print_r($data['ecommerce']); die;
 		if ($this->input->post('username')!='') {
 			$data['email']      = $this->input->post('username');
 			$data['password']   = $this->input->post('password');
@@ -62,11 +64,11 @@ class Login extends CI_Controller
 				$this->session->set_flashdata('success',"Login successful");
 				redirect('dashboard/vendor');
 			}else{
-				redirect('login/vendor');
+				//$this->load->view('login_vendor',$data);
 			}
 		}
 
-		$this->load->view('login_vendor');
+		$this->load->view('login_vendor',$data);
 	}
 
 	/**** Start  of function For logout of client ****/
@@ -83,6 +85,13 @@ class Login extends CI_Controller
 	}
 
 	/*********   End of function   ********/
+
+	//getting ecommerce details
+	private function ecomerce_details()
+	{
+		$ecommerce = $this->user_model->ecommerce_details();
+		return $ecommerce;
+	}
 	
 }
 
