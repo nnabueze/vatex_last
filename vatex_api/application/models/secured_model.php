@@ -25,6 +25,28 @@ class Secured_model extends CI_Model {
 		$item['vendor_name']   = $data['vendor_name'];
 
 		if ($insert = $this->db->insert("vat_on_hold_sweep_queue", $item)) {
+
+			//inserting record into transaction table
+			$transaction['transaction_amount'] = $data['Order_Amount'];
+			$transaction['no_of_orders'] = 1;
+			$trans = $this->transaction($data['Transaction_Id']);
+			if ($trans) {
+
+				//sum up all the order amount under the transaction
+				$transaction['transaction_amount']   = $transaction['transaction_amount'] + $trans['transaction_amount'];
+				$transaction['no_of_orders'] = $trans['no_of_orders'] + 1;
+
+				$this->db->where('transaction_id',$data['Transaction_Id']);
+				$this->db->update('transactions', $transaction);
+			}else{
+				$transaction['transaction_id']   = $data['Transaction_Id'];
+				$transaction['transaction_date']   = $data['Order_date'];
+				$transaction['ecommerce_id']   = $data['Ecommerce_Id'];
+				$transaction['ecommerce_name']   = $data['ecommerce_name'];
+
+				$this->db->insert("transactions", $transaction);
+
+			}
 			return true;
 		}
 
@@ -173,6 +195,16 @@ class Secured_model extends CI_Model {
 					->row_array();
 
 		return $name['name'];
+	}
+
+	//getting a specific transaction
+	public function transaction($data)
+	{
+		$name = $this->db->where(array('transaction_id'=>$data))
+					->get('transactions')
+					->row_array();
+
+		return $name;
 	}
 
 }
