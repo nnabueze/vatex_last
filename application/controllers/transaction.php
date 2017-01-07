@@ -25,6 +25,30 @@ class Transaction extends CI_Controller {
 
 
 //////////////////////////////////////////////////////////////////TRANSACTION
+	//getting transaction for each ecommerce
+	public function ecommerce_current_transaction()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+		$item = $this->session->userdata('ecommerce_id');
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Current Transaction';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'ecommerce_current_transaction';
+		$data['user'] = 'ecommerce';
+		$data['period'] = date("F,Y",strtotime("-1 month"));
+		$data['current_date'] = date('d F, Y');
+		$data['sweep_date'] = date($this->sweep_date().' F, Y');
+		$data['initiated_orders'] = $this->transaction_model->ecommerce_current_transaction($item);
+		//echo "<pre>"; print_r($data['initiated_orders']); die;
+		$data['page_content'] = '03_transaction/ecommerce_current_transaction';
+		$this->load->view('includes/main_content', $data);
+	}
 	//getting previous month transactions
 	public function current_transaction()
 	{
@@ -53,13 +77,23 @@ class Transaction extends CI_Controller {
 		{
 			redirect(getUrl('login'));
 		}
+
+		$item = $this->session->userdata('ecommerce_id');
+
 		$data = array();
 		$data['datatable'] = TRUE;
 		$data['page_title'] = 'Current Transaction';
 		$data['uri_segment_2'] = 'transaction';
-		$data['uri_segment_3'] = 'current_transaction';
+		
 		$data['initiated_orders'] = $this->transaction_model->current_order($id);
-		//echo "<pre>"; print_r($data['initiated_orders']); die;
+		if ($item) {
+			$data['user'] = 'ecommerce';
+			$data['uri_segment_3'] = 'ecommerce_current_transaction';
+		}else{
+			$data['user'] = 'firs';
+			$data['uri_segment_3'] = 'current_transaction';
+		}
+		
 		$data['page_content'] = '03_transaction/current_order';
 		$this->load->view('includes/main_content', $data);
 	}

@@ -106,6 +106,23 @@ class Transaction_model extends CI_Model {
 
 	}
 
+	//getting ecommerce transaction only
+	public function ecommerce_current_transaction($item)
+	{
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$end_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m"), 0));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+		$orders = $this->db->where('status','1')
+		->where('payment_date >=',$start_of_last_month)
+		->where('payment_date <=',$start_of_current_month)
+		->where('ecommerce_id',$item)
+		->get('transactions')
+		->result_array();
+
+		return $orders;
+	}
+
 	//getting list of last month order
 	public function current_order($id)
 	{
