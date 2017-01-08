@@ -182,6 +182,27 @@ class Transaction extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//getting all vendors order in all ecommerce paltform
+	public function all_vendor_orders()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$phone= $this->session->userdata('phone');
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'List of Vendor Orders';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'all_orders';
+		$data['user'] = 'vendor';
+		$data['vendors'] = $this->transaction_model->all_vendor_orders($phone);
+		//echo"<pre>";print_r($data['vendor_orders']); die;
+		$data['page_content'] = '03_transaction/all_orders';
+		$this->load->view('includes/main_content', $data);
+	}
+
 	//ecommerce orders
 	public function ecommerce_initiated_order()
 	{
