@@ -180,6 +180,7 @@ class Secured_model extends CI_Model {
 				$vendor['Ecommerce_Id']   = $data['Ecommerce_Id'];
 				$vendor['Vendor_Id']   = $data['Vendor_Id'];
 				$vendor['date']   = $data['date'];
+				$vendor['phone']   = $data['mobile'];
 				$vendor['user_id']   = $insert;
 				$vendor['name']   = $data['first_name']." ".$data['last_name'];
 
