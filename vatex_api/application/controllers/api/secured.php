@@ -129,9 +129,10 @@ class Secured extends REST_Controller
         $data['last_name']   = $this->post('last_name');
         $data['email']   = $this->post('email');
         $data['mobile']   = $this->post('phone');
+        $data['tin']   = $this->post('tin');
 
         //validated parameters
-        if (empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_Id')) || empty($this->post('phone'))) {
+        if (empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_Id')) || empty($this->post('phone')) || empty($this->post('tin'))) {
 
             $this->response(array('error' => 'parameter missing'), 404);
         }

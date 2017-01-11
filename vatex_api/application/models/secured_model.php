@@ -182,6 +182,7 @@ class Secured_model extends CI_Model {
 				$vendor['date']   = $data['date'];
 				$vendor['phone']   = $data['mobile'];
 				$vendor['user_id']   = $insert;
+				$vendor['tin']   = $data['tin'];
 				$vendor['name']   = $data['first_name']." ".$data['last_name'];
 
 				$this->db->insert("vendor", $vendor);
