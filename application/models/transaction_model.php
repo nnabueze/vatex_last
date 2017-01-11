@@ -384,7 +384,7 @@ class Transaction_model extends CI_Model {
 	//getting list of vendors with the same phone number
 	public function all_vendor_orders($phone)
 	{
-		$result = $this->db->where(array('phone'=>$phone))
+		$result = $this->db->where(array('tin'=>$phone))
 								->get('vendor')
 								->result_array();
 		return $result;

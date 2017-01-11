@@ -189,7 +189,7 @@ class Transaction extends CI_Controller {
 		{
 			redirect(getUrl('login'));
 		}
-		$phone= $this->session->userdata('phone');
+		$phone= $this->session->userdata('tin');
 
 		$data = array();
 		$data['datatable'] = TRUE;
@@ -200,6 +200,27 @@ class Transaction extends CI_Controller {
 		$data['vendors'] = $this->transaction_model->all_vendor_orders($phone);
 		//echo"<pre>";print_r($data['vendor_orders']); die;
 		$data['page_content'] = '03_transaction/all_orders';
+		$this->load->view('includes/main_content', $data);
+	}
+
+	//getting all vendors order in all ecommerce paltform
+	public function all_vendor_orders2()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$phone= $this->session->userdata('tin');
+
+		$data = array();
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'List of Vendor Orders';
+		$data['uri_segment_2'] = 'transaction';
+		$data['uri_segment_3'] = 'all_orders';
+		$data['user'] = 'vendor';
+		$data['vendors'] = $this->transaction_model->all_vendor_orders($phone);
+		//echo"<pre>";print_r($data['vendor_orders']); die;
+		$data['page_content'] = '03_transaction/all_orders_closed';
 		$this->load->view('includes/main_content', $data);
 	}
 

@@ -62,6 +62,7 @@ class Login extends CI_Controller
 				$this->session->set_userdata('vendor_id', $result['Vendor_Id']);
 				$this->session->set_userdata('ecommerce_Id', $result['Ecommerce_Id']);
 				$this->session->set_userdata('phone', $result['phone']);
+				$this->session->set_userdata('tin', $result['tin']);
 				$this->session->set_flashdata('success',"Login successful");
 				redirect('dashboard/vendor');
 			}else{

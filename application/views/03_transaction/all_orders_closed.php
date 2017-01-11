@@ -7,7 +7,7 @@
                             <div class="panel panel-default shadow no-overflow">
                                 <div class="panel-heading">
                                     <div class="pull-left">
-                                        <h3 class="panel-title">Initiated Orders</h3>
+                                        <h3 class="panel-title">Vendor Closed Orders</h3>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->
@@ -31,7 +31,7 @@
                                             foreach($vendors as $vendor){ 
                                                 $data['ecommerce_id'] = $vendor['Ecommerce_Id'];
                                                 $data['vandor_id'] = $vendor['Vendor_Id'];
-                                                $trans = $this->transaction_model->vendor_initiated_orders($data);
+                                                $trans = $this->transaction_model->vendor_closed_orders($data);
 
                                                 foreach($trans as $initiated_orders){ 
                                                     ?>
