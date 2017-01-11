@@ -92,20 +92,22 @@
                             <table id="datatable-dom" class="table table-default table-middle table-striped table-bordered table-condensed">
                                 <thead>
                                     <tr>
-                                        <th>ecommerce_id</th>
-                                        <th>vendor_id</th>
-                                        <th>period</th>
-                                        <th>transaction_amount</th>
-                                        <th>input_vat</th>
-                                        <th>output_vat</th>
+                                        <th>ECOMMERCE NAME</th>
+                                        <th>VENDOR ID</th>
+                                        <th>PERIOD</th>
+                                        <th>TRASACTION AMOUNT</th>
+                                        <th>INPUT VAT</th>
+                                        <th>OUTPUT VAT</th>
                                         <th>NET VAT</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($report as $report){ ?>
+                                    <?php foreach($report as $report){ 
+                                        $name = $this->reports_model->ecommerce($report->ecommerce_id);
+                                        ?>
                                     <tr class="border-warning">
                                         <td>
-                                            <b><?php echo $report->ecommerce_id; ?></b>
+                                            <b><?php echo $name; ?></b>
                                         </td>
                                         <td>
                                             <?php echo $report->vendor_id; ?>
@@ -134,13 +136,13 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>ecommerce_id</th>
-                                            <th>vendor_id</th>
-                                            <th>period</th>
-                                            <th>transaction_amount</th>
-                                            <th>input_vat</th>
-                                            <th>output_vat</th>
-                                            <th>Net Vat</th>
+                                            <th>ECOMMERCE NAME</th>
+                                            <th>VENDOR ID</th>
+                                            <th>PERIOD</th>
+                                            <th>TRASACTION AMOUNT</th>
+                                            <th>INPUT VAT</th>
+                                            <th>OUTPUT VAT</th>
+                                            <th>NET VAT</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -163,10 +165,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($report as $report){ ?>
+                                        <?php foreach($report as $report){ 
+                                            $name = $this->reports_model->ecommerce($report->ecommerce_id);
+                                            ?>
                                         <tr class="border-warning">
                                             <td>
-                                                <b><?php echo $report->ecommerce_id; ?></b>
+                                                <b><?php echo $name; ?></b>
                                             </td>
                                             <td>
                                                 <?php echo $report->vendor_id; ?>
@@ -225,10 +229,12 @@
                                              </tr>
                                          </thead>
                                          <tbody>
-                                             <?php foreach($report as $report){ ?>
+                                             <?php foreach($report as $report){
+                                                $name = $this->reports_model->ecommerce($report->ecommerce_id);
+                                              ?>
                                              <tr class="border-warning">
                                                  <td>
-                                                     <b><?php echo $report->ecommerce_id; ?></b>
+                                                     <b><?php echo $name; ?></b>
                                                  </td>
                                                  <td>
                                                      <?php echo $report->vendor_id; ?>

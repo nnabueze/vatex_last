@@ -330,6 +330,15 @@ class Reports_model extends CI_Model {
 		return $result;
 	}
 
+	//get ecommerce name
+	public function ecommerce($data)
+	{
+		$name = $this->db->where(array('key_id'=>$data))
+					->get('client')
+					->row_array();
+		return $name['client_name'];
+	}
+
 
 	
 	
