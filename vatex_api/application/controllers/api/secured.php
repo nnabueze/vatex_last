@@ -56,6 +56,11 @@ class Secured extends REST_Controller
             $this->response(array('error' => 'Vendor does not exist'), 404);
         }
 
+        //checking if vendor tin exist
+        if (! $vendor_tin = $this->secured_model->vendor_tin_check($data['Vendor_TIN'])) {
+            $this->response(array('error' => 'Vendor tin does not exist'), 404);
+        }
+
         $data['ec_id'] = $token['client_id'];
 
         //insert paraters into database

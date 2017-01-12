@@ -163,6 +163,17 @@ class Secured_model extends CI_Model {
 		return $vendor;
 	}
 
+	//checking if vendor tin exist
+	public function vendor_tin_check($data)
+	{
+
+		$vendor = $this->db->where(array('tin'=>$data))
+					->get('vendor')
+					->row_array();
+
+		return $vendor;
+	}
+
 	//inserting vendor 
 	public function insert_vendor($data)
 	{
