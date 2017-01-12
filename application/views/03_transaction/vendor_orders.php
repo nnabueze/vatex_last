@@ -7,7 +7,7 @@
                             <div class="panel panel-default shadow no-overflow">
                                 <div class="panel-heading">
                                     <div class="pull-left">
-                                        <h3 class="panel-title">Vendor Closed Orders</h3>
+                                        <h3 class="panel-title">Vendor Efiling Page</h3>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->
@@ -47,10 +47,12 @@
                                         </thead>
                                         <!--tbody section is required-->
                                         <tbody>
-                                            <?php foreach($vendor_orders as $vendor_orders){ ?>
+                                            <?php foreach($vendor_orders as $vendor_orders){
+                                                $name = $this->reports_model->ecommerce($vendor_orders['Ecommerce_Id']);
+                                             ?>
                                             <tr class="border-warning">
                                                 <td>
-                                                    <b><?php echo $vendor_orders['Ecommerce_Id']; ?></b>
+                                                    <b><?php echo $name; ?></b>
                                                 </td>
                                                 <td>
                                                     <?php echo $vendor_orders['Transaction_Id']; ?>

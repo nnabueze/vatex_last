@@ -5,7 +5,7 @@ class Transaction extends CI_Controller {
 	public function  __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('user_model','client_model','vat_model','basic_model','transaction_model'));
+		$this->load->model(array('user_model','client_model','vat_model','basic_model','transaction_model','reports_model'));
 		$this->load->library('upload','form_validation');
 		$this->load->helper(array('url','form','download'));
 		if(!isAdminLoggedIn())
@@ -217,7 +217,7 @@ class Transaction extends CI_Controller {
 		$data['datatable'] = TRUE;
 		$data['page_title'] = 'List of Vendor Orders';
 		$data['uri_segment_2'] = 'transaction';
-		$data['uri_segment_3'] = 'all_orders';
+		$data['uri_segment_3'] = 'all_orders2';
 		$data['user'] = 'vendor';
 		$data['vendors'] = $this->transaction_model->all_vendor_orders($phone);
 		//echo"<pre>";print_r($data['vendor_orders']); die;

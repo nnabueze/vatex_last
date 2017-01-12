@@ -71,8 +71,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php if(strtolower($uri_segment_2)=='transaction') { echo '<span class="selected"></span>'; }  ?>
                         </a>
                         <ul>
-                            <li class="<?php if(strtolower($uri_segment_3)=='initiated_orders') { echo 'active'; }  ?>"><a href="<?php echo site_url('transaction/all_vendor_orders');?>" title="">Initiated Orders</a></li>
-                            <li class="<?php if(strtolower($uri_segment_3)=='closed_orders') { echo 'active'; }  ?>"><a href="<?php echo site_url('transaction/all_vendor_orders2');?>" title="">Successful/Closed Orders</a></li>
+                            <li class="<?php if(strtolower($uri_segment_3)=='all_orders') { echo 'active'; }  ?>"><a href="<?php echo site_url('transaction/all_vendor_orders');?>" title="">Initiated Orders</a></li>
+                            <li class="<?php if(strtolower($uri_segment_3)=='all_orders2') { echo 'active'; }  ?>"><a href="<?php echo site_url('transaction/all_vendor_orders2');?>" title="">Successful/Closed Orders</a></li>
                         </ul>
                     </li>
 
