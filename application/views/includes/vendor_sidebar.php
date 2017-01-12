@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
 
                     <li class="<?php if(strtolower($uri_segment_2)=='reports') { echo 'active'; }  ?>">
-                        <a href="#" title="">
+                        <a href="<?php echo site_url('reports/vendor_reports');?>" title="">
                             <span class="icon"><i class="fa fa-signal"></i></span>
                             <span class="text">Reports & Analytics </span>
                             <?php if(strtolower($uri_segment_2)=='reports') { echo '<span class="selected"></span>'; }  ?>
@@ -85,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
 
 
-                    <li class="submenu <?php if(strtolower($uri_segment_2)=='profile') { echo 'active'; }  ?>">
+<!--                     <li class="submenu <?php if(strtolower($uri_segment_2)=='profile') { echo 'active'; }  ?>">
                         <a href="javascript:void(0);">
                             <span class="icon"><i class="fa fa-user"></i></span>
                             <span class="text">Profile Management</span>
@@ -93,10 +93,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php if(strtolower($uri_segment_2)=='profile') { echo '<span class="selected"></span>'; }  ?>
                         </a>
                         <ul>
-                            <li class="<?php if(strtolower($uri_segment_3)=='userprofile') { echo 'active'; }  ?>"><a href="#" title="">My Profile</a></li>
-                            <li class="<?php if(strtolower($uri_segment_3)=='editprofile') { echo 'active'; }  ?>"><a href="#" title="">Edit Profile</a></li>
+                            <li class="<?php if(strtolower($uri_segment_3)=='userprofile') { echo 'active'; }  ?>"><a href="<?php echo site_url('users/profile');?>" title="">My Profile</a></li>
+                            <li class="<?php if(strtolower($uri_segment_3)=='editprofile') { echo 'active'; }  ?>"><a href="<?php echo site_url('users/editprofile');?>" title="">Edit Profile</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
 
                     <li class="<?php if(strtolower($uri_segment_2)=='vendor_orders') { echo 'active'; }  ?>">

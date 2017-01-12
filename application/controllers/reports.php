@@ -45,6 +45,42 @@ class Reports extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//vendor reports
+	public function vendor_reports()
+	{
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$data= array();
+
+		$item= $this->session->userdata('tin');
+		
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Reports';
+		$data['uri_segment_2'] = 'reports';
+		$data['user'] = 'vendor';
+
+
+			switch ($this->input->post('item')) {
+			    case "deducted_report":
+			    //getting list of vendors with the tin accross board
+			        $data['report'] = $this->reports_model->vendor_report($item);
+			        $data['type'] = "deducted_report";
+			        break;
+			    case "remittance_report":
+			        $data['report'] = $this->reports_model->vendor_report($item);
+			        $data['type'] = "remittance_report";
+			        break;
+			    default:
+			        $data['report'] = $this->reports_model->vendor_report($item);
+			        $data['type'] = "";
+			}
+
+		$data['page_content'] = '04_reporting/vendor_reports';
+		$this->load->view('includes/main_content', $data);
+	}
+
 	//ecommerce reports
 	public function ecommerce_report()
 	{

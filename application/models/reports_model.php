@@ -321,6 +321,26 @@ class Reports_model extends CI_Model {
 		return $result;
 	}
 
+	//vendor compted report accross board
+	public function vendor_computed_report($data)
+	{
+		$result = $this->db->where('vendor_id',$data['vendor_id'])
+				->where('ecommerce_id',$data['ecommerce_id'])
+				->get('computed_vat')->result();
+
+		return $result;
+	}
+
+	//getting vendor deducted report
+	public function vendor_deducted_report($data)
+	{
+		$result = $this->db->where('status','1')
+				->where('vendor_id',$data)
+				->get('computed_vat')->result();
+
+		return $result;
+	}
+
 	//getting list of vendors within ecommerce 
 	public function client_listing($item)
 	{
@@ -337,6 +357,15 @@ class Reports_model extends CI_Model {
 					->get('client')
 					->row_array();
 		return $name['client_name'];
+	}
+
+	//getting list of vendors with the tin accross board
+	public function vendor_report($data)
+	{
+		$result = $this->db->where(array('tin'=>$data))
+								->get('vendor')
+								->result_array();
+		return $result;
 	}
 
 
