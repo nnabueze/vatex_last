@@ -36,6 +36,12 @@ class Dashboard extends CI_Controller {
 		}else{
 
 			$data['page_content'] = '01_dashboard/dashboard';
+
+			$data['total_amount'] = $this->transaction_model->all_total_amount();
+			$data['output_vat'] = $this->transaction_model->all_total_amount();
+			$data['input_vat'] = $this->transaction_model->all_total_amount();
+			$data['net_vat'] = $this->transaction_model->all_total_amount();
+			$data['orders'] = $this->transaction_model->all_last_transaction();
 		}
 		$this->load->view('includes/main_content', $data);
 	}
