@@ -123,8 +123,9 @@ class Transaction extends CI_Controller {
 		{
 			redirect(getUrl('login'));
 		}
-		$item['vandor_id']= $this->session->userdata('vendor_id');
-		$item['ecommerce_id'] = $this->session->userdata('ecommerce_Id');
+/*		$item['vandor_id']= $this->session->userdata('vendor_id');
+		$item['ecommerce_id'] = $this->session->userdata('ecommerce_Id');*/
+		$item = $this->session->userdata('tin');
 
 		$data = array();
 		$data['datatable'] = TRUE;

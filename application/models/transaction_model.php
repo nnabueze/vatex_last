@@ -242,8 +242,7 @@ class Transaction_model extends CI_Model {
 		$end_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m"), 0));
 		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 
-		return $result = $this->db->where(array('Ecommerce_Id'=>$data['ecommerce_id']))
-						->where(array('Vendor_Id'=>$data['vandor_id']))
+		return $result = $this->db->where(array('Vendor_TIN'=>$data))
 						->where(array('Order_Status'=>'1'))
 						->where(array('approve'=>'0'))
 						->where('Payment_Date >=',$start_of_last_month)
