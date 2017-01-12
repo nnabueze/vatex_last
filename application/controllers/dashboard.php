@@ -23,7 +23,15 @@ class Dashboard extends CI_Controller {
 		$data['datatable'] = FALSE;
 		
 		if ($this->session->userdata('user') == "ecommerce") {
+			$item = $this->session->userdata('ecommerce_id');
+
 			$data['page_content'] = '01_dashboard/ecommerce_dashboard';
+			$data['total_amount'] = $this->transaction_model->ecommerce_total_amount($item);
+			$data['output_vat'] = $this->transaction_model->ecommerce_total_amount($item);
+			$data['input_vat'] = $this->transaction_model->ecommerce_total_amount($item);
+			$data['net_vat'] = $this->transaction_model->ecommerce_total_amount($item);
+			$data['orders'] = $this->transaction_model->ecommerce_last_transaction($item);
+			
 			$data['user'] = 'ecommerce';
 		}else{
 

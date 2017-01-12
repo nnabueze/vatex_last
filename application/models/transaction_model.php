@@ -285,6 +285,17 @@ class Transaction_model extends CI_Model {
 						->result_array();
 	}
 
+	//getting ecommerce last 5 closed transaction
+	public function ecommerce_last_transaction($data)
+	{
+		return $result = $this->db->where(array('ecommerce_id'=>$data))
+						->where(array('Status'=>'1'))
+						->limit(5)
+						->order_by('id',"desc")
+						->get('transactions')
+						->result_array();
+	}
+
 	//getting a specific order
 	public function order_details($id)
 	{
@@ -394,6 +405,18 @@ class Transaction_model extends CI_Model {
 		$period = date("F,Y",strtotime("-1 month"));
 
 		$result = $this->db->where(array('vendor_tin'=>$item))
+								->where(array('period'=>$period))
+								->get('computed_vat')
+								->result_array();
+		return $result;
+	}
+
+	//getting ecommerce total amount accross board
+	public function ecommerce_total_amount($item)
+	{
+		$period = date("F,Y",strtotime("-1 month"));
+
+		$result = $this->db->where(array('ecommerce_id'=>$item))
 								->where(array('period'=>$period))
 								->get('computed_vat')
 								->result_array();

@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 
                 <ul class="sidebar-menu">
                     <li class="<?php if(strtolower($uri_segment_2)=='dashboard') { echo 'active'; }  ?>">
-                        <a href="<?php echo site_url('#');?>" title="Dashboard">
+                        <a href="<?php echo site_url('dashboard');?>" title="Dashboard">
                             <span class="icon"><i class="fa fa-home"></i></span>
                             <span class="text">Dashboard</span>
                             <?php if(strtolower($uri_segment_2)=='dashboard') { echo '<span class="selected"></span>'; }  ?>
