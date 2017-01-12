@@ -150,6 +150,7 @@ class Vat1_model extends CI_Model {
 
 						$result['ecommerce_id'] = $vendor['Ecommerce_Id'];
 						$result['vendor_id'] = $vendor['Vendor_Id'];
+						$result['vendor_tin'] = $vendor['tin'];
 						$result['net_vat'] = $result['output_vat'];
 						$result['input_vat'] = "0";
 						$result['period'] = date("F,Y",strtotime("-1 month"));

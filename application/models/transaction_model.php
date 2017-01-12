@@ -277,8 +277,7 @@ class Transaction_model extends CI_Model {
 	//getting vendor the last 5 closed order
 	public function vendor_last_order($data)
 	{
-		return $result = $this->db->where(array('Ecommerce_Id'=>$data['ecommerce_id']))
-						->where(array('Vendor_Id'=>$data['vandor_id']))
+		return $result = $this->db->where(array('Vendor_TIN'=>$data))
 						->where(array('Order_Status'=>'1'))
 						->limit(5)
 						->order_by('id',"desc")
@@ -385,6 +384,18 @@ class Transaction_model extends CI_Model {
 	{
 		$result = $this->db->where(array('tin'=>$phone))
 								->get('vendor')
+								->result_array();
+		return $result;
+	}
+
+	//getting vendor total amount accross board
+	public function vendor_total_amount($item)
+	{
+		$period = date("F,Y",strtotime("-1 month"));
+
+		$result = $this->db->where(array('vendor_tin'=>$item))
+								->where(array('period'=>$period))
+								->get('computed_vat')
 								->result_array();
 		return $result;
 	}
