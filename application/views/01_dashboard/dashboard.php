@@ -18,7 +18,7 @@
                                                             }
                                                         ?>
                                                         <h3 class="text-center text-thin">
-                                                            <b>₦<span class="counter"><?php echo $amount;?></span></b> 
+                                                            <b>₦<span class="counter"><?php echo number_format($amount, 0);?></span></b> 
                                                         </h3>
                                                         <p class="text-center text-thin">
                                                             Last Month
@@ -42,7 +42,7 @@
                                                             }
                                                         ?>
                                                         <h3 class="text-center text-thin">
-                                                            <b>₦<span class="counter"><?php echo $output_vats;?></span></b> 
+                                                            <b>₦<span class="counter"><?php echo number_format($output_vats, 0);?></span></b> 
                                                         </h3>
                                                         <p class="text-center text-thin">
                                                             Last Month
@@ -67,7 +67,7 @@
                                                                 }
                                                             ?>
                                                             <h3 class="text-center text-thin">
-                                                                <b>₦<span class="counter"><?php echo $input_vats;?></span></b> 
+                                                                <b>₦<span class="counter"><?php echo number_format($input_vats, 0);?></span></b> 
                                                             </h3>
                                                             <p class="text-center text-thin">
                                                                 Last Month
@@ -91,7 +91,7 @@
                                                                 }
                                                             ?>
                                                             <h3 class="text-center text-thin">
-                                                                <b>₦<span class="counter"><?php echo $net_vats;?></span></b> 
+                                                                <b>₦<span class="counter"><?php echo number_format($net_vats, 0);?></span></b> 
                                                             </h3>
                                                             <p class="text-center text-thin">
                                                                 Last Month
@@ -128,7 +128,7 @@
                                                                             <b><?php echo $initiatedOrders['transaction_id']; ?></b>
                                                                         </td>
                                                                         <td>
-                                                                            <?php echo $initiatedOrders['transaction_amount']; ?>
+                                                                            <?php echo number_format($initiatedOrders['transaction_amount'], 2) ; ?>
                                                                         </td>
                                                                         <td>
                                                                             <?php echo $initiatedOrders['payment_date']; ?>
@@ -138,7 +138,7 @@
                                                                             <?php echo $initiatedOrders['no_of_orders']; ?>
                                                                         </td>
                                                                         <td>
-                                                                            <?php echo $initiatedOrders['vat_deducted']; ?>
+                                                                            <?php echo number_format($initiatedOrders['vat_deducted'], 2); ?>
                                                                         </td>
                                                                         <td class="text-center">
 
