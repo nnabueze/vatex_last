@@ -21,6 +21,7 @@
                                                 <th data-hide="phone">VAT DEDUCTED</th>
                                                 <th data-hide="phone">QUANTITY</th>
                                                 <th data-hide="phone">PURCHASE PRICE</th>
+                                                <th data-hide="phone">PAYMENT TYPE</th>
                                                 <th data-hide="phone,tablet">SELLING PRICE</th>
                                                 <th data-hide="phone,tablet">PRODUCT DESC</th>
                                                 <th data-hide="phone,tablet">PRODUCT CATEGORY</th>
@@ -46,7 +47,9 @@
                                                 <td class="text-center">
                                                     ₦ <?php echo number_format($initiated_orders['Purchase_Price'], 0); ?>
                                                 </td>
-                                                
+                                                <td>
+                                                    <?php echo ucwords($initiated_orders['Payment_Type']); ?>
+                                                </td>
                                                 <td class="text-center">
                                                     ₦ <?php echo number_format($initiated_orders['sell_price'], 0); ?>
                                                 </td>
@@ -76,6 +79,7 @@
                                             <th data-hide="phone">VAT DEDUCTED</th>
                                             <th data-hide="phone">QUANTITY</th>
                                             <th data-hide="phone">PURCHASE PRICE</th>
+                                            <th data-hide="phone">PAYMENT TYPE</th>
                                             <th data-hide="phone,tablet">SELLING PRICE</th>
                                             <th data-hide="phone,tablet">PRODUCT DESC</th>
                                             <th data-hide="phone,tablet">PRODUCT CATEGORY</th>
