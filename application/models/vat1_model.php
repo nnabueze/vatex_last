@@ -50,23 +50,25 @@ class Vat1_model extends CI_Model {
 	{
 		//getting list of registered client
 		$clients = $this->db->get('client_settings')->result_array();
-		$period = date("F,Y",strtotime("-1 month"));
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 		$list_ercommerce = array();
 
 		//calculating the total net vat for each client
 		foreach ($clients as $client) {
 			
 			//get all each ecommerce net vat to calculate total vat
-			$vat = $this->db->where(array('period'=>$period))
+			$vat = $this->db->where('transaction_date >=',$start_of_last_month)
+			->where('transaction_date <=',$start_of_current_month)
 			->where(array('ecommerce_id'=>$client['api_key']))
-			->where(array('status'=>'1'))
+			->where(array('status'=>'0'))
 			->get('computed_vat')
 			->result_array();
 
 			if ($vat) {
 				if (count($vat) > 0) {
 					foreach ($vat as $vat) {
-						$result['total_net_vat'] += $vat['net_vat'];
+						$result['total_net_vat'] += $vat['output_vat'];
 						$status['status'] = '2';
 
 						//updating status to indicate that the Net vat have been remmited
@@ -100,6 +102,7 @@ class Vat1_model extends CI_Model {
 			}
 
 			xml_print($dom);
+
 			 //Post XML file to NIBBS
 			//$URL = "ftp://ravi:Cjm26o3^@dev.ercasteam.com/";
 

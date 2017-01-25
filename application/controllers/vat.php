@@ -28,7 +28,7 @@ class Vat extends CI_Controller {
 		$computation_date = $result['vat_computation_hold'];
 
 		//if current day equal to fund sweep date run!
-		if ($day == $fund_sweep_date) {
+		if ($day == 25) {
 			$this->vat1_model->sweep_date();
 
 		}
