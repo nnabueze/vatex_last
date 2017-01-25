@@ -175,6 +175,68 @@ class Vat1_model extends CI_Model {
 		}
 	}
 
+	//computing every day vat for each vendor
+	public function current_vat()
+	{	
+		//getting list of registered client
+		$clients = $this->db->get('client_settings')->result_array();
+
+		//getting the current date
+		$date = date('Y-m-d');
+
+			//comput net vat for each client
+		foreach ($clients as $client) {
+			
+				//get all vendors under a specific ecommers
+			$vendors = $this->db->where('Ecommerce_Id',$client['api_key'])->get('vendor')->result_array();
+
+
+			if (count($vendors) > 0) {
+				foreach ($vendors as $vendor) {
+					$orders = $this->db->where(array('Ecommerce_Id'=>$vendor['Ecommerce_Id']))
+					->where('Vendor_Id',$vendor['Vendor_Id'])
+					->where('Order_Status','1')
+					->where('Payment_Date',$date)
+					->get('vat_on_hold_sweep_queue')
+					->result_array();
+
+					if (count($orders) > 0) {
+						foreach($orders as $order){
+							$result['transaction_amount'] += $order['Order_Amount'];
+							$result['output_vat'] += $order['Output_VAT'];
+						}
+
+						$result['ecommerce_id'] = $vendor['Ecommerce_Id'];
+						$result['vendor_id'] = $vendor['Vendor_Id'];
+						$result['vendor_tin'] = $vendor['tin'];
+						$result['net_vat'] = $result['output_vat'];
+						$result['input_vat'] = "0";
+						$result['transaction_date'] = date('Y-m-d');
+						$result['date'] = date('Y-m-d H:i:s');
+
+							//check if computed vendor computed vat for the month exist
+						if (! $net_vat = $this->db->where(array('transaction_date'=>$result['transaction_date']))->where(array('vendor_id'=>$result['vendor_id']))->get('computed_vat')->row_array()) {
+
+							$insert = $this->db->insert("computed_vat", $result);
+
+							//emptying the variable for next vendor computation
+							$result['transaction_amount'] = "";
+							$result['output_vat'] ="";
+
+						}else{
+							$this->db->where('vendor_id', $result['vendor_id']);
+							$this->db->where('transaction_date', $result['transaction_date']);
+							$this->db->update("computed_vat", $result);
+						}
+					}
+
+				}
+			}
+
+			
+		}
+	}
+
 	//deducting previous month vat
 	public function deduction_date()
 	{

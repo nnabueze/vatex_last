@@ -15,6 +15,7 @@ class Vat extends CI_Controller {
 	//test url for computing computed vat
 	public function computed_vat()
 	{
+		//Task is shedule once daily which should be any time
 		//getting the current day of the month
 		$day = date("d", strtotime(date('Y-m-d')));
 
@@ -33,14 +34,14 @@ class Vat extends CI_Controller {
 		}
 		
 		//if current day equal to deduction date run
-		if ($day == $deduction_date) {
+/*		if ($day == $deduction_date) {
 			$this->vat1_model->deduction_date();
-		}
+		}*/
 
 		//if current day equal to computation date run
-		if ($day == $computation_date) {
+	/*	if ($day == $computation_date) {
 			$this->vat1_model->computation_date();
-		}
+		}*/
 
 		//if current day equal to email date sent out email
 		if ($day == $email_date) {
@@ -48,6 +49,14 @@ class Vat extends CI_Controller {
 		}
 
 
+	}
+
+	//computing VAT
+	public function current_vat()
+	{
+		//task should be sheduled every 1hour daily
+		//if schedule once a day it should be by 12midnight
+		$this->vat1_model->current_vat();
 	}
 
 	//showing list of vatible products
