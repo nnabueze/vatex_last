@@ -18,17 +18,8 @@
                                <div class="col-sm-4">
                                 <select class="chosen-select" name="item" tabindex="2">
                                     <option value=""></option>
-                                    <option value="">Computed Report</option>
-                                    <option value="deducted_report">Deducted Report</option>
+                                    <option value="">Transaction Report</option>
                                     <option value="remittance_report">Remittance Report</option>
-                                    <option value="deduction_error_report">Deduction Error Report</option>
-                                    <option value="remittance_error_report">Remittance Error Report</option>
-                                    <option value="order_transaction_volume">Order Transaction Volume</option>
-                                    <option value="remittance_error_report">Order Transaction Summary</option>
-                                    <option value="remittance_error_report">Vendor VAT Remittance History</option>
-                                    <option value="remittance_error_report">Project VAT Remittance Report</option>
-                                    <option value="remittance_error_report">VAT Revenue Report</option>
-                                    <option value="remittance_error_report">VAT Revenue History Report</option>
                                 </select>
                             </div>
                             <label class="col-sm-1 control-label">Date Range:</label>
@@ -68,7 +59,7 @@
                             echo "REMITTANCE REPORT";
                             break;
                         default:
-                            echo "COMPUTED REPORT";
+                            echo "TRANSACTION REPORT";
                     }
                      ?>
                     </h3>
@@ -94,11 +85,9 @@
                                     <tr>
                                         <th>ECOMMERCE NAME</th>
                                         <th>VENDOR ID</th>
-                                        <th>PERIOD</th>
-                                        <th>TRASACTION AMOUNT</th>
-                                        <th>INPUT VAT</th>
-                                        <th>OUTPUT VAT</th>
-                                        <th>NET VAT</th>
+                                        <th>AMOUNT</th>
+                                        <th>VAT</th>
+                                        <th>TRASACTION DATE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -113,23 +102,16 @@
                                             <?php echo $report->vendor_id; ?>
                                         </td>
                                         <td>
-                                            <?php echo $report->period; ?>
+                                            ₦ <?php echo number_format($report->transaction_amount, 0); ?>
                                         </td>
                                         <td>
-                                            <?php echo $report->transaction_amount; ?>
+                                            ₦ <?php echo number_format($report->output_vat, 0); ?>
                                         </td>
-
                                         <td>
-                                            <?php echo $report->input_vat; ?>
+                                            <?php echo $report->transaction_date; ?>
                                         </td>
-                                        <td class="text-center">
-                                            <?php echo $report->output_vat; ?></span>
 
-                                        </td>
-                                        <td class="text-center">
-                                            <?php echo $report->net_vat; ?></span>
-
-                                        </td>
+                                    
 
                                         <?php } ?>
 
@@ -138,11 +120,9 @@
                                         <tr>
                                             <th>ECOMMERCE NAME</th>
                                             <th>VENDOR ID</th>
-                                            <th>PERIOD</th>
-                                            <th>TRASACTION AMOUNT</th>
-                                            <th>INPUT VAT</th>
-                                            <th>OUTPUT VAT</th>
-                                            <th>NET VAT</th>
+                                            <th>AMOUNT</th>
+                                            <th>VAT</th>
+                                            <th>TRASACTION DATE</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -178,11 +158,11 @@
                                             <td>
                                                 <?php echo $report->period; ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?php echo $report->transaction_amount; ?>
                                             </td>
 
-                                            <td>
+                                            <td class="text-center">
                                                 <?php echo $report->input_vat; ?>
                                             </td>
                                             <td >

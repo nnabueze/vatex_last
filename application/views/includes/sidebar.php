@@ -126,14 +126,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!--<li class="<?php if(strtolower($uri_segment_3)=='resetuser') { echo 'active'; }  ?>"><a href="<?php echo site_url('users/passwordreset');?>" title="">Reset User Password</a></li>-->
                         </ul>
                     </li>
-
+<!-- 
                     <li class="<?php if(strtolower($uri_segment_2)=='efiling') { echo 'active'; }  ?>">
                         <a href="<?php echo site_url('transaction/efiling');?>" title="efiling">
                             <span class="icon"><i class="fa fa-home"></i></span>
                             <span class="text">Efiling</span>
                             <?php if(strtolower($uri_segment_2)=='efiling') { echo '<span class="selected"></span>'; }  ?>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="submenu <?php if(strtolower($uri_segment_2)=='profile') { echo 'active'; }  ?>">
                         <a href="javascript:void(0);">
