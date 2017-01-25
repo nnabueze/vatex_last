@@ -32,7 +32,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <?php
                                                     }else{
                                                     ?>
-                                                    <img src="<?php echo base_url('uploads/user_img/'.$userdt[0]->profile_img);?>?create=50x50,4888E1?f=ffffff" alt="admin">
+                                                    <!-- <img src="<?php echo base_url('uploads/user_img/'.$userdt[0]->profile_img);?>?create=50x50,4888E1?f=ffffff" alt="admin"> -->
+                                                    <img src="<?php echo base_url('uploads/user_img/images.jpg');?>?create=50x50,4888E1?f=ffffff" alt="admin">
                                                     <?php } ?>
                             <i class="online"></i>
                         </a>
@@ -83,9 +84,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <a href="<?php echo site_url('clientadmin/activation_deactivation');?>" title="Activate/Deactivate">Activate/Deactivate</a>
                             </li>-->
                             
-                            <li class="<?php if(strtolower($uri_segment_3)=='client_fundssweep_settings') { echo 'active'; }  ?>">
-                                <a href="<?php echo site_url('clientadmin/fundsweep_config');?>" title="Funds Sweep Settings">Funds Sweeping Config</a>
-                            </li>
+                         <!--    <li class="<?php //if(strtolower($uri_segment_3)=='client_fundssweep_settings') { echo 'active'; }  ?>">
+                                <a href="<?php //echo site_url('clientadmin/fundsweep_config');?>" title="Funds Sweep Settings">Funds Sweeping Config</a>
+                            </li> -->
                         </ul>
                     </li>
 

@@ -27,22 +27,10 @@ class Basic_model extends CI_Model {
 	}
 	
 	function customupd($table,$upddata,$updcond){
-		$result = $this->db->get('sweep_settings')->row_array();
-		$client = $this->db->get('client_settings')->result_array();
+		
+			$this->db->where('id', $updcond['id']);
+			$this->db->update('client', $upddata);
 	
-		if ($result) {
-			//update
-			$this->db->where('id', $result['id']);
-			$this->db->update('sweep_settings', $upddata);
-		}else{
-			//insert
-			$this->db->insert("sweep_settings", $upddata);
-		}
-
-		foreach ($client as  $value) {
-			$this->db->where('id', $value['id']);
-			$this->db->update('client_settings', $upddata);
-		}
 	}
 
 	function updatesql($sql){

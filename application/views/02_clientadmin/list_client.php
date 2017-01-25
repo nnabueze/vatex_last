@@ -75,7 +75,7 @@
                                                 <td class="text-center">
                                                     <a href="<?php echo site_url('clientadmin/view_client/'.$clientdata->id);?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="View detail"><i class="fa fa-eye"></i></a>
                                                     <a href="<?php echo site_url('clientadmin/edit_client/'.$clientdata->id);?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-													<a href="<?php echo site_url('clientadmin/settings/'.$clientdata->id);?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Setup & Configure"><i class="fa fa-gears"></i></a>
+													<!-- <a href="<?php echo site_url('clientadmin/settings/'.$clientdata->id);?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Setup & Configure"><i class="fa fa-gears"></i></a> -->
                                                 </td>
                                             </tr>
 											<?php } ?>

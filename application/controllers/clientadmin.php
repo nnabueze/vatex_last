@@ -130,6 +130,8 @@ class Clientadmin extends CI_Controller {
 			$data['date_created']   = date('Y-m-d H:i:s');
 			$data['key_id']   = 'VA'.md5(uniqid(rand(), true));
 			$data['status'] = 1;
+			$data['tin'] = $this->input->post('tin');
+			$data['rc'] = $this->input->post('rc');
 			
 			$client_exists = $this->client_model->client_exists($data['contact_email'],$data['client_name']);
 			if($client_exists>0){
@@ -341,6 +343,8 @@ class Clientadmin extends CI_Controller {
 			$save['contact_phone'] = stripslashes($this->input->post('contact_phone'));
 			$save['client_name'] = stripslashes($this->input->post('client_name'));
 			$save['business_type'] = stripslashes($this->input->post('business_type'));
+			$save['tin'] = stripslashes($this->input->post('tin'));
+			$save['rc'] = stripslashes($this->input->post('rc'));
 			$data['date_modified']   = date('Y-m-d H:i:s');
 			/*$save['company_logo'] = '';*/	
 			

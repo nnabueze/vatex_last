@@ -57,11 +57,22 @@
                                                         <input type="text" class="form-control input-sm" placeholder="Client Identifier" name="unique_identifier" value="<?php echo $client_detail[0]->unique_identifier; ?>"/>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">Client TIN <span class="asterisk">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control input-sm" value="<?php echo $client_detail[0]->tin; ?>" placeholder="Client Tin" name="tin"/>
+                                                    </div>
+                                                </div>
                                                 
                                                 <div class="form-group">
                                                     <label class="col-sm-4 control-label">Line of Business <span class="asterisk">*</span></label>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control input-sm" placeholder="Line of Client Business" name="business_type" value="<?php echo $client_detail[0]->business_type; ?>"/>
+                                                        
+                                                        <select name="business_type" class="form-control input-sm mb-15">
+                                                                <option value="Ecommerce" <?php if ($client_detail[0]->business_type == "Ecommerce") { echo ' selected="selected"'; } ?>>Ecommerce</option>
+                                                                    <option value="Trading" <?php if ($client_detail[0]->business_type == "Trading") { echo ' selected="selected"'; } ?>>Trading</option>
+                                                            </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,6 +81,13 @@
                                                 <div class="form-group form-group-divider">
                                                     <div class="form-inner">
                                                         <h5 class="no-margin">Contact Information</h5>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">Client RC Number </label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control input-sm" value="<?php echo $client_detail[0]->rc; ?>" placeholder="Client RC Number" name="rc"/>
                                                     </div>
                                                 </div>
                                             
