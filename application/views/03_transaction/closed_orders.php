@@ -20,10 +20,12 @@
                                                 <th data-hide="phone">VENDOR NAME</th>
                                                 <th data-hide="phone">ORDER ID</th>
                                                 <th data-hide="phone,tablet">ORDER AMOUNT</th>
+                                                <th data-hide="phone,tablet">VAT DEDUCTED</th>
                                                 <th data-hide="phone,tablet">QUANTITY</th>
+                                                <th data-hide="phone,tablet">PAYMENT TYPE</th>
                                                 <th data-hide="phone,tablet">PAYMENT DATE</th>
                                                 <th data-hide="phone,tablet" class="text-center">STATUS</th>
-                                                <th data-hide="phone,tablet" class="text-center">ACTION</th>
+                                                <th data-hide="phone,tablet">PRODUCT DESC</th>
                                             </tr>
                                         </thead>
                                         <!--tbody section is required-->
@@ -43,11 +45,17 @@
                                                     <?php echo $initiatedOrders->Order_Id; ?>
                                                 </td>
 
-                                                <td>
-                                                    <?php echo $initiatedOrders->Order_Amount; ?>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiatedOrders->Order_Amount, 0); ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiatedOrders->Output_VAT, 0); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiatedOrders->Quantity; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo ucwords($initiatedOrders->Payment_Type); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiatedOrders->Payment_Date; ?>
@@ -60,8 +68,11 @@
                                                     <span class="label label-warning"><?php echo 'Open'; ?></span>
                                                     <?php } ?>
                                                 </td>
-                                                <td class="text-center">
+                                               <!--  <td class="text-center">
                                                     <a href="#" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="View detail"><i class="fa fa-eye"></i></a>
+                                                </td> -->
+                                                <td>
+                                                    <?php echo ucwords($initiatedOrders->Product_Description); ?>
                                                 </td>
 
                                                 <?php } ?>
@@ -75,10 +86,12 @@
                                                     <th>VENDOR ID</th>
                                                     <th>ORDER ID</th>
                                                     <th>ORDER AMOUNT</th>
+                                                    <th data-hide="phone,tablet">VAT DEDUCTED</th>
                                                     <th>QUANTITY</th>
+                                                    <th data-hide="phone,tablet">PAYMENT TYPE</th>
                                                     <th>PAYMENT DATE</th>
                                                     <th>STATUS</th>
-                                                    <th>ACTION</th>
+                                                    <th data-hide="phone,tablet">PRODUCT DESC</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
