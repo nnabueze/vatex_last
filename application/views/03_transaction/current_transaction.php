@@ -6,13 +6,13 @@
                             <!-- Start table advanced -->
                             <div class="panel panel-default shadow no-overflow">
                                 <div class="panel-heading">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <h3 class="panel-title">Last Month Transactions</h3>
                                     </div>
                                     <?php if(count($initiated_orders) > 0){?>
-                                        <div class="col-md-3"><h3 class="panel-title">Period: <?php echo $period; ?></h3></div>
-                                        <div class="col-md-3"><h3 class="panel-title">Current Date: <?php echo $current_date; ?></h3></div>
-                                        <div class="col-md-3"><h3 class="panel-title">Sweeping Date: <?php echo $sweep_date; ?></div>
+                                        <!-- <div class="col-md-3"><h3 class="panel-title">Period: <?php echo $period; ?></h3></div> -->
+                                        <div class="col-md-4"><h3 class="panel-title">Current Date: <?php echo $current_date; ?></h3></div>
+                                        <div class="col-md-4"><h3 class="panel-title">Sweeping Date: <?php echo $sweep_date; ?></div>
                                     <?php } ?>
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->
@@ -24,10 +24,11 @@
                                                 <th data-class="expand">ECOMMERCE</th>
                                                 <th data-hide="phone">TRANSACTION ID</th>
                                                 <th data-hide="phone">TRANSACTION AMOUNT</th>
+                                                <th data-hide="phone,tablet">VAT DEDUCTED</th>
                                                 <th data-hide="phone">TRANSACTION DATE</th>
                                                 <th data-hide="phone,tablet">PAYMENT DATE</th>
+                                                <th data-hide="phone,tablet">PAYMENT TYPE</th>
                                                 <th data-hide="phone,tablet">NO OF ORDERS</th>
-                                                <th data-hide="phone,tablet">VAT DEDUCTED</th>
                                                 <th data-hide="phone,tablet" class="text-center">STATUS</th>
                                                 <th data-hide="phone,tablet" class="text-center">ACTION</th>
                                             </tr>
@@ -46,8 +47,11 @@
                                                 <td>
                                                     <?php echo $initiated_orders['transaction_id']; ?>
                                                 </td>
-                                                <td>
-                                                    <?php echo $initiated_orders['transaction_amount']; ?>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiated_orders['transaction_amount'], 0); ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiated_orders['vat_deducted'], 0); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiated_orders['transaction_date']; ?>
@@ -57,11 +61,12 @@
                                                     <?php echo $initiated_orders['payment_date']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $initiated_orders['no_of_orders']; ?>
+                                                    <?php echo $initiated_orders['Payment_Type']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $initiated_orders['vat_deducted']; ?>
+                                                    <?php echo $initiated_orders['no_of_orders']; ?>
                                                 </td>
+                                           
                                                 <td class="text-center">
                                                     <?php if($initiated_orders['status'] == 1 ){ ?>
                                                     <span class="label label-success"><?php echo "Closed"; ?></span>
@@ -86,18 +91,19 @@
                                             <tr>
                                             <?php if(count($initiated_orders) > 0){?>
                                             <th colspan="2">Total TransactionAmount:</th>
-                                            <th colspan="2"><?php echo $total_amount; ?></th>
+                                            <th colspan="2">₦ <?php echo number_format($total_amount, 0); ?></th>
                                             <th></th>
-                                            <th colspan="2">Total VAT Amount</th>
-                                            <th colspan="2"><?php echo $total_vat; ?></th>
+                                            <th colspan="3">Total VAT Amount</th>
+                                            <th colspan="2">₦ <?php echo number_format($total_vat, 0); ?></th>
                                             <?php }else{ ?>
                                             <th data-class="expand">ECOMMERCE</th>
                                             <th data-hide="phone">TRANSACTION ID</th>
                                             <th data-hide="phone">TRANSACTION AMOUNT</th>
+                                            <th data-hide="phone,tablet">VAT DEDUCTED</th>
                                             <th data-hide="phone">TRANSACTION DATE</th>
                                             <th data-hide="phone,tablet">PAYMENT DATE</th>
+                                            <th data-hide="phone,tablet">PAYMENT TYPE</th>
                                             <th data-hide="phone,tablet">NO OF ORDERS</th>
-                                            <th data-hide="phone,tablet">VAT DEDUCTED</th>
                                             <th data-hide="phone,tablet" class="text-center">STATUS</th>
                                             <th data-hide="phone,tablet" class="text-center">ACTION</th>
                                             <?php } ?>

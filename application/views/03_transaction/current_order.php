@@ -7,7 +7,7 @@
                             <div class="panel panel-default shadow no-overflow">
                                 <div class="panel-heading">
                                     <div class="pull-left">
-                                        <h3 class="panel-title">Last Month Orderss</h3>
+                                        <h3 class="panel-title">Last Month Orders</h3>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->
@@ -18,6 +18,7 @@
                                             <tr>
                                                 <th data-class="expand">ORDER ID</th>
                                                 <th data-hide="phone">ORDER AMOUNT</th>
+                                                <th data-hide="phone">VAT DEDUCTED</th>
                                                 <th data-hide="phone">QUANTITY</th>
                                                 <th data-hide="phone">PURCHASE PRICE</th>
                                                 <th data-hide="phone,tablet">SELLING PRICE</th>
@@ -33,18 +34,21 @@
                                                 <td>
                                                     <b><?php echo ucwords($initiated_orders['Order_Id']); ?></b>
                                                 </td>
-                                                <td>
-                                                    <?php echo $initiated_orders['Order_Amount']; ?>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiated_orders['Order_Amount'], 0); ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiated_orders['Output_VAT'], 0); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiated_orders['Quantity']; ?>
                                                 </td>
-                                                <td>
-                                                    <?php echo $initiated_orders['Purchase_Price']; ?>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiated_orders['Purchase_Price'], 0); ?>
                                                 </td>
                                                 
-                                                <td>
-                                                    <?php echo $initiated_orders['sell_price']; ?>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiated_orders['sell_price'], 0); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiated_orders['Product_Description']; ?>
@@ -69,6 +73,7 @@
                                             <tr>
                                             <th data-class="expand">ORDER ID</th>
                                             <th data-hide="phone">ORDER AMOUNT</th>
+                                            <th data-hide="phone">VAT DEDUCTED</th>
                                             <th data-hide="phone">QUANTITY</th>
                                             <th data-hide="phone">PURCHASE PRICE</th>
                                             <th data-hide="phone,tablet">SELLING PRICE</th>

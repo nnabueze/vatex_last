@@ -88,6 +88,8 @@ class Secured_model extends CI_Model {
 
 		 	//updating transaction table for closed transaction
 		 	$transaction['payment_date']   = $data['Payment_Date'];
+		 	$transaction['Payment_Type']   = $data['Payment_Type'];
+
 		 	$transaction['status']   = "1";
 		 	$transaction['vat_deducted'] = "";
 		 	$trans = $this->transaction_order($data['Transaction_Id']);
