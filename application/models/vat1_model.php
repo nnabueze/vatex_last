@@ -314,7 +314,10 @@ class Vat1_model extends CI_Model {
 	{
 		//getting list of registered client
 		$clients = $this->db->get('client_settings')->result_array();
-		$period = date("F,Y",strtotime("-1 month"));
+		//$period = date("F,Y",strtotime("-1 month"));
+
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 
 
 
@@ -330,10 +333,13 @@ class Vat1_model extends CI_Model {
 				foreach ($vendors as $vendor) {
 					$orders = $this->db->where(array('Ecommerce_Id'=>$vendor['Ecommerce_Id']))
 					->where('Vendor_Id',$vendor['Vendor_Id'])
-					->where('Status','1')
-					->where('period',$period)
+					->where('Status','0')
+					->where('transaction_date >=',$start_of_last_month)
+					->where('transaction_date <=',$start_of_current_month)
 					->get('computed_vat')
 					->row_array();
+
+					//echo "<pre>"; print_r($orders); die;
 
 					if ($orders) {
 						
