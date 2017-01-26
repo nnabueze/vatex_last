@@ -314,7 +314,7 @@ class Vat1_model extends CI_Model {
 	{
 		//getting list of registered client
 		$clients = $this->db->get('client_settings')->result_array();
-		//$period = date("F,Y",strtotime("-1 month"));
+		$period = date("F,Y",strtotime("-1 month"));
 
 		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
 		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
@@ -331,26 +331,32 @@ class Vat1_model extends CI_Model {
 
 			if (count($vendors) > 0) {
 				foreach ($vendors as $vendor) {
+
+					$amount ="";
+					$vat ="";
+
 					$orders = $this->db->where(array('Ecommerce_Id'=>$vendor['Ecommerce_Id']))
 					->where('Vendor_Id',$vendor['Vendor_Id'])
 					->where('Status','0')
 					->where('transaction_date >=',$start_of_last_month)
 					->where('transaction_date <=',$start_of_current_month)
 					->get('computed_vat')
-					->row_array();
-
-					//echo "<pre>"; print_r($orders); die;
+					->result_array();
 
 					if ($orders) {
 						
 						$result['Ecommerce_Id'] = $vendor['Ecommerce_Id'];
 						$result['vendor_id'] = $vendor['Vendor_Id'];
 						$result['period'] = $period;
-						$result['transaction_amount'] = $orders['transaction_amount'];
-						$result['output_vat'] = $orders['output_vat'];
+						foreach ($orders as $order) {
+							$amount += $order['transaction_amount'];
+							$vat += $order['output_vat'];
+						}
+						$result['output_vat'] = $vat;
+						$result['transaction_amount'] = $amount;
 						$result['input_vat'] = $orders['input_vat'];
 						$result['net_vat'] = $orders['net_vat'];
-						$total_net_vat  += $result['net_vat'] ;
+						$total_net_vat  += $result['output_vat'];
 						array_push($total_result, $result);
 						
 					}
