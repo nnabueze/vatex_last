@@ -15,26 +15,21 @@
 	<tr>
 		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">S/N</th>
 		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">VENDOR ID</th>
-		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">PERIOD</th>
+		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">MONTH</th>
 		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">TRANSACTION AMOUNT</th>
-		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">OUTPUT VAT</th>
-		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">INPUT VAT</th>
-		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">NET VAT</th>
+		<th width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;">VAT (5%)</th>
 	</tr>
 <?php foreach($info as $row){?>
 	<tr>
 		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo $i; ?></td>
 		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo $row['vendor_id']; ?></td>
 		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo $row['period']; ?></td>
-		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo $row['transaction_amount']; ?></td>
-		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo $row['output_vat']; ?></td>
-		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo $row['input_vat']; ?></td>
-		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo $row['net_vat']; ?></td>
-	</tr>
+		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo number_format($row['transaction_amount'],0); ?></td>
+		<td width="120" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo number_format($row['output_vat'],0); ?></td>
 <?php $i++; } ?>
 	<tr>
-		<td width="120" colspan="5" height="65" align="center" style="border: 1px solid #c35c4a4a ;">Total</td>
-		<td width="120" colspan="2" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo $total; ?></td>
+		<td width="120" colspan="3" height="65" align="center" style="border: 1px solid #c35c4a4a ;">Total Deducted Vat</td>
+		<td width="120" colspan="2" height="65" align="center" style="border: 1px solid #c35c4a4a ;"><?php echo number_format($total,0); ?></td>
 	</tr>
 </table>
 

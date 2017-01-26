@@ -346,7 +346,7 @@ class Vat1_model extends CI_Model {
 					if ($orders) {
 						
 						$result['Ecommerce_Id'] = $vendor['Ecommerce_Id'];
-						$result['vendor_id'] = $vendor['Vendor_Id'];
+						$result['vendor_id'] = $vendor['name'];
 						$result['period'] = $period;
 						foreach ($orders as $order) {
 							$amount += $order['transaction_amount'];
@@ -354,8 +354,6 @@ class Vat1_model extends CI_Model {
 						}
 						$result['output_vat'] = $vat;
 						$result['transaction_amount'] = $amount;
-						$result['input_vat'] = $orders['input_vat'];
-						$result['net_vat'] = $orders['net_vat'];
 						$total_net_vat  += $result['output_vat'];
 						array_push($total_result, $result);
 						
