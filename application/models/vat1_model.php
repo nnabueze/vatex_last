@@ -84,6 +84,8 @@ class Vat1_model extends CI_Model {
 				$result['ecommerce_id'] = $client['api_key'];
 
 				array_push($list_ercommerce, $result);
+
+				$result['total_net_vat'] ="";
 			}
 		}
 
