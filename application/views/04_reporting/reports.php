@@ -88,6 +88,7 @@
                                         <th>AMOUNT</th>
                                         <th>VAT</th>
                                         <th>TRASACTION DATE</th>
+                                        <th data-hide="phone,tablet" class="text-center">ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -110,7 +111,9 @@
                                         <td>
                                             <?php echo $report->transaction_date; ?>
                                         </td>
-
+                                        <td class="text-center">
+                                            <a href="<?php echo site_url('reports/computted_order/'.$report->vendor_id.'/'.date('Y-m-d', strtotime($report->transaction_date)));?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="View detail"><i class="fa fa-eye"></i></a>
+                                        </td>
                                     
 
                                         <?php } ?>
@@ -123,6 +126,8 @@
                                             <th>AMOUNT</th>
                                             <th>VAT</th>
                                             <th>TRASACTION DATE</th>
+                                            <th data-hide="phone,tablet" class="text-center">ACTION</th>
+
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -173,6 +178,7 @@
                                                 <?php echo $report->net_vat; ?></span>
 
                                             </td>
+
 
                                             <?php } ?>
 

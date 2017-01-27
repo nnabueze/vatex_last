@@ -368,6 +368,17 @@ class Reports_model extends CI_Model {
 		return $result;
 	}
 
+	//getting list of computed order from report table
+	public function computted_order($id, $date)
+	{
+		$result = $this->db->where('Vendor_Id',$id)
+				->where('Payment_Date',$date)
+				->where('Order_Status',"1")
+				->get('vat_on_hold_sweep_queue')->result_array();
+
+		return $result;
+	}
+
 
 	
 	

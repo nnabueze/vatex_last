@@ -45,6 +45,23 @@ class Reports extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//getting list of vendor order per day
+	public function computted_order($id, $date)
+	{
+
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Reports';
+		$data['uri_segment_2'] = 'reports';
+		$data['reports'] = $this->reports_model->computted_order($id, $date);
+		$data['page_content'] = '04_reporting/order_reports';
+		$this->load->view('includes/main_content', $data);
+	}
+
 	//vendor reports
 	public function vendor_reports()
 	{
