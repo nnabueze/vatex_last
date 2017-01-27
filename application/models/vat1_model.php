@@ -212,6 +212,8 @@ class Vat1_model extends CI_Model {
 						$result['ecommerce_id'] = $vendor['Ecommerce_Id'];
 						$result['vendor_id'] = $vendor['Vendor_Id'];
 						$result['vendor_tin'] = $vendor['tin'];
+						$result['ecommerce_name'] = $this->ecommerce($vendor['Ecommerce_Id']);
+						$result['vendor_name'] = $this->vendor($vendor['Vendor_Id']);
 						$result['net_vat'] = $result['output_vat'];
 						$result['input_vat'] = "0";
 						$result['transaction_date'] = date('Y-m-d');
@@ -388,6 +390,26 @@ class Vat1_model extends CI_Model {
 			$this->email->message($body);
 			$this->email->send(); 
 		}
+	}
+
+	//get ecommerce name
+	public function ecommerce($data)
+	{
+		$name = $this->db->where(array('key_id'=>$data))
+					->get('client')
+					->row_array();
+
+		return $name['client_name'];
+	}
+
+	//getting vendor name
+	public function vendor($data)
+	{
+		$name = $this->db->where(array('Vendor_Id'=>$data))
+					->get('vendor')
+					->row_array();
+
+		return $name['name'];
 	}
 
 }
