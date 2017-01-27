@@ -129,7 +129,7 @@ var BlankonFormPicker = function () {
 
             // Predefined Ranges
             function cb(start, end) {
-                $('#reportrange span').html(start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY'));
+                $('#reportrange span').html(start.format('YYYY, MMM D') + ' - ' + end.format('YYYY, MMM D'));
             }
             cb(moment().subtract(29, 'days'), moment());
 
@@ -216,7 +216,7 @@ var BlankonFormPicker = function () {
 
                 if ($('#locale').is(':checked')) {
                     options.locale = {
-                        format: 'MM/DD/YYYY',
+                        format: 'YYYY/MM/DD',
                         separator: ' - ',
                         applyLabel: 'Apply',
                         cancelLabel: 'Cancel',

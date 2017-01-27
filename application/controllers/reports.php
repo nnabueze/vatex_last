@@ -9,7 +9,7 @@ class Reports extends CI_Controller {
 		{  
 			redirect(getUrl('login'));
 		}
-        $this->load->model(array('user_model','reports_model','client_model', 'transaction_model', 'basic_model'));
+		$this->load->model(array('user_model','reports_model','client_model', 'transaction_model', 'basic_model'));
 		$this->load->library('form_validation');
 	} 
 
@@ -26,21 +26,44 @@ class Reports extends CI_Controller {
 		$data['page_title'] = 'Reports';
 		$data['uri_segment_2'] = 'reports';
 
+		$data['report'] = $this->reports_model->computed_report();
+		$data['type'] = "";
 
-			switch ($this->input->post('item')) {
-			    case "deducted_report":
-			        $data['report'] = $this->reports_model->deducted_report();
-			        $data['type'] = "deducted_report";
-			        break;
-			    case "remittance_report":
-			        $data['report'] = $this->reports_model->remittance_report();
-			        $data['type'] = "remittance_report";
-			        break;
-			    default:
-			        $data['report'] = $this->reports_model->computed_report();
-			        $data['type'] = "";
-			}
-	
+		$data['page_content'] = '04_reporting/reports';
+		$this->load->view('includes/main_content', $data);
+	}
+
+	//searching with date range
+	public function search_report()
+	{
+		
+		if(!isAdminLoggedIn())
+		{
+			redirect(getUrl('login'));
+		}
+		$data= array();
+		
+		$data['datatable'] = TRUE;
+		$data['page_title'] = 'Reports';
+		$data['uri_segment_2'] = 'reports';
+
+		$report_date = $this->input->post('report_date');
+
+		switch ($this->input->post('item')) {
+			case "deducted_report":
+			$data['report'] = $this->reports_model->deducted_report();
+			$data['type'] = "deducted_report";
+			break;
+			case "remittance_report":
+
+			$data['report'] = $this->reports_model->remittance_report();
+			$data['type'] = "remittance_report";
+			break;
+			default:
+			$data['report'] = $this->reports_model->computed_report($report_date);
+			$data['type'] = "";
+		}
+		
 		$data['page_content'] = '04_reporting/reports';
 		$this->load->view('includes/main_content', $data);
 	}
@@ -79,20 +102,20 @@ class Reports extends CI_Controller {
 		$data['user'] = 'vendor';
 
 
-			switch ($this->input->post('item')) {
-			    case "deducted_report":
+		switch ($this->input->post('item')) {
+			case "deducted_report":
 			    //getting list of vendors with the tin accross board
-			        $data['report'] = $this->reports_model->vendor_report($item);
-			        $data['type'] = "deducted_report";
-			        break;
-			    case "remittance_report":
-			        $data['report'] = $this->reports_model->vendor_report($item);
-			        $data['type'] = "remittance_report";
-			        break;
-			    default:
-			        $data['report'] = $this->reports_model->vendor_report($item);
-			        $data['type'] = "";
-			}
+			$data['report'] = $this->reports_model->vendor_report($item);
+			$data['type'] = "deducted_report";
+			break;
+			case "remittance_report":
+			$data['report'] = $this->reports_model->vendor_report($item);
+			$data['type'] = "remittance_report";
+			break;
+			default:
+			$data['report'] = $this->reports_model->vendor_report($item);
+			$data['type'] = "";
+		}
 
 		$data['page_content'] = '04_reporting/vendor_reports';
 		$this->load->view('includes/main_content', $data);
@@ -116,19 +139,19 @@ class Reports extends CI_Controller {
 		$data['user'] = 'ecommerce';
 
 
-			switch ($this->input->post('item')) {
-			    case "deducted_report":
-			        $data['report'] = $this->reports_model->ecommerce_deducted_report($item);
-			        $data['type'] = "deducted_report";
-			        break;
-			    case "remittance_report":
-			        $data['report'] = $this->reports_model->remittance_report($item);
-			        $data['type'] = "remittance_report";
-			        break;
-			    default:
-			        $data['report'] = $this->reports_model->ecommerce_computed_report($item);
-			        $data['type'] = "";
-			}
+		switch ($this->input->post('item')) {
+			case "deducted_report":
+			$data['report'] = $this->reports_model->ecommerce_deducted_report($item);
+			$data['type'] = "deducted_report";
+			break;
+			case "remittance_report":
+			$data['report'] = $this->reports_model->remittance_report($item);
+			$data['type'] = "remittance_report";
+			break;
+			default:
+			$data['report'] = $this->reports_model->ecommerce_computed_report($item);
+			$data['type'] = "";
+		}
 
 		$data['page_content'] = '04_reporting/ecommerce_reports';
 		$this->load->view('includes/main_content', $data);
@@ -159,7 +182,7 @@ class Reports extends CI_Controller {
 	public function graphicreport()
 	{		
 		if($this->input->post('biller_srch')!=''){
-		
+
 		}		
 		$data               = array();
 		$data['page_title'] = 'Client Report Module';
@@ -168,9 +191,9 @@ class Reports extends CI_Controller {
 	}
 
 	function cd_list() {
-        $results = $this->reports_model->get_cd_list();
-        echo json_encode($results);
-    }
+		$results = $this->reports_model->get_cd_list();
+		echo json_encode($results);
+	}
 	
 	function analysis(){ 
 		$data['page_title'] = 'Client Report Module';
@@ -183,34 +206,34 @@ class Reports extends CI_Controller {
 		$anastr ='';
 		foreach($analysisdata as $sdata){
 				$anastr .= '['.$sdata->datetimestamp.', '.str_replace(",",'',$sdata->PaidAmount).'] ,';
-		} */
-		
-		if($this->input->post('biller_srch')!=''){
+			} */
+
+			if($this->input->post('biller_srch')!=''){
 			//print_r($_POST);
 
 			//$startdate = explode()
-			$billertbl = $this->input->post('billertbl');
-			$billerid = $this->input->post('biller_srch');
-			$dateto = $this->input->post('dateto');
-			$datefrm = $this->input->post('datefrm');
-			$data['biller_srch'] = $this->input->post('biller_srch');
-			$data['billertbl'] = $billertbl;
-			$data['dateto'] = $dateto;
-			$data['datefrm'] = $datefrm;
-			$data['billername'] = $this->biller_model->biller_name($billerid);
-			$data['ercas_service'] = $this->biller_model->get_ercas_service($billertbl);
-			$analysisdata =  $this->reports_model->generate_analysis_data($billertbl,$dateto,$datefrm);
-		
-		} else {
-			$data['biller_srch'] = $this->input->post('biller_srch');
-			$data['billertbl'] = $billertbl;
-			$data['dateto'] = $dateto;
-			$data['datefrm'] = $datefrm;
-		}
-		
-		$data['grapharr'] = $analysisdata; 
-		
-	
+				$billertbl = $this->input->post('billertbl');
+				$billerid = $this->input->post('biller_srch');
+				$dateto = $this->input->post('dateto');
+				$datefrm = $this->input->post('datefrm');
+				$data['biller_srch'] = $this->input->post('biller_srch');
+				$data['billertbl'] = $billertbl;
+				$data['dateto'] = $dateto;
+				$data['datefrm'] = $datefrm;
+				$data['billername'] = $this->biller_model->biller_name($billerid);
+				$data['ercas_service'] = $this->biller_model->get_ercas_service($billertbl);
+				$analysisdata =  $this->reports_model->generate_analysis_data($billertbl,$dateto,$datefrm);
+
+			} else {
+				$data['biller_srch'] = $this->input->post('biller_srch');
+				$data['billertbl'] = $billertbl;
+				$data['dateto'] = $dateto;
+				$data['datefrm'] = $datefrm;
+			}
+
+			$data['grapharr'] = $analysisdata; 
+
+
 		/*$arr = array();
 		$arr[0] = array('I',20);
 		$arr[1] = array('II',30);
@@ -228,91 +251,91 @@ class Reports extends CI_Controller {
 	
 	public function parse_data(){
 		echo	$string = '{
-		  "draw": 1,
-		  "recordsTotal": 57,
-		  "recordsFiltered": 57,
-		  "data": [
+			"draw": 1,
+			"recordsTotal": 57,
+			"recordsFiltered": 57,
+			"data": [
 			[
-			  "Airi",
-			  "Satou",
-			  "Accountant",
-			  "Tokyo",
-			  "28th Nov 08",
-			  "$162,700"
+			"Airi",
+			"Satou",
+			"Accountant",
+			"Tokyo",
+			"28th Nov 08",
+			"$162,700"
 			],
 			[
-			  "Angelica",
-			  "Ramos",
-			  "Chief Executive Officer (CEO)",
-			  "London",
-			  "9th Oct 09",
-			  "$1,200,000"
+			"Angelica",
+			"Ramos",
+			"Chief Executive Officer (CEO)",
+			"London",
+			"9th Oct 09",
+			"$1,200,000"
 			],
 			[
-			  "Ashton",
-			  "Cox",
-			  "Junior Technical Author",
-			  "San Francisco",
-			  "12th Jan 09",
-			  "$86,000"
+			"Ashton",
+			"Cox",
+			"Junior Technical Author",
+			"San Francisco",
+			"12th Jan 09",
+			"$86,000"
 			],
 			[
-			  "Bradley",
-			  "Greer",
-			  "Software Engineer",
-			  "London",
-			  "13th Oct 12",
-			  "$132,000"
+			"Bradley",
+			"Greer",
+			"Software Engineer",
+			"London",
+			"13th Oct 12",
+			"$132,000"
 			],
 			[
-			  "Brenden",
-			  "Wagner",
-			  "Software Engineer",
-			  "San Francisco",
-			  "7th Jun 11",
-			  "$206,850"
+			"Brenden",
+			"Wagner",
+			"Software Engineer",
+			"San Francisco",
+			"7th Jun 11",
+			"$206,850"
 			],
 			[
-			  "Brielle",
-			  "Williamson",
-			  "Integration Specialist",
-			  "New York",
-			  "2nd Dec 12",
-			  "$372,000"
+			"Brielle",
+			"Williamson",
+			"Integration Specialist",
+			"New York",
+			"2nd Dec 12",
+			"$372,000"
 			],
 			[
-			  "Bruno",
-			  "Nash",
-			  "Software Engineer",
-			  "London",
-			  "3rd May 11",
-			  "$163,500"
+			"Bruno",
+			"Nash",
+			"Software Engineer",
+			"London",
+			"3rd May 11",
+			"$163,500"
 			],
 			[
-			  "Caesar",
-			  "Vance",
-			  "Pre-Sales Support",
-			  "New York",
-			  "12th Dec 11",
-			  "$106,450"
+			"Caesar",
+			"Vance",
+			"Pre-Sales Support",
+			"New York",
+			"12th Dec 11",
+			"$106,450"
 			],
 			[
-			  "Cara",
-			  "Stevens",
-			  "Sales Assistant",
-			  "New York",
-			  "6th Dec 11",
-			  "$145,600"
+			"Cara",
+			"Stevens",
+			"Sales Assistant",
+			"New York",
+			"6th Dec 11",
+			"$145,600"
 			],
 			[
-			  "Cedric",
-			  "Kelly",
-			  "Senior Javascript Developer",
-			  "Edinburgh",
-			  "29th Mar 12",
-			  "$433,060"
+			"Cedric",
+			"Kelly",
+			"Senior Javascript Developer",
+			"Edinburgh",
+			"29th Mar 12",
+			"$433,060"
 			]
-		  ]
+			]
 		}';	
 	}
 
@@ -356,13 +379,13 @@ class Reports extends CI_Controller {
 	}
 
 	function readCSV($csvFile){
-			$file_handle = fopen($csvFile, 'r');
-			while (!feof($file_handle) ) {
-				$line_of_text[] = fgetcsv($file_handle, 1024);
-			}
-			fclose($file_handle);
-			return $line_of_text;
-		} 	 	
+		$file_handle = fopen($csvFile, 'r');
+		while (!feof($file_handle) ) {
+			$line_of_text[] = fgetcsv($file_handle, 1024);
+		}
+		fclose($file_handle);
+		return $line_of_text;
+	} 	 	
 
 	public function readcsvfile(){
 		
@@ -390,7 +413,7 @@ class Reports extends CI_Controller {
 			$save['TransactionStatus'] = $csvfile[12];
 			$this->basic_model->savedata('payment_pos_ewrw',$save);			
 		}
-	
+
 	}
 
 	public function readcollectionfile(){

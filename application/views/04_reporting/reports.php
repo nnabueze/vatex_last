@@ -11,7 +11,7 @@
                     <div class="clearfix"></div>
                 </div><!-- /.panel-heading -->
                 <div class="panel-body no-padding">
-                    <form class="form-horizontal form-bordered" role="form" action="<?php echo site_url("reports");?>" method="POST">
+                    <form class="form-horizontal form-bordered" role="form" action="<?php echo site_url("reports/search_report");?>" method="POST">
                         <div class="form-body">
                             <div class="form-group">
                                <label class="col-sm-2 control-label">Report Type:</label>
@@ -22,17 +22,14 @@
                                     <option value="remittance_report">Vat Remittance Report</option>
                                 </select>
                             </div>
+
                             <label class="col-sm-1 control-label">Date Range:</label>
                             <div class="col-sm-3">
-                               <div class="">
-                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                                    <span></span> <b class="caret"></b>
-                                </div>
+                            <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                                    <input id="reportrange" type="text" class="form-control input-sm" name="report_date">
                             </div>
-                        </div>
                         <div class="col-sm-2">
-                           <button type="submit" name="search_report" value="search" class="btn btn-success">Search</button>
+                           <button type="submit" name="search_report" value="search" class="btn btn-sm btn-success">Search</button>
                        </div>
                    </div>
                </div>

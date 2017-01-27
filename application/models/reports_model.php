@@ -281,7 +281,17 @@ class Reports_model extends CI_Model {
 	//getting computed report
 	public function computed_report($date=null)
 	{
-		$result = $this->db->get('computed_vat')->result();
+		if($date){
+			$from = date('Y-m-d', strtotime(current(explode("-",$date))));
+			$to = date('Y-m-d', strtotime(end(explode("-",$date))));
+
+			$result = $this->db->where("transaction_date >=",$from)
+					->where("transaction_date <=",$to)
+					->get('computed_vat')->result();
+		}else{
+
+			$result = $this->db->get('computed_vat')->result();
+		}
 
 		return $result;
 	}
