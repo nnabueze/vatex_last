@@ -19,7 +19,7 @@
                                 <select class="chosen-select" name="item" tabindex="2">
                                     <option value=""></option>
                                     <option value="">Transaction Report</option>
-                                    <option value="remittance_report">Remittance Report</option>
+                                    <option value="remittance_report">Vat Remittance Report</option>
                                 </select>
                             </div>
                             <label class="col-sm-1 control-label">Date Range:</label>
@@ -56,7 +56,7 @@
                              echo "DEDUCTED REPORT";
                             break;
                         case "remittance_report":
-                            echo "REMITTANCE REPORT";
+                            echo "VAT REMITTANCE REPORT";
                             break;
                         default:
                             echo "TRANSACTION REPORT";
@@ -96,10 +96,10 @@
                                         ?>
                                     <tr class="border-warning">
                                         <td>
-                                            <b><?php echo $name; ?></b>
+                                            <b><?php echo ucwords($report->ecommerce_name); ?></b>
                                         </td>
                                         <td>
-                                            <?php echo $report->vendor_id; ?>
+                                            <?php echo ucwords($report->vendor_name); ?>
                                         </td>
                                         <td>
                                             ₦ <?php echo number_format($report->transaction_amount, 0); ?>
