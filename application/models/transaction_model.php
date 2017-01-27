@@ -436,11 +436,43 @@ class Transaction_model extends CI_Model {
 	//getting all ecommerce total amount across board
 	public function all_total_amount()
 	{
-		$period = date("F,Y",strtotime("-1 month"));
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 
-		$result = $this->db->where(array('period'=>$period))
+		$result = $this->db->where("transaction_date >=", $start_of_last_month)
+								->where("transaction_date <=",$start_of_current_month)
 								->get('computed_vat')
 								->result_array();
+		return $result;
+	}
+
+	//last month total transaction
+	public function total_transaction()
+	{
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+		$result = $this->db->where("transaction_date >=",$start_of_last_month)
+								->where("transaction_date <=", $start_of_current_month)
+								->get('transactions')
+								->result_array();
+
+
+		return $result;
+	}
+
+	//getting last month total order
+	public function total_order()
+	{
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+		$result = $this->db->where("payment_date >=",$start_of_last_month)
+								->where("payment_date <=", $start_of_current_month)
+								->get('vat_on_hold_sweep_queue')
+								->result_array();
+
+
 		return $result;
 	}
 }

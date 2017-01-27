@@ -38,6 +38,8 @@ class Dashboard extends CI_Controller {
 			$data['page_content'] = '01_dashboard/dashboard';
 
 			$data['total_amount'] = $this->transaction_model->all_total_amount();
+			$data['total_transaction'] = $this->transaction_model->total_transaction();
+			$data['total_order'] = $this->transaction_model->total_order();
 			$data['output_vat'] = $this->transaction_model->all_total_amount();
 			$data['input_vat'] = $this->transaction_model->all_total_amount();
 			$data['net_vat'] = $this->transaction_model->all_total_amount();

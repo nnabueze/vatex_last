@@ -4,21 +4,13 @@
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                                     <div class="mini-stat-type-2 shadow border-primary">
-                                                        <h3 class="text-center text-thin">Total Amount</h3>
+                                                        <h3 class="text-center text-thin">Total Transaction</h3>
                                                         <p class="text-center">
                                                             <span class="overview-icon bg-primary"><i class="icon-arrow-up"></i></span>
                                                         </p>
-                                                        <?php
-                                                        //calculating amount accross board
-                                                            $amount = 0;
-                                                            if (count($total_amount) > 0) {
-                                                                foreach ($total_amount as $total_amount) {
-                                                                    $amount += $total_amount['transaction_amount'];
-                                                                }
-                                                            }
-                                                        ?>
+                                                        
                                                         <h3 class="text-center text-thin">
-                                                            <b>₦<span class="counter"><?php echo number_format($amount, 0);?></span></b> 
+                                                            <b><span class="counter"><?php echo number_format(count($total_transaction), 0);?></span></b> 
                                                         </h3>
                                                         <p class="text-center text-thin">
                                                             Last Month
@@ -28,21 +20,13 @@
 
                                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                                     <div class="mini-stat-type-2 shadow border-success">
-                                                        <h3 class="text-center text-thin">OUTPUT VAT</h3>
+                                                        <h3 class="text-center text-thin">Total Order</h3>
                                                         <p class="text-center">
                                                             <span class="overview-icon bg-success"><i class="icon-arrow-down"></i></span>
                                                         </p>
-                                                        <?php
-                                                        //calculating output vat accross board
-                                                            $output_vats = 0;
-                                                            if (count($output_vat) > 0) {
-                                                                foreach ($output_vat as $output_vat) {
-                                                                    $output_vats += $output_vat['output_vat'];
-                                                                }
-                                                            }
-                                                        ?>
+
                                                         <h3 class="text-center text-thin">
-                                                            <b>₦<span class="counter"><?php echo number_format($output_vats, 0);?></span></b> 
+                                                            <b><span class="counter"><?php echo number_format(count($total_order), 0);?></span></b> 
                                                         </h3>
                                                         <p class="text-center text-thin">
                                                             Last Month
@@ -53,21 +37,21 @@
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                                         <div class="mini-stat-type-2 shadow border-primary">
-                                                            <h3 class="text-center text-thin">INPUT VAT</h3>
+                                                            <h3 class="text-center text-thin">Total Amount</h3>
                                                             <p class="text-center">
                                                                 <span class="overview-icon bg-primary"><i class="icon-arrow-up"></i></span>
                                                             </p>
-                                                            <?php
-                                                            //calculating input vat accross board
-                                                                $input_vats = 0;
-                                                                if (count($input_vat) > 0) {
-                                                                    foreach ($input_vat as $input_vat) {
-                                                                        $input_vats += $input_vat['input_vat'];
-                                                                    }
-                                                                }
-                                                            ?>
+                                                                    <?php
+                                                                                                                    //calculating amount accross board
+                                                                                                                        $amount = 0;
+                                                                                                                        if (count($total_amount) > 0) {
+                                                                                                                            foreach ($total_amount as $total_amount) {
+                                                                                                                                $amount += $total_amount['transaction_amount'];
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    ?>
                                                             <h3 class="text-center text-thin">
-                                                                <b>₦<span class="counter"><?php echo number_format($input_vats, 0);?></span></b> 
+                                                                <b>₦<span class="counter"><?php echo number_format($amount, 0);?></span></b> 
                                                             </h3>
                                                             <p class="text-center text-thin">
                                                                 Last Month
@@ -77,21 +61,21 @@
 
                                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                                         <div class="mini-stat-type-2 shadow border-success">
-                                                            <h3 class="text-center text-thin">NET VAT</h3>
+                                                            <h3 class="text-center text-thin">VAT (5%)</h3>
                                                             <p class="text-center">
                                                                 <span class="overview-icon bg-success"><i class="icon-arrow-down"></i></span>
                                                             </p>
                                                             <?php
-                                                            //calculating net vat accross board
-                                                                $net_vats = 0;
-                                                                if (count($total_amount) > 0) {
-                                                                    foreach ($net_vat as $net_vat) {
-                                                                        $net_vats += $net_vat['net_vat'];
+                                                            //calculating output vat accross board
+                                                                $output_vats = 0;
+                                                                if (count($output_vat) > 0) {
+                                                                    foreach ($output_vat as $output_vat) {
+                                                                        $output_vats += $output_vat['output_vat'];
                                                                     }
                                                                 }
                                                             ?>
                                                             <h3 class="text-center text-thin">
-                                                                <b>₦<span class="counter"><?php echo number_format($net_vats, 0);?></span></b> 
+                                                                <b>₦<span class="counter"><?php echo number_format($output_vats, 0);?></span></b> 
                                                             </h3>
                                                             <p class="text-center text-thin">
                                                                 Last Month
@@ -111,6 +95,7 @@
                                                                 <table class="table table-no-border table-middle table-primary">
                                                                 <thead>
                                                                     <tr>
+                                                                        <th data-hide="phone">ECOMMERCE NAME</th>
                                                                         <th data-hide="phone">TRANSACTION ID</th>
                                                                         <th data-hide="phone">TRANSACTION AMOUNT</th>
                                                                         <th data-hide="phone,tablet">PAYMENT DATE</th>
@@ -124,6 +109,9 @@
                                                                     <?php foreach($orders as $initiatedOrders){ 
                                                                         ?>
                                                                     <tr class="border-warning">
+                                                                        <td>
+                                                                            <b><?php echo ucwords($initiatedOrders['ecommerce_name']); ?></b>
+                                                                        </td>
                                                                         <td>
                                                                             <b><?php echo $initiatedOrders['transaction_id']; ?></b>
                                                                         </td>
