@@ -89,7 +89,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($report as $report){ 
+                                    <?php 
+                                    $total_amount = "";
+                                    $total_vat = "";
+                                    foreach($report as $report){ 
                                         $name = $this->reports_model->ecommerce($report->ecommerce_id);
                                         ?>
                                     <tr class="border-warning">
@@ -113,18 +116,28 @@
                                         </td>
                                     
 
-                                        <?php } ?>
+                                        <?php 
+                                            $total_amount += $report->transaction_amount;
+                                            $total_vat += $report->output_vat;
+                                        } ?>
 
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>ECOMMERCE NAME</th>
-                                            <th>VENDOR ID</th>
-                                            <th>AMOUNT</th>
-                                            <th>VAT</th>
-                                            <th>TRASACTION DATE</th>
-                                            <th data-hide="phone,tablet" class="text-center">ACTION</th>
-
+                                        <?php if(count($report) > 0){?>
+                                        <th colspan="1"><b>Total Transaction Amount:</b></th>
+                                        <th colspan="1"><b>₦ <?php echo number_format($total_amount, 0); ?></b></th>
+                                        <th></th>
+                                        <th colspan="1"><b>Total Deducted VAT (5%)</b></th>
+                                        <th colspan="2"><b>₦ <?php echo number_format($total_vat, 0); ?></b></th>
+                                        <?php }else{ ?>
+                                        <th>ECOMMERCE NAME</th>
+                                        <th>VENDOR ID</th>
+                                        <th>AMOUNT</th>
+                                        <th>VAT</th>
+                                        <th>TRASACTION DATE</th>
+                                        <th data-hide="phone,tablet" class="text-center">ACTION</th>
+                                        <?php } ?>
                                         </tr>
                                     </tfoot>
                                 </table>
