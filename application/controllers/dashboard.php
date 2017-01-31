@@ -27,6 +27,8 @@ class Dashboard extends CI_Controller {
 
 			$data['page_content'] = '01_dashboard/ecommerce_dashboard';
 			$data['total_amount'] = $this->transaction_model->ecommerce_total_amount($item);
+			$data['total_transaction'] = $this->transaction_model->total_transaction($item);
+			$data['total_order'] = $this->transaction_model->total_order($item);
 			$data['output_vat'] = $this->transaction_model->ecommerce_total_amount($item);
 			$data['input_vat'] = $this->transaction_model->ecommerce_total_amount($item);
 			$data['net_vat'] = $this->transaction_model->ecommerce_total_amount($item);

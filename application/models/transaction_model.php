@@ -424,10 +424,13 @@ class Transaction_model extends CI_Model {
 	//getting specific ecommerce total amount accross board
 	public function ecommerce_total_amount($item)
 	{
-		$period = date("F,Y",strtotime("-1 month"));
+		//$period = date("F,Y",strtotime("-1 month"));
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 
 		$result = $this->db->where(array('ecommerce_id'=>$item))
-								->where(array('period'=>$period))
+								->where("transaction_date >=", $start_of_last_month)
+								->where("transaction_date <=",$start_of_current_month)
 								->get('computed_vat')
 								->result_array();
 		return $result;
@@ -447,32 +450,64 @@ class Transaction_model extends CI_Model {
 	}
 
 	//last month total transaction
-	public function total_transaction()
+	public function total_transaction($trans =NULL)
 	{
-		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
-		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+		if ($trans) {
 
-		$result = $this->db->where("transaction_date >=",$start_of_last_month)
-								->where("transaction_date <=", $start_of_current_month)
-								->get('transactions')
-								->result_array();
+			$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+			$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+			$result = $this->db->where("transaction_date >=",$start_of_last_month)
+									->where("transaction_date <=", $start_of_current_month)
+									->where("ecommerce_id",$trans)
+									->where("status","1")
+									->get('transactions')
+									->result_array();
+
+			return $result;
+		}else{
+			$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+			$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+			$result = $this->db->where("transaction_date >=",$start_of_last_month)
+									->where("transaction_date <=", $start_of_current_month)
+									->where("status","1")
+									->get('transactions')
+									->result_array();
 
 
-		return $result;
+			return $result;
+		}
 	}
 
 	//getting last month total order
-	public function total_order()
+	public function total_order($order=null)
 	{
-		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
-		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+		if ($order) {
+			$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+			$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 
-		$result = $this->db->where("payment_date >=",$start_of_last_month)
-								->where("payment_date <=", $start_of_current_month)
-								->get('vat_on_hold_sweep_queue')
-								->result_array();
+			$result = $this->db->where("payment_date >=",$start_of_last_month)
+									->where("payment_date <=", $start_of_current_month)
+									->where("Ecommerce_Id", $order)
+									->where("Order_Status", "1")
+									->get('vat_on_hold_sweep_queue')
+									->result_array();
 
 
-		return $result;
+			return $result;
+		}else{
+			$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+			$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+			$result = $this->db->where("payment_date >=",$start_of_last_month)
+									->where("payment_date <=", $start_of_current_month)
+									->where("Order_Status", "1")
+									->get('vat_on_hold_sweep_queue')
+									->result_array();
+
+
+			return $result;
+		}
 	}
 }
