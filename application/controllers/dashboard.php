@@ -68,6 +68,7 @@ class Dashboard extends CI_Controller {
 		$data['datatable'] = FALSE;
 		$data['user'] = 'vendor';
 		$data['total_amount'] = $this->transaction_model->vendor_total_amount($item);
+		$data['total_order'] = $this->transaction_model->vendor_total_order($item);
 		$data['output_vat'] = $this->transaction_model->vendor_total_amount($item);
 		$data['input_vat'] = $this->transaction_model->vendor_total_amount($item);
 		$data['net_vat'] = $this->transaction_model->vendor_total_amount($item);

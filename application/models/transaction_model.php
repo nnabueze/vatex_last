@@ -277,12 +277,14 @@ class Transaction_model extends CI_Model {
 	//getting vendor the last 5 closed order
 	public function vendor_last_order($data)
 	{
-		return $result = $this->db->where(array('Vendor_TIN'=>$data))
+		 $result = $this->db->where(array('Vendor_TIN'=>$data))
 						->where(array('Order_Status'=>'1'))
 						->limit(5)
 						->order_by('id',"desc")
 						->get('vat_on_hold_sweep_queue')
 						->result_array();
+
+		return $result;
 	}
 
 	//getting specific ecommerce last 5 closed transaction
@@ -412,10 +414,14 @@ class Transaction_model extends CI_Model {
 	//getting vendor total amount accross board
 	public function vendor_total_amount($item)
 	{
-		$period = date("F,Y",strtotime("-1 month"));
+		//$period = date("F,Y",strtotime("-1 month"));
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 
 		$result = $this->db->where(array('vendor_tin'=>$item))
-								->where(array('period'=>$period))
+								->where("transaction_date >=", $start_of_last_month)
+								->where("transaction_date <=",$start_of_current_month)
+								->where("status","0")
 								->get('computed_vat')
 								->result_array();
 		return $result;
@@ -431,6 +437,7 @@ class Transaction_model extends CI_Model {
 		$result = $this->db->where(array('ecommerce_id'=>$item))
 								->where("transaction_date >=", $start_of_last_month)
 								->where("transaction_date <=",$start_of_current_month)
+								->where("status","0")
 								->get('computed_vat')
 								->result_array();
 		return $result;
@@ -509,5 +516,20 @@ class Transaction_model extends CI_Model {
 
 			return $result;
 		}
+	}
+
+	//getting the vendor total order
+	public function vendor_total_order($order)
+	{
+		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
+
+		$result = $this->db->where("payment_date >=",$start_of_last_month)
+								->where("payment_date <=", $start_of_current_month)
+								->where("Vendor_TIN", $order)
+								->where("Order_Status", "1")
+								->get('vat_on_hold_sweep_queue')
+								->result_array();
+		return $result;
 	}
 }

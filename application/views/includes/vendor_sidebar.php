@@ -99,13 +99,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li> -->
 
 
-                    <li class="<?php if(strtolower($uri_segment_2)=='vendor_orders') { echo 'active'; }  ?>">
+<!--                     <li class="<?php if(strtolower($uri_segment_2)=='vendor_orders') { echo 'active'; }  ?>">
                         <a href="<?php echo site_url('transaction/vendor_orders');?>" title="Efiling">
                             <span class="icon"><i class="fa fa-cogs"></i></span>
                             <span class="text">Efiling</span>
                             <?php if(strtolower($uri_segment_3)=='vendor_orders') { echo '<span class="selected"></span>'; }  ?>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li>
                         <a href="<?php echo site_url('login/logout');?>" title="">
