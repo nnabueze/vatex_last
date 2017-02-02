@@ -29,9 +29,10 @@
                                                                     <?php
                                                                                                                     //calculating amount accross board
                                                                                                                         $amount = 0;
+
                                                                                                                         if (count($total_amount) > 0) {
                                                                                                                             foreach ($total_amount as $total_amount) {
-                                                                                                                                $amount += $total_amount['transaction_amount'];
+                                                                                                                                $amount += $total_amount['Order_Amount'];
                                                                                                                             }
                                                                                                                         }
                                                                                                                     ?>
@@ -55,7 +56,7 @@
                                                                 $output_vats = 0;
                                                                 if (count($output_vat) > 0) {
                                                                     foreach ($output_vat as $output_vat) {
-                                                                        $output_vats += $output_vat['output_vat'];
+                                                                        $output_vats += $output_vat['Output_VAT'];
                                                                     }
                                                                 }
                                                             ?>
@@ -101,7 +102,7 @@
                                                                             <b><?php echo $initiatedOrders['Order_Id']; ?></b>
                                                                         </td>
                                                                         <td>
-                                                                            <?php echo number_format($initiatedOrders['Order_date'], 2) ; ?>
+                                                                            <?php echo number_format($initiatedOrders['Order_Amount'], 0) ; ?>
                                                                         </td>
                                                                         <td>
                                                                             <?php echo $initiatedOrders['Payment_Date']; ?>

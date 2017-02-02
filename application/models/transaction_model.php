@@ -418,11 +418,11 @@ class Transaction_model extends CI_Model {
 		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
 		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 
-		$result = $this->db->where(array('vendor_tin'=>$item))
-								->where("transaction_date >=", $start_of_last_month)
-								->where("transaction_date <=",$start_of_current_month)
-								->where("status","0")
-								->get('computed_vat')
+		$result = $this->db->where(array('Vendor_TIN'=>$item))
+								->where("Payment_Date >=", $start_of_last_month)
+								->where("Payment_Date <=",$start_of_current_month)
+								->where("Order_Status","1")
+								->get('vat_on_hold_sweep_queue')
 								->result_array();
 		return $result;
 	}
