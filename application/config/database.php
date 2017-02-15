@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';//69.64.69.79
+$db['default']['hostname'] = '69.64.69.79';//69.64.69.79
 
 $db['default']['username'] = 'admin_connect';//admin_connect
 $db['default']['password'] = 'd8^mKu89';//d8^mKu89
@@ -69,6 +69,12 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
+//connecting to second database
+$db['default']['hostname'] = '69.64.69.79';//69.64.69.79
+$db['default2']['username'] = 'admin_connect';//admin_connect
+$db['default2']['password'] = 'd8^mKu89';//d8^mKu89
+$db['default2']['database'] = 'ercas_vatex_v1';//ercas_vatex_v1
 
 
 /* End of file database.php */
