@@ -446,11 +446,17 @@ class Transaction_model extends CI_Model {
 	//getting all ecommerce total amount across board
 	public function all_total_amount()
 	{
-		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
+/*		$start_of_last_month = date("Y-m-d", mktime(0, 0, 0, date("m")-1, 1));
 		$start_of_current_month = date('Y-m-d', strtotime(date('Y-m-1')));
 
 		$result = $this->db->where("transaction_date >=", $start_of_last_month)
 								->where("transaction_date <=",$start_of_current_month)
+								->get('computed_vat')
+								->result_array();
+		return $result;*/
+		//getting the current date
+		$date = date('Y-m-d');
+		$result = $this->db->where("transaction_date =", $date)
 								->get('computed_vat')
 								->result_array();
 		return $result;

@@ -12,14 +12,18 @@ class Test_model extends CI_Model {
 	{
 		parent::__construct();	
 
-		$db2 = $this->load->database('default2', TRUE);
+		
 	}
 
 	//getting data from ecommerce
 	public function test_vat()
 	{
-		echo "yes";
-		die;
+		$otherdb = $this->load->database('default2', TRUE);
+		$query = $otherdb->select('*')->get('wp_posts')->result_array();
+		  //var_dump($query);
+		echo "<pre>";
+		  print_r($query);
+		  die;
 	}
 
 
