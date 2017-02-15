@@ -60,7 +60,7 @@ $db['default']['database'] = 'kh_vatex';
 */
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
+$db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
@@ -71,10 +71,22 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 //connecting to second database
-$db['default']['hostname'] = '69.64.69.79';//69.64.69.79
+$db['default2']['hostname'] = '69.64.69.79';//69.64.69.79
 $db['default2']['username'] = 'admin_connect';//admin_connect
 $db['default2']['password'] = 'd8^mKu89';//d8^mKu89
 $db['default2']['database'] = 'ercas_vatex_v1';//ercas_vatex_v1
+
+$db['default2']['dbdriver'] = 'mysql';
+$db['default2']['dbprefix'] = '';
+$db['default2']['pconnect'] = FALSE;
+$db['default2']['db_debug'] = TRUE;
+$db['default2']['cache_on'] = FALSE;
+$db['default2']['cachedir'] = '';
+$db['default2']['char_set'] = 'utf8';
+$db['default2']['dbcollat'] = 'utf8_general_ci';
+$db['default2']['swap_pre'] = '';
+$db['default2']['autoinit'] = TRUE;
+$db['default2']['stricton'] = FALSE;
 
 
 /* End of file database.php */
