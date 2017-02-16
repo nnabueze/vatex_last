@@ -16,6 +16,12 @@ class Test_vat extends CI_Controller {
 	{
 		$this->test_model->test_vat();
 	}
+
+	//getting payment
+	public function payment_vat()
+	{
+		$this->test_model->payment_vat();
+	}
 	
 	
 }
