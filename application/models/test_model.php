@@ -52,29 +52,37 @@ class Test_model extends CI_Model {
 			$data['Ecommerce_Id'] = $vendor['Ecommerce_Id'];
 			$data['ecommerce_name'] = $this->ecommerce($vendor['Ecommerce_Id']);
 
-			if ($insert = $this->db->insert("vat_on_hold_sweep_queue", $data)) {
-				//inserting record into transaction table
-				$transaction['transaction_amount'] = $data['Order_Amount'];
-				$transaction['no_of_orders'] = 1;
-				$trans = $this->transaction($data['Transaction_Id']);
-				if ($trans) {
+			//check if the transaction id exist
+			$transaction = $this->db->where("Transaction_Id", $data['Transaction_Id'])
+			->get('vat_on_hold_sweep_queue')->row_array();
 
-					//sum up all the order amount under the transaction
-					$transaction['transaction_amount']   = $transaction['transaction_amount'] + $trans['transaction_amount'];
-					$transaction['no_of_orders'] = $trans['no_of_orders'] + 1;
+			if (! $transaction) {
 
-					$this->db->where('transaction_id',$data['Transaction_Id']);
-					$this->db->update('transactions', $transaction);
-				}else{
-					$transaction['transaction_id']   = $data['Transaction_Id'];
-					$transaction['transaction_date']   = $data['Order_date'];
-					$transaction['ecommerce_id']   = $data['Ecommerce_Id'];
-					$transaction['ecommerce_name']   = $data['ecommerce_name'];
+				if ($insert = $this->db->insert("vat_on_hold_sweep_queue", $data)) {
+					//inserting record into transaction table
+					$transaction['transaction_amount'] = $data['Order_Amount'];
+					$transaction['no_of_orders'] = 1;
+					$trans = $this->transaction($data['Transaction_Id']);
+					if ($trans) {
 
-					$this->db->insert("transactions", $transaction);
+						//sum up all the order amount under the transaction
+						$transaction['transaction_amount']   = $transaction['transaction_amount'] + $trans['transaction_amount'];
+						$transaction['no_of_orders'] = $trans['no_of_orders'] + 1;
 
+						$this->db->where('transaction_id',$data['Transaction_Id']);
+						$this->db->update('transactions', $transaction);
+					}else{
+						$transaction['transaction_id']   = $data['Transaction_Id'];
+						$transaction['transaction_date']   = $data['Order_date'];
+						$transaction['ecommerce_id']   = $data['Ecommerce_Id'];
+						$transaction['ecommerce_name']   = $data['ecommerce_name'];
+
+						$this->db->insert("transactions", $transaction);
+
+					}
 				}
 			}
+
 		
 
 

@@ -12,7 +12,7 @@ class Test_vat extends CI_Controller {
 	} 
 
 	//getting orders from ecommerces
-	public function vat()
+	public function order_vat()
 	{
 		$this->test_model->test_vat();
 	}
