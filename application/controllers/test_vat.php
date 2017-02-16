@@ -22,6 +22,12 @@ class Test_vat extends CI_Controller {
 	{
 		$this->test_model->payment_vat();
 	}
+
+	//calculating vat for vendors
+	public function compute_vat()
+	{
+		$this->test_model->compute_vat();
+	}
 	
 	
 }
