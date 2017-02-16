@@ -72,9 +72,9 @@ $db['default']['stricton'] = FALSE;
 
 //connecting to second database
 $db['default2']['hostname'] = '5.153.47.230';//69.64.69.79
-$db['default2']['username'] = 'halflegc_mkt';//admin_connect
-$db['default2']['password'] = 'Market123';//d8^mKu89
-$db['default2']['database'] = 'halflegc_mkt';//ercas_vatex_v1
+$db['default2']['username'] = 'halflegc_ecom';//admin_connect
+$db['default2']['password'] = 'eCommerce123';//d8^mKu89
+$db['default2']['database'] = 'halflegc_ecom';//ercas_vatex_v1
 
 $db['default2']['dbdriver'] = 'mysql';
 $db['default2']['dbprefix'] = '';
