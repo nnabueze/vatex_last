@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 
                 <footer class="footer-content">
-                    <span id="copyright-year"></span> &copy; FIRS - Federal Internal Revenue Services. Powered by Gention Global Resources for FIRS.
+                    <span id="copyright-year"></span> &copy; FIRS - Federal Inland Revenue Service. Powered by Gention Global Resources for FIRS.
                 </footer>
 
             </section>
