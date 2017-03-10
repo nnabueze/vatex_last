@@ -20,6 +20,8 @@
                                                 <th data-hide="phone">VENDOR NAME</th>
                                                 <th data-hide="phone">ORDER AMOUNT</th>
                                                 <th data-hide="phone">TRANSACTION ID</th>
+                                                <th data-hide="phone,tablet">SELLING PRICE</th>
+                                                <th data-hide="phone,tablet">COST PRICE</th>
                                                 <th data-hide="phone,tablet">ORDER DATE</th>
                                                 <th data-hide="phone,tablet" class="text-center">STATUS</th>
                                             </tr>
@@ -42,6 +44,12 @@
                                                 </td>
                                                 
                                                 <td>
+                                                    <?php echo $initiated_orders->sell_price; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $initiated_orders->cost_price; ?>
+                                                </td>
+                                                <td>
                                                     <?php echo $initiated_orders->Order_date; ?>
                                                 </td>
                                                 <td class="text-center">
@@ -63,6 +71,8 @@
                                                 <th>VENDOR ID</th>
                                                 <th>ORDER AMOUNT</th>
                                                 <th>TRANSACTION ID</th>
+                                                <th>SELLING PRICE</th>
+                                                <th>COST PRICE</th>
                                                 <th>ORDER DATE</th>
                                                 <th>STATUS</th>
                                             </tr>

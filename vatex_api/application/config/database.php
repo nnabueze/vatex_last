@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';//69.64.69.79
+$db['default']['hostname'] = '69.64.69.79';//69.64.69.79
 
 $db['default']['username'] = 'admin_connect';//admin_connect
 $db['default']['password'] = 'd8^mKu89';//d8^mKu89

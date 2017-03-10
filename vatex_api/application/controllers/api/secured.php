@@ -24,6 +24,8 @@ class Secured extends REST_Controller
         $data['Order_Amount']   = $this->post('Order_Amount');
         $data['Quantity']   = $this->post('Quantity');
         $data['Order_date']   = $this->post('Order_date');
+        $data['cost_price']   = $this->post('cost_price');
+        $data['selling_price']   = $this->post('selling_price');
         $data['Purchase_Price']   = $this->post('Purchase_Price');
         $data['Product_Description']   = $this->post('Product_Description');
         $data['Product_Category']   = $this->post('Product_Category');
@@ -34,7 +36,7 @@ class Secured extends REST_Controller
         $data['vendor_name']   = $this->vendor($this->post('Vendor_Id'));
 
         //check if any of the parameters are empty
-        if (empty($this->post('Transaction_Id')) || empty($this->post('Vendor_Id'))|| empty($this->post('Order_Id'))|| empty($this->post('Order_Amount'))|| empty($this->post('Quantity')) || empty($this->post('Order_date')) || empty($this->post('Purchase_Price')) || empty($this->post('Product_Description')) || empty($this->post('Product_Category')) || empty($this->post('Order_date')) || empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_TIN'))) {
+        if (empty($this->post('Transaction_Id')) || empty($this->post('Vendor_Id'))|| empty($this->post('Order_Id'))|| empty($this->post('Order_Amount'))|| empty($this->post('Quantity')) || empty($this->post('Order_date')) || empty($this->post('Purchase_Price')) || empty($this->post('Product_Description')) || empty($this->post('Product_Category')) || empty($this->post('Order_date'))|| empty($this->post('cost_price')) || empty($this->post('selling_price')) || empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_TIN'))) {
 
             $this->response(array('error' => 'parameter missing'), 404);
         }
@@ -84,10 +86,11 @@ class Secured extends REST_Controller
         $data['Payment_Type']   = $this->post('Payment_Type');
         $data['Delivery_Date']   = $this->post('Delivery_Date');
         $data['Order_Status']   = "1";
+        $data['delivery_mode']   = $this->post('delivery_mode');
         $data['token']   = $this->post('token');
 
         //validated parameters
-        if (empty($this->post('Ecommerce_Id')) || empty($this->post('Transaction_Id'))|| empty($this->post('Payment_Date'))|| empty($this->post('Payment_Type'))|| empty($this->post('Delivery_Date'))  ) {
+        if (empty($this->post('Ecommerce_Id')) || empty($this->post('Transaction_Id'))|| empty($this->post('Payment_Date'))|| empty($this->post('Payment_Type'))|| empty($this->post('Delivery_Date')) || empty($this->post('delivery_mode')) ) {
 
             $this->response(array('error' => 'parameter missing'), 404);
         }

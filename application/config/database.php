@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';//69.64.69.79
+$db['default']['hostname'] = '69.64.69.79';//69.64.69.79
 
 $db['default']['username'] = 'admin_connect';//admin_connect
 $db['default']['password'] = 'd8^mKu89';//d8^mKu89
@@ -71,10 +71,10 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 //connecting to second database
-$db['default2']['hostname'] = '5.153.47.230';//69.64.69.79
-$db['default2']['username'] = 'halflegc_ecom';//admin_connect
-$db['default2']['password'] = 'eCommerce123';//d8^mKu89
-$db['default2']['database'] = 'halflegc_ecom';//ercas_vatex_v1
+/*$db['default2']['hostname'] = '5.153.47.230';
+$db['default2']['username'] = 'halflegc_ecom';
+$db['default2']['password'] = 'eCommerce123';
+$db['default2']['database'] = 'halflegc_ecom';
 
 $db['default2']['dbdriver'] = 'mysql';
 $db['default2']['dbprefix'] = '';
@@ -86,7 +86,7 @@ $db['default2']['char_set'] = 'utf8';
 $db['default2']['dbcollat'] = 'utf8_general_ci';
 $db['default2']['swap_pre'] = '';
 $db['default2']['autoinit'] = TRUE;
-$db['default2']['stricton'] = FALSE;
+$db['default2']['stricton'] = FALSE;*/
 
 
 /* End of file database.php */

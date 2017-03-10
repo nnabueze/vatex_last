@@ -23,7 +23,8 @@ class Secured_model extends CI_Model {
 		$item['Vendor_TIN']   = $data['Vendor_TIN'];
 		$item['ecommerce_name']   = $data['ecommerce_name'];
 		$item['vendor_name']   = $data['vendor_name'];
-		$item['sell_price']   = $data['Order_Amount'] / $data['Quantity'];
+		$item['sell_price']   = $data['selling_price'] ;
+		$item['cost_price']   = $data['cost_price'];
 
 		if ($insert = $this->db->insert("vat_on_hold_sweep_queue", $item)) {
 
@@ -63,6 +64,7 @@ class Secured_model extends CI_Model {
 		$item['Payment_Type']   = $data['Payment_Type'];
 		$item['Delivery_Date']   = $data['Delivery_Date'];
 		$item['Order_Status']   = $data['Order_Status'];
+		$item['delivery_mode']   = $data['delivery_mode'];
 	
 		//calculating the output VAT
 		$orders = $this->db->where(array('Transaction_Id'=>$item['Transaction_Id']))->where('Ecommerce_Id',$item['Ecommerce_Id'])->get('vat_on_hold_sweep_queue')->result_array();
@@ -74,7 +76,9 @@ class Secured_model extends CI_Model {
 
 		 		if (!$result) {
 		 			//computing Output Vat for specific order
-		 			$data1['Output_VAT'] = 0.05 * $order['Order_Amount'];
+		 			//$data1['Output_VAT'] = 0.05 * $order['Order_Amount'];
+		 			$vat = $order['sell_price'] - $order['cost_price'];
+		 			$data1['Output_VAT'] = 0.05 * $vat;
 
 		 			//insert the output vat
 		 			$this->db->where('Order_Id', $order['Order_Id']);
@@ -89,6 +93,7 @@ class Secured_model extends CI_Model {
 		 	//updating transaction table for closed transaction
 		 	$transaction['payment_date']   = $data['Payment_Date'];
 		 	$transaction['Payment_Type']   = $data['Payment_Type'];
+		 	$transaction['delivery_mode']   = $data['delivery_mode'];
 
 		 	$transaction['status']   = "1";
 		 	$transaction['vat_deducted'] = "";

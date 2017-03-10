@@ -21,10 +21,13 @@
                                                 <th data-hide="phone">ORDER ID</th>
                                                 <th data-hide="phone,tablet">ORDER AMOUNT</th>
                                                 <th data-hide="phone,tablet">VAT DEDUCTED</th>
-                                                <th data-hide="phone,tablet">QUANTITY</th>
+                                                <!-- <th data-hide="phone,tablet">QUANTITY</th> -->
                                                 <th data-hide="phone,tablet">PAYMENT TYPE</th>
                                                 <th data-hide="phone,tablet">PAYMENT DATE</th>
-                                                <th data-hide="phone,tablet" class="text-center">STATUS</th>
+                                                <th data-hide="phone,tablet">SELLING PRICE</th>
+                                                <th data-hide="phone,tablet">COST PRICE</th>
+                                                <th data-hide="phone,tablet">DELIVERY MODE</th>
+                                                <!-- <th data-hide="phone,tablet" class="text-center">STATUS</th> -->
                                                 <th data-hide="phone,tablet">PRODUCT DESC</th>
                                             </tr>
                                         </thead>
@@ -51,23 +54,37 @@
                                                 <td class="text-center">
                                                     ₦ <?php echo number_format($initiatedOrders->Output_VAT, 0); ?>
                                                 </td>
-                                                <td>
+<!--                                                 <td>
                                                     <?php echo $initiatedOrders->Quantity; ?>
-                                                </td>
+                                                </td> -->
                                                 <td>
                                                     <?php echo ucwords($initiatedOrders->Payment_Type); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $initiatedOrders->Payment_Date; ?>
                                                 </td>
+                                                <td>
+                                                    <?php echo $initiatedOrders->sell_price; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $initiatedOrders->cost_price; ?>
+                                                </td>
                                                 <td class="text-center">
+
+                                                    <?php if($initiatedOrders->delivery_mode== 1 ){ ?>
+                                                    <span class="label label-success"><?php echo 'Self Filfulled'; ?></span>
+                                                    <?php } else { ?>
+                                                    <span class="label label-warning"><?php echo 'Ecommerce'; ?></span>
+                                                    <?php } ?>
+                                                </td>
+<!--                                                 <td class="text-center">
 
                                                     <?php if($initiatedOrders->Order_Status== 1 ){ ?>
                                                     <span class="label label-success"><?php echo 'Closed'; ?></span>
                                                     <?php } else { ?>
                                                     <span class="label label-warning"><?php echo 'Open'; ?></span>
                                                     <?php } ?>
-                                                </td>
+                                                </td> -->
                                                <!--  <td class="text-center">
                                                     <a href="#" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="View detail"><i class="fa fa-eye"></i></a>
                                                 </td> -->
@@ -87,10 +104,13 @@
                                                     <th>ORDER ID</th>
                                                     <th>ORDER AMOUNT</th>
                                                     <th data-hide="phone,tablet">VAT DEDUCTED</th>
-                                                    <th>QUANTITY</th>
+                                                    <!-- <th>QUANTITY</th> -->
                                                     <th data-hide="phone,tablet">PAYMENT TYPE</th>
                                                     <th>PAYMENT DATE</th>
-                                                    <th>STATUS</th>
+                                                    <th data-hide="phone,tablet">SELLING PRICE</th>
+                                                    <th data-hide="phone,tablet">COST PRICE</th>
+                                                    <th data-hide="phone,tablet">DELIVERY MODE</th>
+                                                    <!-- <th>STATUS</th> -->
                                                     <th data-hide="phone,tablet">PRODUCT DESC</th>
                                                 </tr>
                                             </tfoot>
