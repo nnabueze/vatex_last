@@ -23,6 +23,10 @@
                                                 <th data-hide="phone,tablet">SELLING PRICE</th>
                                                 <th data-hide="phone,tablet">COST PRICE</th>
                                                 <th data-hide="phone,tablet">ORDER DATE</th>
+                                                <th data-hide="phone,tablet">SHIPPING FEE</th>
+                                                <th data-hide="phone,tablet">ECOMMERCE_COMMISSION</th>
+                                                <th data-hide="phone,tablet">WARRANTY</th>
+                                                <th data-hide="phone,tablet">RETURN POLICY</th>
                                                 <th data-hide="phone,tablet" class="text-center">STATUS</th>
                                             </tr>
                                         </thead>
@@ -52,6 +56,18 @@
                                                 <td>
                                                     <?php echo $initiated_orders->Order_date; ?>
                                                 </td>
+                                                <td>
+                                                    <?php echo $initiated_orders->shipping_fee; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $initiated_orders->commission; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $initiated_orders->warranty_period; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $initiated_orders->return_policy; ?>
+                                                </td>
                                                 <td class="text-center">
                                                     <?php if($initiated_orders->Order_Status == 1 ){ ?>
                                                     <span class="label label-success"><?php echo "Closed"; ?></span>
@@ -74,6 +90,10 @@
                                                 <th>SELLING PRICE</th>
                                                 <th>COST PRICE</th>
                                                 <th>ORDER DATE</th>
+                                                <th data-hide="phone,tablet">SHIPPING FEE</th>
+                                                <th data-hide="phone,tablet">ECOMMERCE_COMMISSION</th>
+                                                <th data-hide="phone,tablet">WARRANTY</th>
+                                                <th data-hide="phone,tablet">RETURN POLICY</th>
                                                 <th>STATUS</th>
                                             </tr>
                                         </tfoot>

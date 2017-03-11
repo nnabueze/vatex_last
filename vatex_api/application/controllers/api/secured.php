@@ -34,9 +34,14 @@ class Secured extends REST_Controller
         $data['token']   = $this->post('token');
         $data['ecommerce_name']   = $this->ecommerce($this->post('Ecommerce_Id'));
         $data['vendor_name']   = $this->vendor($this->post('Vendor_Id'));
+        //////////////////////////////////////////////////////////////////////////
+        $data['return_policy']   = $this->post('return_policy');
+        $data['warranty_period']   = $this->post('warranty_period');
+        $data['commission']   = $this->post('commission');
+        $data['shipping_fee']   = $this->post('shipping_fee');
 
         //check if any of the parameters are empty
-        if (empty($this->post('Transaction_Id')) || empty($this->post('Vendor_Id'))|| empty($this->post('Order_Id'))|| empty($this->post('Order_Amount'))|| empty($this->post('Quantity')) || empty($this->post('Order_date')) || empty($this->post('Purchase_Price')) || empty($this->post('Product_Description')) || empty($this->post('Product_Category')) || empty($this->post('Order_date'))|| empty($this->post('cost_price')) || empty($this->post('selling_price')) || empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_TIN'))) {
+        if (empty($this->post('Transaction_Id')) || empty($this->post('Vendor_Id'))|| empty($this->post('Order_Id'))|| empty($this->post('Order_Amount'))|| empty($this->post('Quantity')) || empty($this->post('Order_date')) || empty($this->post('Purchase_Price')) || empty($this->post('Product_Description')) || empty($this->post('Product_Category')) || empty($this->post('Order_date'))|| empty($this->post('cost_price')) || empty($this->post('selling_price')) || empty($this->post('Ecommerce_Id')) || empty($this->post('Vendor_TIN'))|| empty($this->post('return_policy')) || empty($this->post('warranty_period')) || empty($this->post('commission')) || empty($this->post('shipping_fee'))) {
 
             $this->response(array('error' => 'parameter missing'), 404);
         }

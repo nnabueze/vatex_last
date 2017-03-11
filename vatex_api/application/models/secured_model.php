@@ -25,6 +25,11 @@ class Secured_model extends CI_Model {
 		$item['vendor_name']   = $data['vendor_name'];
 		$item['sell_price']   = $data['selling_price'] ;
 		$item['cost_price']   = $data['cost_price'];
+		//////////////////////////////////////////////////////////
+		$item['return_policy']   = $data['return_policy'];
+		$item['warranty_period']   = $data['warranty_period'];
+		$item['commission']   = $data['commission'];
+		$item['shipping_fee']   = $data['shipping_fee'];
 
 		if ($insert = $this->db->insert("vat_on_hold_sweep_queue", $item)) {
 
@@ -78,7 +83,13 @@ class Secured_model extends CI_Model {
 		 			//computing Output Vat for specific order
 		 			//$data1['Output_VAT'] = 0.05 * $order['Order_Amount'];
 		 			$vat = $order['sell_price'] - $order['cost_price'];
+		 			$vat = $order['Quantity'] * $vat;
 		 			$data1['Output_VAT'] = 0.05 * $vat;
+
+		 			//claculating the total, commion_vat and shipping
+		 			$data1['commission_vat'] = 0.05 * $order['commission'];
+		 			$data1['shipping_vat'] = 0.05 * $order['shipping_fee'];
+		 			$data1['Total_vat'] = $data1['Output_VAT'] + $data1['shipping_vat'] + $data1['commission_vat'];
 
 		 			//insert the output vat
 		 			$this->db->where('Order_Id', $order['Order_Id']);

@@ -20,7 +20,10 @@
                                                 <th data-hide="phone">VENDOR NAME</th>
                                                 <th data-hide="phone">ORDER ID</th>
                                                 <th data-hide="phone,tablet">ORDER AMOUNT</th>
+                                                <th data-hide="phone,tablet">TOTAL VAT</th>
                                                 <th data-hide="phone,tablet">VAT DEDUCTED</th>
+                                                <th data-hide="phone,tablet">COMMISSION VAT</th>
+                                                <th data-hide="phone,tablet">SHIPPING VAT</th>
                                                 <!-- <th data-hide="phone,tablet">QUANTITY</th> -->
                                                 <th data-hide="phone,tablet">PAYMENT TYPE</th>
                                                 <th data-hide="phone,tablet">PAYMENT DATE</th>
@@ -52,7 +55,16 @@
                                                     ₦ <?php echo number_format($initiatedOrders->Order_Amount, 0); ?>
                                                 </td>
                                                 <td class="text-center">
+                                                    ₦ <?php echo number_format($initiatedOrders->Total_vat, 0); ?>
+                                                </td>
+                                                <td class="text-center">
                                                     ₦ <?php echo number_format($initiatedOrders->Output_VAT, 0); ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiatedOrders->commission_vat, 0); ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    ₦ <?php echo number_format($initiatedOrders->shipping_vat, 0); ?>
                                                 </td>
 <!--                                                 <td>
                                                     <?php echo $initiatedOrders->Quantity; ?>
@@ -103,7 +115,10 @@
                                                     <th>VENDOR ID</th>
                                                     <th>ORDER ID</th>
                                                     <th>ORDER AMOUNT</th>
+                                                    <th data-hide="phone,tablet">TOTAL VAT</th>
                                                     <th data-hide="phone,tablet">VAT DEDUCTED</th>
+                                                    <th data-hide="phone,tablet">COMMISSION VAT</th>
+                                                    <th data-hide="phone,tablet">SHIPPING VAT</th>
                                                     <!-- <th>QUANTITY</th> -->
                                                     <th data-hide="phone,tablet">PAYMENT TYPE</th>
                                                     <th>PAYMENT DATE</th>
