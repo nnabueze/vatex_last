@@ -86,9 +86,10 @@
                                                 </div>
                                                 
                                                 <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Input VAT <span class="asterisk">*</span></label>
+                                                    <label class="col-sm-4 control-label">Reason <span class="asterisk">*</span></label>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control input-sm" name="input_vat"/>
+                                                        <!-- <input type="text" class="form-control input-sm" name="input_vat"/> -->
+                                                        <textarea class="form-control" name="input_vat"></textarea>
                                                     </div>
                                                 </div>
                                             </div>

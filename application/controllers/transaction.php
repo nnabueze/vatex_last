@@ -139,6 +139,29 @@ class Transaction extends CI_Controller {
 		$this->load->view('includes/main_content', $data);
 	}
 
+	//getting list of ecommerce orders
+	public function ecommerce_order()
+	{
+			if(!isAdminLoggedIn())
+			{
+				redirect(getUrl('login'));
+			}
+			$item['vandor_id']= $this->session->userdata('vendor_id');
+			$item['ecommerce_id'] = $this->session->userdata('ecommerce_Id');
+			//$item = $this->session->userdata('tin');
+
+			$data = array();
+			$data['datatable'] = TRUE;
+			$data['page_title'] = 'List of Vendor Orders';
+			$data['uri_segment_2'] = 'vendor_orders';
+			$data['uri_segment_3'] = 'vendor_orders';
+			$data['user'] = 'ecommerce';
+			$data['vendor_orders'] = $this->transaction_model->ecommerce_order($item);
+
+			$data['page_content'] = '03_transaction/vendor_orders';
+			$this->load->view('includes/main_content', $data);	
+	}
+
 	//getting list of vendor order
 	public function vendor_initiated_orders()
 	{
@@ -301,7 +324,7 @@ class Transaction extends CI_Controller {
 		$data['page_title'] = 'Efiling of Input VAT';
 		$data['uri_segment_2'] = 'vendor_orders';
 		$data['uri_segment_3'] = 'vendor_orders';
-		$data['user'] = 'vendor';
+		$data['user'] = 'ecommerce';
 		$data['order_details'] = $this->transaction_model->order_details($id);
 
 		$data['page_content'] = '03_transaction/input_vat';
@@ -333,6 +356,7 @@ class Transaction extends CI_Controller {
 
 		$data['input_vat']   = $this->input->post('input_vat');
 		$data['id']      = $this->input->post('Id');
+		$data['reason']      = $this->input->post('reason');
 
 		if ($vat = $this->transaction_model->input_vat($data)) {
 			$this->session->set_flashdata('success',"VAT entered susccessfully.");

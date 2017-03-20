@@ -252,6 +252,17 @@ class Transaction_model extends CI_Model {
 						->result_array();
 	}
 
+	//getting ecommerce order
+	public function ecommerce_order($data)
+	{
+		return $result = $this->db->where(array('Order_Status'=>'1'))
+						->where(array('Ecommerce_Id'=>$data['ecommerce_id']))
+						->where(array('approve'=>'0'))
+						->order_by('id',"desc")
+						->get('vat_on_hold_sweep_queue')
+						->result_array();
+	}
+
 
 	//getting all the list of vendor initiated order
 	public function vendor_initiated_orders($data)
@@ -321,17 +332,18 @@ class Transaction_model extends CI_Model {
 	{
 		$item['input_vat'] = $data['input_vat'];
 		$item['vat_image'] = $data['vat_image'];
-		$item['approve'] = "1";
+		$item['reason'] = $data['reason'];
+		$item['approve'] = "2";
 
 		//check if the date is greater than 21st.
-		$day_of_current_month = date('d', strtotime(date('Y-m-1')));
-		if ($day_of_current_month < 21) {
+/*		$day_of_current_month = date('d', strtotime(date('Y-m-1')));
+		if ($day_of_current_month < 21) {*/
 			$this->db->where('id', $data['id']);
 			$this->db->update('vat_on_hold_sweep_queue', $item);
 
 			return True;
-		}
-		return FALSE;
+	/*	}
+		return FALSE;*/
 	}
 
 	//getting list of inputed vat
